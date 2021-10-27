@@ -77,7 +77,7 @@ cols <- c("NG" = "#d11141",
           "refined liquids enduse" = "#8c8c8c")
 
 datapath <- function(fname){
-  file.path("./", fname)
+  file.path("C:/Users/johannah/Documents/EDGE-Transport/Output/SSP2-MixWise_2021-10-12_15.49.40/level_2/", fname)
 }
 
 datapath_level0 <- function(fname){
