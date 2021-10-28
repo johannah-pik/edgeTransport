@@ -15,21 +15,21 @@
 
 lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenarios.pdf"){
   
-  # if no path in "dirs" starts with "output/" insert it at the beginning
+  # if no path in "listofruns" starts with "output_folder/" insert it at the beginning
   # this is the case if listofruns was created in the lower case above !exists("outputdirs"), i.e. if this script was not called via Rscript output.R
-
+  
   
   scenNames <- c()
   demand_km <- demand_ej <- vintcomp <- newcomp <- shares <-pref <- mj_km_data <- loadFactor <- annual_mileage <- annual_sale <- list()
   count_scen <- 2
   #Maping for vehicle type aggregation
   Mapp_Aggr_vehtype = data.table(
-  gran_vehtype = c("Compact Car","Large Car","Large Car and SUV","Light Truck and SUV", "Midsize Car","Mini Car","Subcompact Car","Van", "International Aviation_tmp_vehicletype",
-                    "Domestic Ship_tmp_vehicletype","Freight Rail_tmp_vehicletype","Truck (0-3.5t)" ,"Truck (18t)","Truck (26t)","Truck (40t)","Truck (7.5t)","Domestic Aviation_tmp_vehicletype",
-                    "HSR_tmp_vehicletype","Passenger Rail_tmp_vehicletype","Bus_tmp_vehicletype", "Moped","Motorcycle (50-250cc)","Motorcycle (>250cc)","International Ship_tmp_vehicletype") ,
-  aggr_vehtype= c("Small Cars","Large Cars","Large Cars","Trucks", "Large Cars","Small Cars","Small Cars", "Large Cars", "Aircraft (international)",
-                   "Ships (domestic)","Freight Trains","Trucks" ,"Trucks","Trucks","Trucks","Trucks","Aircraft (domestic)",
-                   "Passenger Trains","Passenger Trains","Busses", "Motorbikes","Motorbikes","Motorbikes","Ships (international)") 
+    gran_vehtype = c("Compact Car","Large Car","Large Car and SUV","Light Truck and SUV", "Midsize Car","Mini Car","Subcompact Car","Van", "International Aviation_tmp_vehicletype",
+                     "Domestic Ship_tmp_vehicletype","Freight Rail_tmp_vehicletype","Truck (0-3.5t)" ,"Truck (18t)","Truck (26t)","Truck (40t)","Truck (7.5t)","Domestic Aviation_tmp_vehicletype",
+                     "HSR_tmp_vehicletype","Passenger Rail_tmp_vehicletype","Bus_tmp_vehicletype", "Moped","Motorcycle (50-250cc)","Motorcycle (>250cc)","International Ship_tmp_vehicletype") ,
+    aggr_vehtype= c("Small Cars","Large Cars","Large Cars","Trucks", "Large Cars","Small Cars","Small Cars", "Large Cars", "Aircraft international",
+                    "Ships domestic","Freight Trains","Trucks" ,"Trucks","Trucks","Trucks","Trucks","Aircraft domestic",
+                    "Passenger Trains","Passenger Trains","Busses", "Motorbikes","Motorbikes","Motorbikes","Ships international") 
   )  
   
   #Color code EDGE-T report
@@ -97,8 +97,8 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   
   for (i in 1:length(listofruns)) {
     if(any(grepl(sub("_.*", "", listofruns[[i]]),scenNames))) {
-     scenNames[i] <- paste0(sub("_.*", "", listofruns[[i]]),"_",count_scen)
-     count_scen=count_scen+1
+      scenNames[i] <- paste0(sub("_.*", "", listofruns[[i]]),"_",count_scen)
+      count_scen=count_scen+1
     }
     else {scenNames[i] <- sub("_.*", "", listofruns[[i]])}
     #add path to output folder if not provided
@@ -128,8 +128,8 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
     annual_sale[[i]] <- readRDS(paste0(listofruns[[i]],"annual_sales.RDS"))
     annual_sale[[i]]$scenario=scenNames[i]
   }
-
-
+  
+  
   
   ## ---- Open output-pdf ----
   
@@ -244,7 +244,7 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   plot_dem_ej_Frght <- plot_dem_ej_Frght[, value:=sum(value), by= c("period","region","scenario","variable")][,sector:=NULL]
   plot_dem_ej_Frght <- plot_dem_ej_Frght[!duplicated( plot_dem_ej_Frght)]
   plot_dem_ej_Frght <- as.quitte( plot_dem_ej_Frght)
-
+  
   p <- mipArea(plot_dem_ej_Frght[region==mainReg], scales="free_y")
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=3.5,width=7") 
@@ -260,33 +260,33 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   p <- mipArea(plot_dem_ej_Frght,scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
- 
+  
   swlatex(sw,"\\subsection{FE by transport modes}")
- 
+  
   plot_dem_ej_modes <- merge(dem_ej,Mapp_Aggr_vehtype,by.x="vehicle_type",by.y="gran_vehtype")
   plot_dem_ej_modes[,demand_EJ:=sum(demand_EJ), by=c("year","region","scenario","aggr_vehtype")]
   #Remove unneeded columns and add model and unit column for mip
   plot_dem_ej_modes <- plot_dem_ej_modes[, c("year","region","aggr_vehtype","demand_EJ","scenario")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   setnames(plot_dem_ej_modes, c("year","demand_EJ","aggr_vehtype"),c("period","value","variable"))
   plot_dem_ej_modes <- plot_dem_ej_modes[!duplicated(plot_dem_ej_modes)]
- 
+  
   p <- mipArea(plot_dem_ej_modes[region==mainReg], scales="free_y")
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=3.5,width=7") 
- 
+  
   p <- mipBarYearData(plot_dem_ej_modes[region==mainReg & period %in% y_bar])
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
- 
+  
   p <- mipBarYearData(plot_dem_ej_modes[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
- 
+  
   swlatex(sw,"\\onecolumn")
   p <- mipArea(plot_dem_ej_modes,scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
-
- 
+  
+  
   swlatex(sw,"\\subsection{Energy intensity}")
   
   FV_final_pref <- list()
@@ -397,3 +397,4 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   ## Close output-pdf
   swclose(sw)
 }
+
