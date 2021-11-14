@@ -22,6 +22,18 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   scenNames <- c()
   demand_km <- demand_ej <- vintcomp <- newcomp <- shares <-pref <- mj_km_data <- loadFactor <- annual_mileage <- annual_sale <- list()
   count_scen <- 2
+  #Region Mapping
+  RegionMappingH12 <- fread(system.file("extdata", "regionmappingH12.csv", package = "edgeTransport"))
+  Regionmapping_21_EU11 <- fread(system.file("extdata", "regionmapping_21_EU11.csv", package = "edgeTransport"))
+  setnames(Regionmapping_21_EU11,"RegionCode","region")
+  Regionmapping_21_H12 <-copy(Regionmapping_21_EU11)
+  Regionmapping_21_H12[, missingH12 := ifelse(missingH12 == "rest", region, missingH12)]
+  Regionmapping_21_H12 <- Regionmapping_21_H12[,-c("X","CountryCode")]
+  Regionmapping_21_H12 <- Regionmapping_21_H12[!duplicated(Regionmapping_21_H12)]
+  Regionmapping_H12_world <- copy(Regionmapping_21_H12[,-c("region")])
+  Regionmapping_H12_world[,world:="GLO"]
+  Regionmapping_H12_world <- Regionmapping_H12_world[!duplicated(Regionmapping_H12_world)]
+  
   #Maping for vehicle type aggregation
   Mapp_Aggr_vehtype = data.table(
     gran_vehtype = c("Compact Car","Large Car","Large Car and SUV","Light Truck and SUV", "Midsize Car","Mini Car","Subcompact Car","Van", "International Aviation_tmp_vehicletype",
@@ -31,69 +43,6 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
                     "Ships domestic","Freight Trains","Trucks" ,"Trucks","Trucks","Trucks","Trucks","Aircraft domestic",
                     "Passenger Trains","Passenger Trains","Busses", "Motorbikes","Motorbikes","Motorbikes","Ships international") 
   )  
-  
-  #Color code EDGE-T report
-  cols <- c("NG" = "#d11141",
-            "Liquids" = "#8c8c8c",
-            "Hybrid Liquids" = "#ffc425",
-            "Hybrid Electric" = "#f37735",
-            "BEV" = "#00b159",
-            "Electricity" = "#00b159",
-            "Electric" = "#00b159",
-            "FCEV" = "#00aedb",
-            "char" = "#00aedb",
-            "tot" = "#00b159",
-            "av" = "#f37735",
-            "range" = "#ffc425",
-            "ref" = "#8c8c8c",
-            "risk" = "#d11141",
-            "Hydrogen" = "#00aedb",
-            "Biodiesel" = "#66a182",
-            "Synfuel" = "orchid",
-            "Oil" = "#2e4057",
-            "fuel price pkm" = "#edae49",
-            "Operating costs registration and insurance" = "#8d96a3",
-            "Operating costs maintenance" = "#00798c",
-            "Capital cost" = "#d1495b",
-            "International Aviation" = "#9acd32",
-            "AVBUNK" = "#9acd32",
-            "Domestic Aviation" = "#7cfc00",
-            "DOMESAIR" = "#7cfc00",
-            "Bus" = "#32cd32",
-            "Passenger Rail" = "#2e8b57",
-            "RAIL" = "#2e8b57",
-            "Freight Rail" = "#ee4000",
-            "Trucks" = "#ff6a6a",
-            "ROAD" = "#ff6a6a",
-            "ROAD LDV" = "#d11141",
-            "ROAD HDV" = "#f37735",
-            "International Shipping" = "#cd2626",
-            "MARBUNK" = "#cd2626",
-            "Domestic Shipping" = "#ff4040",
-            "DOMESNAV" = "#ff4040",
-            "Shipping" = "#ff4040",
-            "Dom. Shipping" = "#ff4040",
-            "Non Bunkers" = "#9acd32",
-            "Bunkers" = "#87cefa",
-            "Truck" = "#ff7f50",
-            "Trucks (<3.5t)" = "#ff7f50",
-            "Trucks (3.5t-16)" = "#8b0000",
-            "Trucks (>16)" = "#fa8072",
-            "Motorbikes" = "#1874cd", #"dodgerblue3",
-            "Small Cars" = "#87cefa",
-            "Large Cars" = "#6495ed",
-            "Van" = "#40e0d0",
-            "LDV" = "#00bfff",
-            "Non motorized" = "#da70d6",
-            "Freight"="#ff0000",
-            "Freight (Inland)" = "#cd5555",
-            "Pass non LDV" = "#6b8e23",
-            "Pass" = "#66cdaa",
-            "Pass non LDV (Domestic)" = "#54ff9f",
-            "refined liquids enduse" = "#8c8c8c")
-  
-  
-  
   
   for (i in 1:length(listofruns)) {
     if(any(grepl(sub("_.*", "", listofruns[[i]]),scenNames))) {
@@ -195,7 +144,12 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   plot_dem_ej_Tot <- copy(plot_dem_ej)
   plot_dem_ej_Tot <- plot_dem_ej_Tot[, value:=sum(value), by= c("period","region","scenario","variable")][,sector:=NULL]
   plot_dem_ej_Tot <- plot_dem_ej_Tot[!duplicated(plot_dem_ej_Tot)]
-  plot_dem_ej_Tot <- as.quitte(plot_dem_ej_Tot)
+  #Aggregate regions
+  plot_dem_ej_Tot <- aggregate_dt(plot_dem_ej_Tot,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("variable","scenario","model","unit"),valuecol = "value")
+  setnames(plot_dem_ej_Tot,"missingH12", "region")
+  plot_dem_ej_Tot_glo <- aggregate_dt(plot_dem_ej_Tot,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("variable","scenario","model","unit"),valuecol = "value")
+  setnames(plot_dem_ej_Tot_glo, "world", "region")
+  plot_dem_ej_Tot<- rbind(plot_dem_ej_Tot,plot_dem_ej_Tot_glo)
   
   p <- mipArea(plot_dem_ej_Tot[region== mainReg], scales="free_y")
   p <- p + theme(legend.position="none")
@@ -212,6 +166,7 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   p <- mipArea(plot_dem_ej_Tot,scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
+  
   swlatex(sw,"\\subsubsection{Passenger}")
   #Choose and aggregate passenger sectors
   plot_dem_ej_Pass <- copy(plot_dem_ej)
@@ -219,7 +174,13 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   plot_dem_ej_Pass <- plot_dem_ej_Pass[, value:=sum(value), by= c("period","region","scenario","variable")][,sector:=NULL]
   
   plot_dem_ej_Pass <- plot_dem_ej_Pass[!duplicated(plot_dem_ej_Pass)]
-  plot_dem_ej_Pass <- as.quitte(plot_dem_ej_Pass)
+  
+  #Aggregate regions
+  plot_dem_ej_Pass <- aggregate_dt(plot_dem_ej_Pass,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("variable","scenario","model","unit"),valuecol = "value")
+  setnames(plot_dem_ej_Pass,"missingH12", "region")
+  plot_dem_ej_Pass_glo <- aggregate_dt(plot_dem_ej_Pass,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("variable","scenario","model","unit"),valuecol = "value")
+  setnames(plot_dem_ej_Tot_glo, "world", "region")
+  plot_dem_ej_Pass<- rbind(plot_dem_ej_Pass,plot_dem_ej_Pass_glo)
   
   p <- mipArea(plot_dem_ej_Pass[region==mainReg], scales="free_y")
   p <- p + theme(legend.position="none")
@@ -243,7 +204,13 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   plot_dem_ej_Frght <- plot_dem_ej_Frght[sector %in% c("trn_freight","trn_shipping_intl")]
   plot_dem_ej_Frght <- plot_dem_ej_Frght[, value:=sum(value), by= c("period","region","scenario","variable")][,sector:=NULL]
   plot_dem_ej_Frght <- plot_dem_ej_Frght[!duplicated( plot_dem_ej_Frght)]
-  plot_dem_ej_Frght <- as.quitte( plot_dem_ej_Frght)
+
+  #Aggregate regions
+  plot_dem_ej_Frght <- aggregate_dt(plot_dem_ej_Frght,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("variable","scenario","model","unit"),valuecol = "value")
+  setnames(plot_dem_ej_Frght,"missingH12", "region")
+  plot_dem_ej_Frght_glo <- aggregate_dt(plot_dem_ej_Frght,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("variable","scenario","model","unit"),valuecol = "value")
+  setnames(plot_dem_ej_Frght_glo, "world", "region")
+  plot_dem_ej_Frght<- rbind(plot_dem_ej_Frght,plot_dem_ej_Frght_glo)
   
   p <- mipArea(plot_dem_ej_Frght[region==mainReg], scales="free_y")
   p <- p + theme(legend.position="none")
@@ -269,6 +236,13 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   plot_dem_ej_modes <- plot_dem_ej_modes[, c("year","region","aggr_vehtype","demand_EJ","scenario")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   setnames(plot_dem_ej_modes, c("year","demand_EJ","aggr_vehtype"),c("period","value","variable"))
   plot_dem_ej_modes <- plot_dem_ej_modes[!duplicated(plot_dem_ej_modes)]
+  
+  #Aggregate regions
+  plot_dem_ej_modes <- aggregate_dt(plot_dem_ej_modes,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("variable","scenario","model","unit"),valuecol = "value")
+  setnames(plot_dem_ej_modes,"missingH12", "region")
+  plot_dem_ej_modes_glo <- aggregate_dt(plot_dem_ej_modes,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("variable","scenario","model","unit"),valuecol = "value")
+  setnames(plot_dem_ej_Frght_glo, "world", "region")
+  plot_dem_ej_modes<- rbind(plot_dem_ej_modes,plot_dem_ej_modes_glo)
   
   p <- mipArea(plot_dem_ej_modes[region==mainReg], scales="free_y")
   p <- p + theme(legend.position="none")
@@ -314,6 +288,7 @@ lvl2_compareScen <- function(output_folder, listofruns, fileName="CompareScenari
   FV_final_pref_LSUV <- FV_final_pref_LSUV[!duplicated(FV_final_pref_LSUV)]
   setnames(FV_final_pref_LSUV, c("year", "logit_type"),c("period", "variable"))
   colours <- cols[names(cols) %in% FV_final_pref_LSUV$variable]
+  
   
   p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar],colours)
   swfigure(sw,print,p,sw_option="height=9,width=16")
