@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.2)  25 OCT 2021 08:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.2)  17 NOV 2021 15:44
 entering extended mode
 **./CompareScenarios.tex
 (CompareScenarios.tex
@@ -298,19 +298,19 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {C:/Users/johannah/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
 Package color Info: Redefining color shadecolor on input line 84.
-<figure/1-1.pdf, id=102, 505.89pt x 289.08pt>
+<figure/1-1.pdf, id=182, 505.89pt x 289.08pt>
 File: figure/1-1.pdf Graphic file (type pdf)
 <use figure/1-1.pdf>
 Package pdftex.def Info: figure/1-1.pdf  used on input line 85.
 (pdftex.def)             Requested size: 396.39595pt x 226.51807pt.
 Package color Info: Redefining color shadecolor on input line 92.
-<figure/2-1.pdf, id=103, 505.89pt x 325.215pt>
+<figure/2-1.pdf, id=183, 505.89pt x 325.215pt>
 File: figure/2-1.pdf Graphic file (type pdf)
 <use figure/2-1.pdf>
 Package pdftex.def Info: figure/2-1.pdf  used on input line 93.
 (pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
 Package color Info: Redefining color shadecolor on input line 100.
-<figure/3-1.pdf, id=104, 1156.32pt x 650.43pt>
+<figure/3-1.pdf, id=184, 1156.32pt x 650.43pt>
 File: figure/3-1.pdf Graphic file (type pdf)
 <use figure/3-1.pdf>
 Package pdftex.def Info: figure/3-1.pdf  used on input line 101.
@@ -320,7 +320,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2 <./figure/1-1.pdf> <./figure/2-1.pdf> <./figure/3-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 109.
-<figure/4-1.pdf, id=125, 1156.32pt x 578.16pt>
+<figure/4-1.pdf, id=205, 1156.32pt x 578.16pt>
 File: figure/4-1.pdf Graphic file (type pdf)
 <use figure/4-1.pdf>
 Package pdftex.def Info: figure/4-1.pdf  used on input line 110.
@@ -329,19 +329,19 @@ Package pdftex.def Info: figure/4-1.pdf  used on input line 110.
 
  <./figure/4-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 119.
-<figure/5-1.pdf, id=136, 505.89pt x 252.945pt>
+<figure/5-1.pdf, id=216, 505.89pt x 252.945pt>
 File: figure/5-1.pdf Graphic file (type pdf)
 <use figure/5-1.pdf>
 Package pdftex.def Info: figure/5-1.pdf  used on input line 120.
 (pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
 Package color Info: Redefining color shadecolor on input line 127.
-<figure/6-1.pdf, id=137, 505.89pt x 325.215pt>
+<figure/6-1.pdf, id=217, 505.89pt x 325.215pt>
 File: figure/6-1.pdf Graphic file (type pdf)
 <use figure/6-1.pdf>
 Package pdftex.def Info: figure/6-1.pdf  used on input line 128.
 (pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
 Package color Info: Redefining color shadecolor on input line 135.
-<figure/7-1.pdf, id=138, 578.16pt x 650.43pt>
+<figure/7-1.pdf, id=218, 578.16pt x 650.43pt>
 File: figure/7-1.pdf Graphic file (type pdf)
 <use figure/7-1.pdf>
 Package pdftex.def Info: figure/7-1.pdf  used on input line 136.
@@ -353,7 +353,7 @@ Underfull \vbox (badness 1609) has occurred while \output is active []
 
  <./figure/5-1.pdf> <./figure/6-1.pdf> <./figure/7-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 144.
-<figure/8-1.pdf, id=159, 1156.32pt x 578.16pt>
+<figure/8-1.pdf, id=239, 1156.32pt x 578.16pt>
 File: figure/8-1.pdf Graphic file (type pdf)
 <use figure/8-1.pdf>
 Package pdftex.def Info: figure/8-1.pdf  used on input line 145.
@@ -362,31 +362,31 @@ Package pdftex.def Info: figure/8-1.pdf  used on input line 145.
 
  <./figure/8-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 154.
-<figure/9-1.pdf, id=170, 505.89pt x 252.945pt>
+<figure/9-1.pdf, id=250, 505.89pt x 252.945pt>
 File: figure/9-1.pdf Graphic file (type pdf)
 <use figure/9-1.pdf>
 Package pdftex.def Info: figure/9-1.pdf  used on input line 155.
 (pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
 Package color Info: Redefining color shadecolor on input line 162.
-<figure/10-1.pdf, id=171, 505.89pt x 325.215pt>
+<figure/10-1.pdf, id=251, 505.89pt x 325.215pt>
 File: figure/10-1.pdf Graphic file (type pdf)
 <use figure/10-1.pdf>
 Package pdftex.def Info: figure/10-1.pdf  used on input line 163.
 (pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
 Package color Info: Redefining color shadecolor on input line 170.
-<figure/11-1.pdf, id=172, 578.16pt x 650.43pt>
+<figure/11-1.pdf, id=252, 578.16pt x 650.43pt>
 File: figure/11-1.pdf Graphic file (type pdf)
 <use figure/11-1.pdf>
 Package pdftex.def Info: figure/11-1.pdf  used on input line 171.
 (pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
 
-Underfull \vbox (badness 1584) has occurred while \output is active []
+Underfull \vbox (badness 1609) has occurred while \output is active []
 
  [6
 
  <./figure/9-1.pdf> <./figure/10-1.pdf> <./figure/11-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 179.
-<figure/12-1.pdf, id=193, 1156.32pt x 578.16pt>
+<figure/12-1.pdf, id=273, 1156.32pt x 578.16pt>
 File: figure/12-1.pdf Graphic file (type pdf)
 <use figure/12-1.pdf>
 Package pdftex.def Info: figure/12-1.pdf  used on input line 180.
@@ -395,31 +395,31 @@ Package pdftex.def Info: figure/12-1.pdf  used on input line 180.
 
  <./figure/12-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 189.
-<figure/13-1.pdf, id=205, 505.89pt x 252.945pt>
+<figure/13-1.pdf, id=285, 505.89pt x 252.945pt>
 File: figure/13-1.pdf Graphic file (type pdf)
 <use figure/13-1.pdf>
 Package pdftex.def Info: figure/13-1.pdf  used on input line 190.
 (pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
 Package color Info: Redefining color shadecolor on input line 197.
-<figure/14-1.pdf, id=206, 505.89pt x 325.215pt>
+<figure/14-1.pdf, id=286, 505.89pt x 325.215pt>
 File: figure/14-1.pdf Graphic file (type pdf)
 <use figure/14-1.pdf>
 Package pdftex.def Info: figure/14-1.pdf  used on input line 198.
 (pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
 Package color Info: Redefining color shadecolor on input line 205.
-<figure/15-1.pdf, id=207, 578.16pt x 650.43pt>
+<figure/15-1.pdf, id=287, 578.16pt x 650.43pt>
 File: figure/15-1.pdf Graphic file (type pdf)
 <use figure/15-1.pdf>
 Package pdftex.def Info: figure/15-1.pdf  used on input line 206.
 (pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
 
-Underfull \vbox (badness 1142) has occurred while \output is active []
+Underfull \vbox (badness 1609) has occurred while \output is active []
 
  [8
 
  <./figure/13-1.pdf> <./figure/14-1.pdf> <./figure/15-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 214.
-<figure/16-1.pdf, id=228, 1156.32pt x 578.16pt>
+<figure/16-1.pdf, id=308, 1156.32pt x 578.16pt>
 File: figure/16-1.pdf Graphic file (type pdf)
 <use figure/16-1.pdf>
 Package pdftex.def Info: figure/16-1.pdf  used on input line 215.
@@ -427,86 +427,570 @@ Package pdftex.def Info: figure/16-1.pdf  used on input line 215.
  [9
 
  <./figure/16-1.pdf>]
-Package color Info: Redefining color shadecolor on input line 227.
-<figure/17-1.pdf, id=239, 1156.32pt x 650.43pt>
+Package color Info: Redefining color shadecolor on input line 224.
+<figure/17-1.pdf, id=319, 505.89pt x 252.945pt>
 File: figure/17-1.pdf Graphic file (type pdf)
 <use figure/17-1.pdf>
-Package pdftex.def Info: figure/17-1.pdf  used on input line 228.
-(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
-Package color Info: Redefining color shadecolor on input line 236.
-<figure/18-1.pdf, id=240, 1156.32pt x 650.43pt>
+Package pdftex.def Info: figure/17-1.pdf  used on input line 225.
+(pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
+Package color Info: Redefining color shadecolor on input line 232.
+<figure/18-1.pdf, id=320, 505.89pt x 325.215pt>
 File: figure/18-1.pdf Graphic file (type pdf)
 <use figure/18-1.pdf>
-Package pdftex.def Info: figure/18-1.pdf  used on input line 237.
-(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Package color Info: Redefining color shadecolor on input line 245.
-<figure/19-1.pdf, id=241, 1156.32pt x 650.43pt>
+Package pdftex.def Info: figure/18-1.pdf  used on input line 233.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 240.
+<figure/19-1.pdf, id=321, 578.16pt x 650.43pt>
 File: figure/19-1.pdf Graphic file (type pdf)
 <use figure/19-1.pdf>
-Package pdftex.def Info: figure/19-1.pdf  used on input line 246.
-(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
-Package color Info: Redefining color shadecolor on input line 254.
-<figure/20-1.pdf, id=242, 1156.32pt x 650.43pt>
-File: figure/20-1.pdf Graphic file (type pdf)
-<use figure/20-1.pdf>
-Package pdftex.def Info: figure/20-1.pdf  used on input line 255.
-(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+Package pdftex.def Info: figure/19-1.pdf  used on input line 241.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 1584) has occurred while \output is active []
+
  [10
 
  <./figure/17-1.pdf> <./figure/18-1.pdf> <./figure/19-1.pdf>]
-Package color Info: Redefining color shadecolor on input line 264.
-<figure/21-1.pdf, id=262, 1156.32pt x 650.43pt>
+Package color Info: Redefining color shadecolor on input line 249.
+<figure/20-1.pdf, id=342, 1156.32pt x 578.16pt>
+File: figure/20-1.pdf Graphic file (type pdf)
+<use figure/20-1.pdf>
+Package pdftex.def Info: figure/20-1.pdf  used on input line 250.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [11
+
+ <./figure/20-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 259.
+<figure/21-1.pdf, id=353, 505.89pt x 289.08pt>
 File: figure/21-1.pdf Graphic file (type pdf)
 <use figure/21-1.pdf>
-Package pdftex.def Info: figure/21-1.pdf  used on input line 265.
-(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Package color Info: Redefining color shadecolor on input line 273.
-<figure/22-1.pdf, id=263, 1156.32pt x 650.43pt>
+Package pdftex.def Info: figure/21-1.pdf  used on input line 260.
+(pdftex.def)             Requested size: 396.39595pt x 226.51807pt.
+Package color Info: Redefining color shadecolor on input line 267.
+<figure/22-1.pdf, id=354, 505.89pt x 325.215pt>
 File: figure/22-1.pdf Graphic file (type pdf)
 <use figure/22-1.pdf>
-Package pdftex.def Info: figure/22-1.pdf  used on input line 274.
+Package pdftex.def Info: figure/22-1.pdf  used on input line 268.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 275.
+<figure/23-1.pdf, id=355, 1156.32pt x 650.43pt>
+File: figure/23-1.pdf Graphic file (type pdf)
+<use figure/23-1.pdf>
+Package pdftex.def Info: figure/23-1.pdf  used on input line 276.
 (pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11 <./figure/20-1.pdf> <./figure/21-1.pdf>]
-Package color Info: Redefining color shadecolor on input line 282.
-<figure/23-1.pdf, id=278, 1156.32pt x 650.43pt>
-File: figure/23-1.pdf Graphic file (type pdf)
-<use figure/23-1.pdf>
-Package pdftex.def Info: figure/23-1.pdf  used on input line 283.
-(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
-Package color Info: Redefining color shadecolor on input line 291.
-<figure/24-1.pdf, id=279, 1156.32pt x 650.43pt>
+ [12
+
+ <./figure/21-1.pdf> <./figure/22-1.pdf> <./figure/23-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 284.
+<figure/24-1.pdf, id=376, 1156.32pt x 578.16pt>
 File: figure/24-1.pdf Graphic file (type pdf)
 <use figure/24-1.pdf>
-Package pdftex.def Info: figure/24-1.pdf  used on input line 292.
+Package pdftex.def Info: figure/24-1.pdf  used on input line 285.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [13
+
+ <./figure/24-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 294.
+<figure/25-1.pdf, id=388, 505.89pt x 289.08pt>
+File: figure/25-1.pdf Graphic file (type pdf)
+<use figure/25-1.pdf>
+Package pdftex.def Info: figure/25-1.pdf  used on input line 295.
+(pdftex.def)             Requested size: 396.39595pt x 226.51807pt.
+Package color Info: Redefining color shadecolor on input line 302.
+<figure/26-1.pdf, id=389, 505.89pt x 325.215pt>
+File: figure/26-1.pdf Graphic file (type pdf)
+<use figure/26-1.pdf>
+Package pdftex.def Info: figure/26-1.pdf  used on input line 303.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 310.
+<figure/27-1.pdf, id=390, 1156.32pt x 650.43pt>
+File: figure/27-1.pdf Graphic file (type pdf)
+<use figure/27-1.pdf>
+Package pdftex.def Info: figure/27-1.pdf  used on input line 311.
 (pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
- [12 <./figure/22-1.pdf> <./figure/23-1.pdf> <./figure/24-1.pdf>] (CompareScena
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14
+
+ <./figure/25-1.pdf> <./figure/26-1.pdf> <./figure/27-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 319.
+<figure/28-1.pdf, id=411, 1156.32pt x 578.16pt>
+File: figure/28-1.pdf Graphic file (type pdf)
+<use figure/28-1.pdf>
+Package pdftex.def Info: figure/28-1.pdf  used on input line 320.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [15
+
+ <./figure/28-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 329.
+<figure/29-1.pdf, id=422, 505.89pt x 252.945pt>
+File: figure/29-1.pdf Graphic file (type pdf)
+<use figure/29-1.pdf>
+Package pdftex.def Info: figure/29-1.pdf  used on input line 330.
+(pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
+Package color Info: Redefining color shadecolor on input line 337.
+<figure/30-1.pdf, id=423, 505.89pt x 325.215pt>
+File: figure/30-1.pdf Graphic file (type pdf)
+<use figure/30-1.pdf>
+Package pdftex.def Info: figure/30-1.pdf  used on input line 338.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 345.
+<figure/31-1.pdf, id=424, 578.16pt x 650.43pt>
+File: figure/31-1.pdf Graphic file (type pdf)
+<use figure/31-1.pdf>
+Package pdftex.def Info: figure/31-1.pdf  used on input line 346.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 1142) has occurred while \output is active []
+
+ [16
+
+ <./figure/29-1.pdf> <./figure/30-1.pdf> <./figure/31-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 354.
+<figure/32-1.pdf, id=445, 1156.32pt x 578.16pt>
+File: figure/32-1.pdf Graphic file (type pdf)
+<use figure/32-1.pdf>
+Package pdftex.def Info: figure/32-1.pdf  used on input line 355.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [17
+
+ <./figure/32-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 364.
+<figure/33-1.pdf, id=456, 505.89pt x 252.945pt>
+File: figure/33-1.pdf Graphic file (type pdf)
+<use figure/33-1.pdf>
+Package pdftex.def Info: figure/33-1.pdf  used on input line 365.
+(pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
+Package color Info: Redefining color shadecolor on input line 372.
+<figure/34-1.pdf, id=457, 505.89pt x 325.215pt>
+File: figure/34-1.pdf Graphic file (type pdf)
+<use figure/34-1.pdf>
+Package pdftex.def Info: figure/34-1.pdf  used on input line 373.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 380.
+<figure/35-1.pdf, id=458, 578.16pt x 650.43pt>
+File: figure/35-1.pdf Graphic file (type pdf)
+<use figure/35-1.pdf>
+Package pdftex.def Info: figure/35-1.pdf  used on input line 381.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 1142) has occurred while \output is active []
+
+ [18
+
+ <./figure/33-1.pdf> <./figure/34-1.pdf> <./figure/35-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 389.
+<figure/36-1.pdf, id=479, 1156.32pt x 578.16pt>
+File: figure/36-1.pdf Graphic file (type pdf)
+<use figure/36-1.pdf>
+Package pdftex.def Info: figure/36-1.pdf  used on input line 390.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [19
+
+ <./figure/36-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 400.
+<figure/37-1.pdf, id=491, 578.16pt x 578.16pt>
+File: figure/37-1.pdf Graphic file (type pdf)
+<use figure/37-1.pdf>
+Package pdftex.def Info: figure/37-1.pdf  used on input line 401.
+(pdftex.def)             Requested size: 396.39595pt x 396.39009pt.
+Package color Info: Redefining color shadecolor on input line 408.
+<figure/38-1.pdf, id=492, 578.16pt x 650.43pt>
+File: figure/38-1.pdf Graphic file (type pdf)
+<use figure/38-1.pdf>
+Package pdftex.def Info: figure/38-1.pdf  used on input line 409.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package color Info: Redefining color shadecolor on input line 417.
+<figure/39-1.pdf, id=493, 578.16pt x 578.16pt>
+File: figure/39-1.pdf Graphic file (type pdf)
+<use figure/39-1.pdf>
+Package pdftex.def Info: figure/39-1.pdf  used on input line 418.
+(pdftex.def)             Requested size: 396.39595pt x 396.39009pt.
+Package color Info: Redefining color shadecolor on input line 425.
+<figure/40-1.pdf, id=494, 578.16pt x 650.43pt>
+File: figure/40-1.pdf Graphic file (type pdf)
+<use figure/40-1.pdf>
+Package pdftex.def Info: figure/40-1.pdf  used on input line 426.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [20
+
+ <./figure/37-1.pdf> <./figure/38-1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package color Info: Redefining color shadecolor on input line 434.
+<figure/41-1.pdf, id=511, 578.16pt x 578.16pt>
+File: figure/41-1.pdf Graphic file (type pdf)
+<use figure/41-1.pdf>
+Package pdftex.def Info: figure/41-1.pdf  used on input line 435.
+(pdftex.def)             Requested size: 396.39595pt x 396.39009pt.
+Package color Info: Redefining color shadecolor on input line 442.
+<figure/42-1.pdf, id=512, 578.16pt x 650.43pt>
+File: figure/42-1.pdf Graphic file (type pdf)
+<use figure/42-1.pdf>
+Package pdftex.def Info: figure/42-1.pdf  used on input line 443.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [21 <./figure/39-1.pdf> <./figure/40-1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package color Info: Redefining color shadecolor on input line 452.
+<figure/43-1.pdf, id=529, 505.89pt x 289.08pt>
+File: figure/43-1.pdf Graphic file (type pdf)
+<use figure/43-1.pdf>
+Package pdftex.def Info: figure/43-1.pdf  used on input line 453.
+(pdftex.def)             Requested size: 396.39595pt x 226.51807pt.
+Package color Info: Redefining color shadecolor on input line 460.
+<figure/44-1.pdf, id=530, 505.89pt x 325.215pt>
+File: figure/44-1.pdf Graphic file (type pdf)
+<use figure/44-1.pdf>
+Package pdftex.def Info: figure/44-1.pdf  used on input line 461.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [22 <./figure/41-1.pdf> <./figure/42-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 468.
+<figure/45-1.pdf, id=547, 1156.32pt x 650.43pt>
+File: figure/45-1.pdf Graphic file (type pdf)
+<use figure/45-1.pdf>
+Package pdftex.def Info: figure/45-1.pdf  used on input line 469.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23 <./figure/43-1.pdf> <./figure/44-1.pdf> <./figure/45-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 477.
+<figure/46-1.pdf, id=568, 1156.32pt x 578.16pt>
+File: figure/46-1.pdf Graphic file (type pdf)
+<use figure/46-1.pdf>
+Package pdftex.def Info: figure/46-1.pdf  used on input line 478.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [24
+
+ <./figure/46-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 487.
+<figure/47-1.pdf, id=579, 505.89pt x 252.945pt>
+File: figure/47-1.pdf Graphic file (type pdf)
+<use figure/47-1.pdf>
+Package pdftex.def Info: figure/47-1.pdf  used on input line 488.
+(pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
+Package color Info: Redefining color shadecolor on input line 495.
+<figure/48-1.pdf, id=580, 505.89pt x 325.215pt>
+File: figure/48-1.pdf Graphic file (type pdf)
+<use figure/48-1.pdf>
+Package pdftex.def Info: figure/48-1.pdf  used on input line 496.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 503.
+<figure/49-1.pdf, id=581, 578.16pt x 650.43pt>
+File: figure/49-1.pdf Graphic file (type pdf)
+<use figure/49-1.pdf>
+Package pdftex.def Info: figure/49-1.pdf  used on input line 504.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 1609) has occurred while \output is active []
+
+ [25
+
+ <./figure/47-1.pdf> <./figure/48-1.pdf> <./figure/49-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 512.
+<figure/50-1.pdf, id=603, 1156.32pt x 578.16pt>
+File: figure/50-1.pdf Graphic file (type pdf)
+<use figure/50-1.pdf>
+Package pdftex.def Info: figure/50-1.pdf  used on input line 513.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [26
+
+ <./figure/50-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 522.
+<figure/51-1.pdf, id=614, 505.89pt x 252.945pt>
+File: figure/51-1.pdf Graphic file (type pdf)
+<use figure/51-1.pdf>
+Package pdftex.def Info: figure/51-1.pdf  used on input line 523.
+(pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
+Package color Info: Redefining color shadecolor on input line 530.
+<figure/52-1.pdf, id=615, 505.89pt x 325.215pt>
+File: figure/52-1.pdf Graphic file (type pdf)
+<use figure/52-1.pdf>
+Package pdftex.def Info: figure/52-1.pdf  used on input line 531.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 538.
+<figure/53-1.pdf, id=616, 578.16pt x 650.43pt>
+File: figure/53-1.pdf Graphic file (type pdf)
+<use figure/53-1.pdf>
+Package pdftex.def Info: figure/53-1.pdf  used on input line 539.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 1609) has occurred while \output is active []
+
+ [27
+
+ <./figure/51-1.pdf> <./figure/52-1.pdf> <./figure/53-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 547.
+<figure/54-1.pdf, id=637, 1156.32pt x 578.16pt>
+File: figure/54-1.pdf Graphic file (type pdf)
+<use figure/54-1.pdf>
+Package pdftex.def Info: figure/54-1.pdf  used on input line 548.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [28
+
+ <./figure/54-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 557.
+<figure/55-1.pdf, id=648, 505.89pt x 252.945pt>
+File: figure/55-1.pdf Graphic file (type pdf)
+<use figure/55-1.pdf>
+Package pdftex.def Info: figure/55-1.pdf  used on input line 558.
+(pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
+Package color Info: Redefining color shadecolor on input line 565.
+<figure/56-1.pdf, id=649, 505.89pt x 325.215pt>
+File: figure/56-1.pdf Graphic file (type pdf)
+<use figure/56-1.pdf>
+Package pdftex.def Info: figure/56-1.pdf  used on input line 566.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 573.
+<figure/57-1.pdf, id=650, 578.16pt x 650.43pt>
+File: figure/57-1.pdf Graphic file (type pdf)
+<use figure/57-1.pdf>
+Package pdftex.def Info: figure/57-1.pdf  used on input line 574.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 1609) has occurred while \output is active []
+
+ [29
+
+ <./figure/55-1.pdf> <./figure/56-1.pdf> <./figure/57-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 582.
+<figure/58-1.pdf, id=671, 1156.32pt x 578.16pt>
+File: figure/58-1.pdf Graphic file (type pdf)
+<use figure/58-1.pdf>
+Package pdftex.def Info: figure/58-1.pdf  used on input line 583.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [30
+
+ <./figure/58-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 592.
+<figure/59-1.pdf, id=682, 505.89pt x 252.945pt>
+File: figure/59-1.pdf Graphic file (type pdf)
+<use figure/59-1.pdf>
+Package pdftex.def Info: figure/59-1.pdf  used on input line 593.
+(pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
+Package color Info: Redefining color shadecolor on input line 600.
+<figure/60-1.pdf, id=683, 505.89pt x 325.215pt>
+File: figure/60-1.pdf Graphic file (type pdf)
+<use figure/60-1.pdf>
+Package pdftex.def Info: figure/60-1.pdf  used on input line 601.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 608.
+<figure/61-1.pdf, id=684, 578.16pt x 650.43pt>
+File: figure/61-1.pdf Graphic file (type pdf)
+<use figure/61-1.pdf>
+Package pdftex.def Info: figure/61-1.pdf  used on input line 609.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 1584) has occurred while \output is active []
+
+ [31
+
+ <./figure/59-1.pdf> <./figure/60-1.pdf> <./figure/61-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 617.
+<figure/62-1.pdf, id=706, 1156.32pt x 578.16pt>
+File: figure/62-1.pdf Graphic file (type pdf)
+<use figure/62-1.pdf>
+Package pdftex.def Info: figure/62-1.pdf  used on input line 618.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [32
+
+ <./figure/62-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 626.
+<figure/63-1.pdf, id=717, 505.89pt x 252.945pt>
+File: figure/63-1.pdf Graphic file (type pdf)
+<use figure/63-1.pdf>
+Package pdftex.def Info: figure/63-1.pdf  used on input line 627.
+(pdftex.def)             Requested size: 396.39595pt x 198.20331pt.
+Package color Info: Redefining color shadecolor on input line 634.
+<figure/64-1.pdf, id=718, 505.89pt x 325.215pt>
+File: figure/64-1.pdf Graphic file (type pdf)
+<use figure/64-1.pdf>
+Package pdftex.def Info: figure/64-1.pdf  used on input line 635.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 642.
+<figure/65-1.pdf, id=719, 578.16pt x 650.43pt>
+File: figure/65-1.pdf Graphic file (type pdf)
+<use figure/65-1.pdf>
+Package pdftex.def Info: figure/65-1.pdf  used on input line 643.
+(pdftex.def)             Requested size: 396.39595pt x 445.93886pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [33
+
+ <./figure/63-1.pdf> <./figure/64-1.pdf> <./figure/65-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 651.
+<figure/66-1.pdf, id=740, 1156.32pt x 578.16pt>
+File: figure/66-1.pdf Graphic file (type pdf)
+<use figure/66-1.pdf>
+Package pdftex.def Info: figure/66-1.pdf  used on input line 652.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [34
+
+ <./figure/66-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 661.
+<figure/67-1.pdf, id=751, 505.89pt x 289.08pt>
+File: figure/67-1.pdf Graphic file (type pdf)
+<use figure/67-1.pdf>
+Package pdftex.def Info: figure/67-1.pdf  used on input line 662.
+(pdftex.def)             Requested size: 396.39595pt x 226.51807pt.
+Package color Info: Redefining color shadecolor on input line 669.
+<figure/68-1.pdf, id=752, 505.89pt x 325.215pt>
+File: figure/68-1.pdf Graphic file (type pdf)
+<use figure/68-1.pdf>
+Package pdftex.def Info: figure/68-1.pdf  used on input line 670.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 677.
+<figure/69-1.pdf, id=753, 1156.32pt x 650.43pt>
+File: figure/69-1.pdf Graphic file (type pdf)
+<use figure/69-1.pdf>
+Package pdftex.def Info: figure/69-1.pdf  used on input line 678.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [35
+
+ <./figure/67-1.pdf> <./figure/68-1.pdf> <./figure/69-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 686.
+<figure/70-1.pdf, id=774, 1156.32pt x 578.16pt>
+File: figure/70-1.pdf Graphic file (type pdf)
+<use figure/70-1.pdf>
+Package pdftex.def Info: figure/70-1.pdf  used on input line 687.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [36
+
+ <./figure/70-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 696.
+<figure/71-1.pdf, id=785, 505.89pt x 289.08pt>
+File: figure/71-1.pdf Graphic file (type pdf)
+<use figure/71-1.pdf>
+Package pdftex.def Info: figure/71-1.pdf  used on input line 697.
+(pdftex.def)             Requested size: 396.39595pt x 226.51807pt.
+Package color Info: Redefining color shadecolor on input line 704.
+<figure/72-1.pdf, id=786, 505.89pt x 325.215pt>
+File: figure/72-1.pdf Graphic file (type pdf)
+<use figure/72-1.pdf>
+Package pdftex.def Info: figure/72-1.pdf  used on input line 705.
+(pdftex.def)             Requested size: 396.39595pt x 254.83282pt.
+Package color Info: Redefining color shadecolor on input line 712.
+<figure/73-1.pdf, id=787, 1156.32pt x 650.43pt>
+File: figure/73-1.pdf Graphic file (type pdf)
+<use figure/73-1.pdf>
+Package pdftex.def Info: figure/73-1.pdf  used on input line 713.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37
+
+ <./figure/71-1.pdf> <./figure/72-1.pdf> <./figure/73-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 721.
+<figure/74-1.pdf, id=809, 1156.32pt x 578.16pt>
+File: figure/74-1.pdf Graphic file (type pdf)
+<use figure/74-1.pdf>
+Package pdftex.def Info: figure/74-1.pdf  used on input line 722.
+(pdftex.def)             Requested size: 802.79192pt x 401.39217pt.
+ [38
+
+ <./figure/74-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 733.
+<figure/75-1.pdf, id=820, 1156.32pt x 650.43pt>
+File: figure/75-1.pdf Graphic file (type pdf)
+<use figure/75-1.pdf>
+Package pdftex.def Info: figure/75-1.pdf  used on input line 734.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+Package color Info: Redefining color shadecolor on input line 742.
+<figure/76-1.pdf, id=821, 1156.32pt x 650.43pt>
+File: figure/76-1.pdf Graphic file (type pdf)
+<use figure/76-1.pdf>
+Package pdftex.def Info: figure/76-1.pdf  used on input line 743.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package color Info: Redefining color shadecolor on input line 751.
+<figure/77-1.pdf, id=822, 1156.32pt x 650.43pt>
+File: figure/77-1.pdf Graphic file (type pdf)
+<use figure/77-1.pdf>
+Package pdftex.def Info: figure/77-1.pdf  used on input line 752.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+Package color Info: Redefining color shadecolor on input line 760.
+<figure/78-1.pdf, id=823, 1156.32pt x 650.43pt>
+File: figure/78-1.pdf Graphic file (type pdf)
+<use figure/78-1.pdf>
+Package pdftex.def Info: figure/78-1.pdf  used on input line 761.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+ [39
+
+ <./figure/75-1.pdf> <./figure/76-1.pdf> <./figure/77-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 770.
+<figure/79-1.pdf, id=843, 1156.32pt x 650.43pt>
+File: figure/79-1.pdf Graphic file (type pdf)
+<use figure/79-1.pdf>
+Package pdftex.def Info: figure/79-1.pdf  used on input line 771.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package color Info: Redefining color shadecolor on input line 779.
+<figure/80-1.pdf, id=844, 1156.32pt x 650.43pt>
+File: figure/80-1.pdf Graphic file (type pdf)
+<use figure/80-1.pdf>
+Package pdftex.def Info: figure/80-1.pdf  used on input line 780.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40 <./figure/78-1.pdf> <./figure/79-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 788.
+<figure/81-1.pdf, id=859, 1156.32pt x 650.43pt>
+File: figure/81-1.pdf Graphic file (type pdf)
+<use figure/81-1.pdf>
+Package pdftex.def Info: figure/81-1.pdf  used on input line 789.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+Package color Info: Redefining color shadecolor on input line 797.
+<figure/82-1.pdf, id=860, 1156.32pt x 650.43pt>
+File: figure/82-1.pdf Graphic file (type pdf)
+<use figure/82-1.pdf>
+Package pdftex.def Info: figure/82-1.pdf  used on input line 798.
+(pdftex.def)             Requested size: 396.39595pt x 222.96942pt.
+ [41 <./figure/80-1.pdf> <./figure/81-1.pdf> <./figure/82-1.pdf>] (CompareScena
 rios.aux)
 Package rerunfilecheck Info: File `CompareScenarios.out' has not changed.
-(rerunfilecheck)             Checksum: B6B9CC4E88CF2036E40458010E133DC8;1976.
+(rerunfilecheck)             Checksum: 7DF62F3C500B9EF90D061C62445D1C6A;4246.
  ) 
 Here is how much of TeX's memory you used:
- 8286 strings out of 478927
- 125682 string characters out of 2862384
- 430467 words of memory out of 3000000
- 26001 multiletter control sequences out of 15000+600000
+ 8869 strings out of 478927
+ 137351 string characters out of 2862384
+ 439473 words of memory out of 3000000
+ 26481 multiletter control sequences out of 15000+600000
  404948 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,6n,66p,290b,323s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,6n,66p,306b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Progra
 m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on CompareScenarios.pdf (12 pages, 724168 bytes).
+Output written on CompareScenarios.pdf (41 pages, 1468810 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
- 32 named destinations out of 1000 (max. 500000)
- 265 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 915 PDF objects out of 1000 (max. 8388607)
+ 77 named destinations out of 1000 (max. 500000)
+ 683 words of extra memory for PDF output out of 10000 (max. 10000000)
 
