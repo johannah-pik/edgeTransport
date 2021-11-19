@@ -4,6 +4,7 @@
 #'
 #' @import mip  
 #' @import data.table
+#' @import utils
 #' @import rmndt
 #' @importFrom luplot magpie2ggplot2
 #' @importFrom ggplot2 facet_grid ggplot geom_col facet_wrap geom_point aes_ geom_ribbon guides guide_legend
@@ -156,25 +157,25 @@ cols <- c("NG" = "#d11141",
   GDP_country[, year := as.numeric(gsub("y", "", Year))][, Year := NULL]
   GDP_country[, variable := paste0(sub("gdp_", "",variable))]
   setnames(GDP_country, c("ISO3","variable", "value"),c("CountryCode","scenario", "weight"))
-  GDP_country <- aggregate_dt(GDP_country,Regionmapping_21_EU11[,-c("X","missingH12")],fewcol = "region", manycol = "CountryCode",datacols = "scenario",valuecol = "weight",)
+  GDP_country <- aggregate_dt(GDP_country,Regionmapping_21_EU11[,-c("X","missingH12")],fewcol = "region", manycol = "CountryCode",datacols = "scenario",valuecol = "weight")
   
   #Maping for vehicle type aggregation
   Mapp_Aggr_vehtype = data.table(
     gran_vehtype = c("Compact Car","Large Car","Large Car and SUV","Light Truck and SUV", "Midsize Car","Mini Car","Subcompact Car","Van", "International Aviation_tmp_vehicletype",
                      "Domestic Ship_tmp_vehicletype","Freight Rail_tmp_vehicletype","Truck (0-3.5t)" ,"Truck (18t)","Truck (26t)","Truck (40t)","Truck (7.5t)","Domestic Aviation_tmp_vehicletype",
-                     "HSR_tmp_vehicletype","Passenger Rail_tmp_vehicletype","Bus_tmp_vehicletype", "Moped","Motorcycle (50-250cc)","Motorcycle (>250cc)","International Ship_tmp_vehicletype") ,
-    aggr_vehtype= c("Small Cars","Large Cars","Large Cars","Trucks", "Large Cars","Small Cars","Small Cars", "Large Cars", "Aircraft international",
+                     "HSR_tmp_vehicletype","Passenger Rail_tmp_vehicletype","Bus_tmp_vehicletype", "Moped","Motorcycle (50-250cc)","Motorcycle (>250cc)","International Ship_tmp_vehicletype", "Cycle_tmp_vehicletype","Walk_tmp_vehicletype") ,
+    aggr_vehtype= c("Small Cars","Large Cars","Large Cars","Large Cars", "Large Cars","Small Cars","Small Cars", "Large Cars", "Aircraft international",
                     "Ships domestic","Freight Trains","Trucks" ,"Trucks","Trucks","Trucks","Trucks","Aircraft domestic",
-                    "Passenger Trains","Passenger Trains","Busses", "Motorbikes","Motorbikes","Motorbikes","Ships international") ,
+                    "Passenger Trains","Passenger Trains","Busses", "Motorbikes","Motorbikes","Motorbikes","Ships international","Cycling","Walking") ,
     international=c("no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","bunkers","no bunkers","no bunkers","no bunkers","no bunkers",
-                    "no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","bunkers")
+                    "no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","no bunkers","bunkers","no bunkers","no bunkers")
   )  
   
   #Mapping efficiencies for useful energy
   
   Mapp_UE = data.table(
-    technology = c("UE|FCEV","UE|BEV","UE|ICE"),
-    UE_efficiency =c(0.5,0.8,0.3))
+    technology = c("FCEV","BEV","Electric","Liquids","Hydrogen"),
+    UE_efficiency =c(0.5,0.8,0.8, 0.3, 0.35))
   
   
   ## ---- Load scenario data ----
@@ -274,7 +275,7 @@ cols <- c("NG" = "#d11141",
   plot_dem_ej<- rbind(plot_dem_ej,plot_dem_ej_glo)
   plot_dem_ej <- plot_dem_ej[!duplicated(plot_dem_ej)]
   
-  #Rename and aggregate technologies by energy carrier 
+  #Rename technologies by energy carrier 
   plot_dem_ej[technology %in% c("FCEV","Hydrogen"),technology:="FE|Hydrogen"]
   plot_dem_ej[technology %in% c("BEV","Electric"),technology:="FE|Electricity"]
   plot_dem_ej[technology == "Liquids",technology:="FE|Liquids"]
@@ -311,7 +312,7 @@ cols <- c("NG" = "#d11141",
   plot_dem_ej_Tot <- plot_dem_ej_Tot[,sector:=NULL][,vehicle_type:=NULL]
   plot_dem_ej_Tot <- plot_dem_ej_Tot[, value:=sum(value), by= c("period","region","scenario","FE_carrier")]
   plot_dem_ej_Tot <- plot_dem_ej_Tot[!duplicated(plot_dem_ej_Tot)]
-  #Set FE_carrier as variable
+  #Set technology as variable
   setnames(plot_dem_ej_Tot,"FE_carrier","variable")
   
   p <- mipArea(plot_dem_ej_Tot[region== mainReg], scales="free_y")
@@ -322,11 +323,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Tot[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Tot[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Tot,scales="free_y")
+  p <- mipArea(plot_dem_ej_Tot[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
 
@@ -349,11 +350,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Pass_tot[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Pass_tot[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Pass_tot,scales="free_y")
+  p <- mipArea(plot_dem_ej_Pass_tot[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
@@ -376,11 +377,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Pass_LDV[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Pass_LDV[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Pass_LDV,scales="free_y")
+  p <- mipArea(plot_dem_ej_Pass_LDV[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
 
@@ -402,11 +403,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Pass_nonLDV[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Pass_nonLDV[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Pass_nonLDV,scales="free_y")
+  p <- mipArea(plot_dem_ej_Pass_nonLDV[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
@@ -430,76 +431,79 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Frght_tot[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Frght_tot[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Frght_tot,scales="free_y")
+  p <- mipArea(plot_dem_ej_Frght_tot[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
-  ### ---- Bunkers ---- 
-  swlatex(sw,"\\subsubsection{Bunkers}")
+  # ### ---- Bunkers ---- 
+  # swlatex(sw,"\\subsubsection{Bunkers}")
+  # 
+  # #Aggregate sectors
+  # plot_dem_ej_bunk_Tot <- copy(plot_dem_ej_bunk)
+  # plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[,sector:=NULL][,vehicle_type:=NULL]
+  # plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[, value:=sum(value),by= c("period","region","scenario","FE_carrier")]
+  # plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[!duplicated(plot_dem_ej_bunk_Tot)]
+  # #Set FE_carrier as variable
+  # setnames(plot_dem_ej_bunk_Tot,"FE_carrier","variable")
+  # 
+  # p <- mipArea(plot_dem_ej_bunk_Tot[region== mainReg], scales="free_y")
+  # p <- p + theme(legend.position="none")
+  # swfigure(sw,print,p,sw_option="height=4,width=7")
+  # 
+  # p <- mipBarYearData(plot_dem_ej_bunk_Tot[region==mainReg & period %in% y_bar])
+  # p <- p + theme(legend.position="none")
+  # swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  # 
+  # p <- mipBarYearData(plot_dem_ej_bunk_Tot[!region==mainReg & period %in% y_bar])
+  # swfigure(sw,print,p,sw_option="height=9,width=16")
+  # 
+  # swlatex(sw,"\\onecolumn")
+  # p <- mipArea(plot_dem_ej_bunk_Tot[!region==mainReg],scales="free_y")
+  # swfigure(sw,print,p,sw_option="height=8,width=16")
+  # swlatex(sw,"\\twocolumn")
   
-  #Aggregate sectors
-  plot_dem_ej_bunk_Tot <- copy(plot_dem_ej_bunk)
-  plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[,sector:=NULL][,vehicle_type:=NULL]
-  plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[, value:=sum(value),by= c("period","region","scenario","FE_carrier")]
-  plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[!duplicated(plot_dem_ej_bunk_Tot)]
-  #Set FE_carrier as variable
-  setnames(plot_dem_ej_bunk_Tot,"FE_carrier","variable")
   
-  p <- mipArea(plot_dem_ej_bunk_Tot[region== mainReg], scales="free_y")
-  p <- p + theme(legend.position="none")
-  swfigure(sw,print,p,sw_option="height=4,width=7")
-  
-  p <- mipBarYearData(plot_dem_ej_bunk_Tot[region==mainReg & period %in% y_bar])
-  p <- p + theme(legend.position="none")
-  swfigure(sw,print,p,sw_option="height=4.5,width=7")
-  
-  p <- mipBarYearData(plot_dem_ej_bunk_Tot[period %in% y_bar])
-  swfigure(sw,print,p,sw_option="height=9,width=16")
-  
-  swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_bunk_Tot,scales="free_y")
-  swfigure(sw,print,p,sw_option="height=8,width=16")
-  swlatex(sw,"\\twocolumn")
-  
-  
-  ### ---- No Bunkers ---- 
-  swlatex(sw,"\\subsubsection{W/O Bunkers}")
-  
-  #Aggregate sectors
-  plot_dem_ej_wobunk_Tot <- copy(plot_dem_ej_wobunk)
-  plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[,sector:=NULL][,vehicle_type:=NULL]
-  plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[, value:=sum(value),by= c("period","region","scenario","FE_carrier")]
-  plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[!duplicated(plot_dem_ej_wobunk_Tot)]
-  #Set FE_carrier as variable
-  setnames(plot_dem_ej_wobunk_Tot,"FE_carrier","variable")
-  
-  p <- mipArea(plot_dem_ej_wobunk_Tot[region== mainReg], scales="free_y")
-  p <- p + theme(legend.position="none")
-  swfigure(sw,print,p,sw_option="height=4,width=7")
-  
-  p <- mipBarYearData(plot_dem_ej_wobunk_Tot[region==mainReg & period %in% y_bar])
-  p <- p + theme(legend.position="none")
-  swfigure(sw,print,p,sw_option="height=4.5,width=7")
-  
-  p <- mipBarYearData(plot_dem_ej_wobunk_Tot[period %in% y_bar])
-  swfigure(sw,print,p,sw_option="height=9,width=16")
-  
-  swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_wobunk_Tot,scales="free_y")
-  swfigure(sw,print,p,sw_option="height=8,width=16")
-  swlatex(sw,"\\twocolumn")
-  
+  # ### ---- No Bunkers ---- 
+  # swlatex(sw,"\\subsubsection{W/O Bunkers}")
+  # 
+  # #Aggregate sectors
+  # plot_dem_ej_wobunk_Tot <- copy(plot_dem_ej_wobunk)
+  # plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[,sector:=NULL][,vehicle_type:=NULL]
+  # plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[, value:=sum(value),by= c("period","region","scenario","FE_carrier")]
+  # plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[!duplicated(plot_dem_ej_wobunk_Tot)]
+  # #Set FE_carrier as variable
+  # setnames(plot_dem_ej_wobunk_Tot,"FE_carrier","variable")
+  # 
+  # p <- mipArea(plot_dem_ej_wobunk_Tot[region== mainReg], scales="free_y")
+  # p <- p + theme(legend.position="none")
+  # swfigure(sw,print,p,sw_option="height=4,width=7")
+  # 
+  # p <- mipBarYearData(plot_dem_ej_wobunk_Tot[region==mainReg & period %in% y_bar])
+  # p <- p + theme(legend.position="none")
+  # swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  # 
+  # p <- mipBarYearData(plot_dem_ej_wobunk_Tot[!region==mainReg & period %in% y_bar])
+  # swfigure(sw,print,p,sw_option="height=9,width=16")
+  # 
+  # swlatex(sw,"\\onecolumn")
+  # p <- mipArea(plot_dem_ej_wobunk_Tot[!region==mainReg],scales="free_y")
+  # swfigure(sw,print,p,sw_option="height=8,width=16")
+  # swlatex(sw,"\\twocolumn")
+  # 
   
   ## ---- FE Transport modes----
   swlatex(sw,"\\subsection{Final energy by transport modes}")
+  swlatex(sw,"\\subsubsection{Passenger without bunkers by transport modes}")
   
   
-  #Aggregate by transport modes
   plot_dem_ej_modes <- copy(plot_dem_ej)
+  #Choose Passenger without bunkers
+  plot_dem_ej_modes <- plot_dem_ej_modes[sector=="trn_pass"]
+  #Aggregate by transport modes
   plot_dem_ej_modes <- plot_dem_ej_modes[,sector:=NULL][,FE_carrier:=NULL]
   plot_dem_ej_modes <- plot_dem_ej_modes[, value:=sum(value), by= c("period","region","scenario","vehicle_type")]
   plot_dem_ej_modes <- plot_dem_ej_modes[!duplicated(plot_dem_ej_modes)]
@@ -514,11 +518,97 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_modes[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_modes[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_modes,scales="free_y")
+  p <- mipArea(plot_dem_ej_modes[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")
+  
+  swlatex(sw,"\\subsubsection{Passenger bunkers by transport modes}")
+  
+  
+  plot_dem_ej_modes <- copy(plot_dem_ej)
+  #Choose Passenger bunkers
+  plot_dem_ej_modes <- plot_dem_ej_modes[sector=="trn_aviation_intl"]
+  #Aggregate by transport modes
+  plot_dem_ej_modes <- plot_dem_ej_modes[,sector:=NULL][,FE_carrier:=NULL]
+  plot_dem_ej_modes <- plot_dem_ej_modes[, value:=sum(value), by= c("period","region","scenario","vehicle_type")]
+  plot_dem_ej_modes <- plot_dem_ej_modes[!duplicated(plot_dem_ej_modes)]
+  #Set vehicle_types as variable
+  setnames( plot_dem_ej_modes,"vehicle_type","variable")
+  
+  p <- mipArea(plot_dem_ej_modes[region==mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=3.5,width=7") 
+  
+  p <- mipBarYearData(plot_dem_ej_modes[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_dem_ej_modes[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=8")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_dem_ej_modes[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")
+  
+  swlatex(sw,"\\subsubsection{Freight without bunkers by transport modes}")
+  
+  
+  plot_dem_ej_modes <- copy(plot_dem_ej)
+  #Choose Freight without bunkers
+  plot_dem_ej_modes <- plot_dem_ej_modes[sector=="trn_freight"]
+  #Aggregate by transport modes
+  plot_dem_ej_modes <- plot_dem_ej_modes[,sector:=NULL][,FE_carrier:=NULL]
+  plot_dem_ej_modes <- plot_dem_ej_modes[, value:=sum(value), by= c("period","region","scenario","vehicle_type")]
+  plot_dem_ej_modes <- plot_dem_ej_modes[!duplicated(plot_dem_ej_modes)]
+  #Set vehicle_types as variable
+  setnames( plot_dem_ej_modes,"vehicle_type","variable")
+  
+  p <- mipArea(plot_dem_ej_modes[region==mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=3.5,width=7") 
+  
+  p <- mipBarYearData(plot_dem_ej_modes[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_dem_ej_modes[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=8")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_dem_ej_modes[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")
+  
+  swlatex(sw,"\\subsubsection{Freight bunkers by transport modes}")
+  
+  plot_dem_ej_modes <- copy(plot_dem_ej)
+  #Choose Freight bunkers
+  plot_dem_ej_modes <- plot_dem_ej_modes[sector=="trn_shipping_intl"]
+  #Aggregate by transport modes
+  plot_dem_ej_modes <- plot_dem_ej_modes[,sector:=NULL][,FE_carrier:=NULL]
+  plot_dem_ej_modes <- plot_dem_ej_modes[, value:=sum(value), by= c("period","region","scenario","vehicle_type")]
+  plot_dem_ej_modes <- plot_dem_ej_modes[!duplicated(plot_dem_ej_modes)]
+  #Set vehicle_types as variable
+  setnames( plot_dem_ej_modes,"vehicle_type","variable")
+  
+  p <- mipArea(plot_dem_ej_modes[region==mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=3.5,width=7") 
+  
+  p <- mipBarYearData(plot_dem_ej_modes[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_dem_ej_modes[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=8")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_dem_ej_modes[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
 
@@ -526,7 +616,7 @@ cols <- c("NG" = "#d11141",
   swlatex(sw,"\\subsection{Final energy bunkers vs. no bunkers}")
   
 
-  #Set bunkers bunkers as variable
+  #Set bunkers vs no bunkers as variable
   setnames(plot_dem_ej_wwobunk,"international","variable")
   
   p <- mipArea(plot_dem_ej_wwobunk[region==mainReg], scales="free_y")
@@ -537,11 +627,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_wwobunk[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_wwobunk[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_wwobunk,scales="free_y")
+  p <- mipArea(plot_dem_ej_wwobunk[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")  
   
@@ -624,22 +714,21 @@ cols <- c("NG" = "#d11141",
   plot_dem_ej_UE <- rbind(plot_dem_ej_UE,plot_dem_ej_glo_UE)
   plot_dem_ej_UE <- plot_dem_ej_UE[!duplicated(plot_dem_ej_UE)]
   
+  #Calculate UE
+  plot_dem_ej_UE <- merge(plot_dem_ej_UE,Mapp_UE)
+  plot_dem_ej_UE[,value:=value*UE_efficiency][,UE_efficiency:=NULL] 
+  
   #Rename and aggregate technologies by energy carrier 
-  plot_dem_ej_UE[technology %in% c("FCEV"),technology:="UE|FCEV"]
-  plot_dem_ej_UE[technology %in% c("Hydrogen"),technology:="UE|ICE"]
-  plot_dem_ej_UE[technology %in% c("BEV","Electric"),technology:="UE|BEV"]
-  plot_dem_ej_UE[technology == "Liquids",technology:="UE|ICE"]
-  plot_dem_ej_UE[technology == "NG",technology:="UE|ICE"]
+  plot_dem_ej_UE[technology %in% c("FCEV"),technology:="UE|Hydrogen"]
+  plot_dem_ej_UE[technology %in% c("Hydrogen"),technology:="UE|Hydrogen"]
+  plot_dem_ej_UE[technology %in% c("BEV","Electric"),technology:="UE|Electricity"]
+  plot_dem_ej_UE[technology == "Liquids",technology:="UE|Liquids"]
+  plot_dem_ej_UE[technology == "NG",technology:="UE|Gas"]
   #Group vehicle types for plotting
   plot_dem_ej_UE <- merge(plot_dem_ej_UE,Mapp_Aggr_vehtype, by.x="vehicle_type" ,by.y="gran_vehtype")
   plot_dem_ej_UE <- plot_dem_ej_UE[,-c("vehicle_type")]
   setnames(plot_dem_ej_UE,"aggr_vehtype","vehicle_type")
-   #Calculate UE
-  merge(plot_dem_ej_UE,Mapp_UE)
-  plot_dem_ej_UE[,value:=value*UE_efficieny][,-c("UE_efficiency")]
-  
-  
-  
+
   #Filter for bunkers/no bunkers
   plot_dem_ej_wobunk_UE <- plot_dem_ej_UE[international=="no bunkers"]
   plot_dem_ej_bunk_UE <- plot_dem_ej_UE[international=="bunkers"]
@@ -660,8 +749,6 @@ cols <- c("NG" = "#d11141",
   plot_dem_ej_wwobunk_UE <- plot_dem_ej_wwobunk_UE[!duplicated(plot_dem_ej_wwobunk_UE)]
   
  
-  
-  
   ### ---- Total ----
   swlatex(sw,"\\subsubsection{Total}")
   #Aggregate sectors
@@ -680,11 +767,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Tot_UE[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Tot_UE[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Tot_UE,scales="free_y")
+  p <- mipArea(plot_dem_ej_Tot_UE[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
@@ -707,11 +794,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Pass_tot_UE[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Pass_tot_UE[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Pass_tot_UE,scales="free_y")
+  p <- mipArea(plot_dem_ej_Pass_tot_UE[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
@@ -734,11 +821,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Pass_LDV_UE[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Pass_LDV_UE[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Pass_LDV_UE,scales="free_y")
+  p <- mipArea(plot_dem_ej_Pass_LDV_UE[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
@@ -760,11 +847,11 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Pass_nonLDV_UE[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Pass_nonLDV_UE[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Pass_nonLDV_UE,scales="free_y")
+  p <- mipArea(plot_dem_ej_Pass_nonLDV_UE[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
@@ -788,16 +875,18 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_dem_ej_Frght_tot_UE[period %in% y_bar])
+  p <- mipBarYearData(plot_dem_ej_Frght_tot_UE[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_Frght_tot_UE,scales="free_y")
+  p <- mipArea(plot_dem_ej_Frght_tot_UE[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
 
   #### ---- Trucks---- 
+  
+  swlatex(sw,"\\subsubsection{Freight Trucks}")
   #Choose only Trucks 
   plot_dem_ej_Frght_Trucks_UE <- plot_dem_ej_Frght_UE[vehicle_type=="Trucks"]
   plot_dem_ej_Frght_Trucks_UE <- plot_dem_ej_Frght_Trucks_UE[,sector:=NULL][,vehicle_type:=NULL]
@@ -814,73 +903,275 @@ cols <- c("NG" = "#d11141",
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData( plot_dem_ej_Frght_Trucks_UE[period %in% y_bar])
+  p <- mipBarYearData( plot_dem_ej_Frght_Trucks_UE[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea( plot_dem_ej_Frght_Trucks_UE,scales="free_y")
+  p <- mipArea( plot_dem_ej_Frght_Trucks_UE[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
   
-  ### ---- Bunkers ---- 
-  swlatex(sw,"\\subsubsection{Bunkers}")
+  # ### ---- Bunkers ---- 
+  # swlatex(sw,"\\subsubsection{Bunkers}")
+  # 
+  # #Aggregate sectors
+  # plot_dem_ej_bunk_Tot_UE <- copy(plot_dem_ej_bunk_UE)
+  # plot_dem_ej_bunk_Tot_UE <- plot_dem_ej_bunk_Tot_UE[,sector:=NULL][,vehicle_type:=NULL]
+  # plot_dem_ej_bunk_Tot_UE <- plot_dem_ej_bunk_Tot_UE[, value:=sum(value), by= c("period","region","scenario","technology")]
+  # plot_dem_ej_bunk_Tot_UE <- plot_dem_ej_bunk_Tot_UE[!duplicated(plot_dem_ej_bunk_Tot_UE)]
+  # #Set technology as variable
+  # setnames(plot_dem_ej_bunk_Tot_UE,"technology","variable")
+  # 
+  # p <- mipArea(plot_dem_ej_bunk_Tot_UE[region == mainReg], scales="free_y")
+  # p <- p + theme(legend.position="none")
+  # swfigure(sw,print,p,sw_option="height=4,width=7")
+  # 
+  # p <- mipBarYearData(plot_dem_ej_bunk_Tot_UE[region==mainReg & period %in% y_bar])
+  # p <- p + theme(legend.position="none")
+  # swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  # 
+  # p <- mipBarYearData(plot_dem_ej_bunk_Tot_UE[!region==mainReg & period %in% y_bar])
+  # swfigure(sw,print,p,sw_option="height=9,width=16")
+  # 
+  # swlatex(sw,"\\onecolumn")
+  # p <- mipArea(plot_dem_ej_bunk_Tot_UE[!region==mainReg],scales="free_y")
+  # swfigure(sw,print,p,sw_option="height=8,width=16")
+  # swlatex(sw,"\\twocolumn")
+  # 
+  # ### ---- No Bunkers ---- 
+  # swlatex(sw,"\\subsubsection{W/O Bunkers}")
+  # 
+  # #Aggregate sectors
+  # plot_dem_ej_wobunk_Tot_UE <- copy(plot_dem_ej_wobunk_UE)
+  # plot_dem_ej_wobunk_Tot_UE <- plot_dem_ej_wobunk_Tot_UE[,sector:=NULL][,vehicle_type:=NULL]
+  # plot_dem_ej_wobunk_Tot_UE <- plot_dem_ej_wobunk_Tot_UE[, value:=sum(value), by= c("period","region","scenario","technology")]
+  # plot_dem_ej_wobunk_Tot_UE <- plot_dem_ej_wobunk_Tot_UE[!duplicated(plot_dem_ej_wobunk_Tot_UE)]
+  # #Set technology as variable
+  # setnames(plot_dem_ej_wobunk_Tot_UE,"technology","variable")
+  # 
+  # p <- mipArea(plot_dem_ej_wobunk_Tot_UE[region== mainReg], scales="free_y")
+  # p <- p + theme(legend.position="none")
+  # swfigure(sw,print,p,sw_option="height=4,width=7")
+  # 
+  # p <- mipBarYearData(plot_dem_ej_wobunk_Tot_UE[region==mainReg & period %in% y_bar])
+  # p <- p + theme(legend.position="none")
+  # swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  # 
+  # p <- mipBarYearData(plot_dem_ej_wobunk_Tot_UE[!region==mainReg & period %in% y_bar])
+  # swfigure(sw,print,p,sw_option="height=9,width=16")
+  # 
+  # swlatex(sw,"\\onecolumn")
+  # p <- mipArea(plot_dem_ej_wobunk_Tot_UE[!region==mainReg],scales="free_y")
+  # swfigure(sw,print,p,sw_option="height=8,width=16")
+  # swlatex(sw,"\\twocolumn")
+  # 
+  ###Energy Services
   
-  #Aggregate sectors
-  plot_dem_ej_bunk_Tot_UE <- copy(plot_dem_ej_bunk_UE)
-  plot_dem_ej_bunk_Tot_UE <- plot_dem_ej_bunk_Tot_UE[,sector:=NULL][,vehicle_type:=NULL]
-  plot_dem_ej_bunk_Tot_UE <- plot_dem_ej_bunk_Tot_UE[, value:=sum(value), by= c("period","region","scenario","technology")]
-  plot_dem_ej_bunk_Tot_UE <- plot_dem_ej_bunk_Tot_UE[!duplicated(plot_dem_ej_bunk_Tot_UE)]
-  #Set technology as variable
-  setnames(plot_dem_ej_bunk_Tot_UE,"technology","variable")
+  swlatex(sw,"\\section{Energy services}")
   
-  p <- mipArea(plot_dem_ej_bunk_Tot_UE[region== mainReg], scales="free_y")
-  p <- p + theme(legend.position="none")
-  swfigure(sw,print,p,sw_option="height=4,width=7")
+  energy_services <- do.call(rbind.data.frame, demand_km)
+  setkey(energy_services,NULL)
   
-  p <- mipBarYearData(plot_dem_ej_bunk_Tot_UE[region==mainReg & period %in% y_bar])
-  p <- p + theme(legend.position="none")
-  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  plot_Energy_services <- copy(energy_services)
   
-  p <- mipBarYearData(plot_dem_ej_bunk_Tot_UE[period %in% y_bar])
-  swfigure(sw,print,p,sw_option="height=9,width=16")
   
-  swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_bunk_Tot_UE,scales="free_y")
-  swfigure(sw,print,p,sw_option="height=8,width=16")
-  swlatex(sw,"\\twocolumn")
   
-  ### ---- No Bunkers ---- 
-  swlatex(sw,"\\subsubsection{W/O Bunkers}")
+  #rename columns for mip
+  setnames(plot_Energy_services,c("demand_F","year"),c("value","period"))
+  plot_Energy_services <- plot_Energy_services[,c("value","period","region","scenario","sector","technology", "vehicle_type")]
+  plot_Energy_services[,unit:= "km/yr"]
+  #Aggregate regions
+  plot_Energy_services <- aggregate_dt(plot_Energy_services,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" , datacols = c("technology","scenario","sector","vehicle_type","unit"),valuecol = "value")
+  plot_Energy_services_glo <- aggregate_dt(plot_Energy_services,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("technology","scenario","sector","vehicle_type","unit"),valuecol = "value")
+  setnames(plot_Energy_services,"missingH12", "region")
+  setnames(plot_Energy_services_glo, "world", "region")
+  plot_Energy_services<- rbind(plot_Energy_services,plot_Energy_services_glo)
+  plot_Energy_services <- plot_Energy_services[!duplicated(plot_Energy_services)]
+
+  #Rename technologies by energy carrier 
+  plot_Energy_services[technology %in% c("FCEV","Hydrogen"),technology:="Hydrogen"]
+  plot_Energy_services[technology %in% c("BEV","Electric"),technology:="Electricity"]
+  plot_Energy_services[technology == "Liquids",technology:="Liquids"]
+  plot_Energy_services[technology == "NG",technology:="Gases"]
   
-  #Aggregate sectors
-  plot_dem_ej_wobunk_Tot_UE <- copy(plot_dem_ej_wobunk_UE)
-  plot_dem_ej_wobunk_Tot_UE <- plot_dem_ej_wobunk_Tot_UE[,sector:=NULL][,vehicle_type:=NULL]
-  plot_dem_ej_wobunk_Tot_UE <- plot_dem_ej_wobunk_Tot_UE[, value:=sum(value), by= c("period","region","scenario","technology")]
-  plot_dem_ej_wobunk_Tot_UE <- plot_dem_ej_wobunk_Tot_UE[!duplicated(plot_dem_ej_wobunk_Tot_UE)]
-  #Set technology as variable
-  setnames(plot_dem_ej_wobunk_Tot_UE,"technology","variable")
-  
-  p <- mipArea(plot_dem_ej_wobunk_Tot_UE[region== mainReg], scales="free_y")
-  p <- p + theme(legend.position="none")
-  swfigure(sw,print,p,sw_option="height=4,width=7")
-  
-  p <- mipBarYearData(plot_dem_ej_wobunk_Tot_UE[region==mainReg & period %in% y_bar])
-  p <- p + theme(legend.position="none")
-  swfigure(sw,print,p,sw_option="height=4.5,width=7")
-  
-  p <- mipBarYearData(plot_dem_ej_wobunk_Tot_UE[period %in% y_bar])
-  swfigure(sw,print,p,sw_option="height=9,width=16")
-  
-  swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_wobunk_Tot_UE,scales="free_y")
-  swfigure(sw,print,p,sw_option="height=8,width=16")
-  swlatex(sw,"\\twocolumn")
-  
-  ###Energy intensity 
-  
-  Energy_intensity <- do.call(rbind.data.frame, mj_km_data)
  
+  #Group vehicle types for plotting
+  plot_Energy_services <- merge(plot_Energy_services,Mapp_Aggr_vehtype, by.x="vehicle_type" ,by.y="gran_vehtype")
+  plot_Energy_services <- plot_Energy_services[,-c("vehicle_type")]
+  setnames(plot_Energy_services,"aggr_vehtype","vehicle_type")
+  
+  #Filter for bunkers/no bunkers
+  plot_Energy_services_Pass_wobunk <- plot_Energy_services[sector %in% c("trn_pass","trn_aviation_intl" ) & international == "no bunkers"][,international:=NULL][,technology:=NULL][,sector:=NULL]
+  plot_Energy_services_Pass_bunk <- plot_Energy_services[sector %in% c("trn_pass","trn_aviation_intl" ) & international == "bunkers"][,international:=NULL][,technology:=NULL][,sector:=NULL]
+  plot_Energy_services_Frght_wobunk <- plot_Energy_services[sector %in% c("trn_freight","trn_shipping_intl" ) & international == "no bunkers"][,international:=NULL][,technology:=NULL][,sector:=NULL]
+  plot_Energy_services_Frght_bunk <- plot_Energy_services[sector %in% c("trn_freight","trn_shipping_intl" ) & international == "bunkers"][,international:=NULL][,technology:=NULL][,sector:=NULL]
+  
+  #Aggregate copy by vehicle type and technology for each sector
+  plot_Energy_services[, value:=sum(value), by= c("period","region","scenario","sector", "vehicle_type", "unit","international","technology")]
+  plot_Energy_services <- plot_Energy_services[!duplicated(plot_Energy_services)]
+  #Aggregate by vehicle_type 
+  plot_Energy_services_Pass_wobunk[, value:=sum(value), by= c("period","region","scenario", "vehicle_type", "unit")]
+  plot_Energy_services_Pass_wobunk  <- plot_Energy_services_Pass_wobunk [!duplicated(plot_Energy_services_Pass_wobunk )]
+  plot_Energy_services_Pass_bunk[, value:=sum(value), by= c("period","region","scenario","vehicle_type", "unit")]
+  plot_Energy_services_Pass_bunk  <- plot_Energy_services_Pass_bunk[!duplicated(plot_Energy_services_Pass_bunk )]
+  plot_Energy_services_Frght_wobunk[, value:=sum(value), by= c("period","region","scenario","vehicle_type", "unit")]
+  plot_Energy_services_Frght_wobunk  <- plot_Energy_services_Frght_wobunk [!duplicated(plot_Energy_services_Frght_wobunk )]
+  plot_Energy_services_Frght_bunk[, value:=sum(value), by= c("period","region","scenario", "vehicle_type", "unit")]
+  plot_Energy_services_Frght_bunk  <- plot_Energy_services_Frght_bunk[!duplicated(plot_Energy_services_Frght_bunk )]  
+  
+  swlatex(sw,"\\subsection{Passenger without bunkers by vehicle type}")
+  #Set vehicle type as variable
+  setnames(plot_Energy_services_Pass_wobunk,"vehicle_type","variable")
+  
+  p <- mipArea(plot_Energy_services_Pass_wobunk[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Pass_wobunk[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Pass_wobunk[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Energy_services_Pass_wobunk[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")
+  
+  swlatex(sw,"\\subsection{Passenger bunkers}")
+  #Set vehicle type as variable
+  setnames(plot_Energy_services_Pass_bunk,"vehicle_type","variable")
+  
+  p <- mipArea(plot_Energy_services_Pass_bunk[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Pass_bunk[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Pass_bunk[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Energy_services_Pass_bunk[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn") 
+  
+  swlatex(sw,"\\subsection{Freight without bunkers by vehicle type}")
+  #Set vehicle type as variable
+  setnames(plot_Energy_services_Frght_wobunk,"vehicle_type","variable")
+  
+  p <- mipArea(plot_Energy_services_Frght_wobunk[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Frght_wobunk[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Frght_wobunk[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Energy_services_Frght_wobunk[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")
+  
+  swlatex(sw,"\\subsection{Freight bunkers by vehicle type}")
+  #Set technology as variable
+  setnames(plot_Energy_services_Frght_bunk,"vehicle_type","variable")
+  
+  p <- mipArea(plot_Energy_services_Frght_bunk[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Frght_bunk[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Frght_bunk[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Energy_services_Frght_bunk[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn") 
+  
+  swlatex(sw,"\\subsection{LDV's by technology}")
+  
+  plot_Energy_services_LDV <- plot_Energy_services[vehicle_type %in% c("Small Cars","Large Cars")]
+  plot_Energy_services_LDV <- plot_Energy_services_LDV[,-c("international","vehicle_type","sector")]
+  plot_Energy_services_LDV[,value:=sum(value), by=c("period","region","scenario","unit", "technology")]
+  plot_Energy_services_LDV <- plot_Energy_services_LDV[!duplicated(plot_Energy_services_LDV)]
+  setnames(plot_Energy_services_LDV,"technology","variable")
+  
+  p <- mipArea(plot_Energy_services_LDV[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_LDV[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_LDV[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Energy_services_LDV[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
+  
+  swlatex(sw,"\\subsection{Busses by technology}")
+  
+  plot_Energy_services_Bus <- plot_Energy_services[vehicle_type == "Busses"]
+  plot_Energy_services_Bus <- plot_Energy_services_Bus[,-c("international","vehicle_type","sector")]
+  setnames(plot_Energy_services_Bus,"technology","variable")
+  plot_Energy_services_Bus <- plot_Energy_services_Bus[,value:=sum(value), by = c("period", "region", "scenario", "variable", "unit")]
+  plot_Energy_services_Bus <- plot_Energy_services_Bus[!duplicated(plot_Energy_services_Bus)]
+  
+  p <- mipArea(plot_Energy_services_Bus[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Bus[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Bus[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Energy_services_Bus[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
+  
+  swlatex(sw,"\\subsection{Trucks by technology}")
+  
+  plot_Energy_services_Truck <- plot_Energy_services[vehicle_type == "Trucks"]
+  plot_Energy_services_Truck <- plot_Energy_services_Truck[,-c("international","vehicle_type","sector")]
+  setnames(plot_Energy_services_Truck,"technology","variable")
+  plot_Energy_services_Truck <- plot_Energy_services_Truck[,value:=sum(value), by = c("period", "region", "scenario", "variable", "unit")]
+  plot_Energy_services_Truck <- plot_Energy_services_Truck[!duplicated(plot_Energy_services_Truck)]
+  
+  p <- mipArea(plot_Energy_services_Truck[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Truck[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Energy_services_Truck[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Energy_services_Truck[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
+  
   ## ---- Costs----   
   FV_final_pref <- list()
   
@@ -891,6 +1182,7 @@ cols <- c("NG" = "#d11141",
   }
   
   FV_final_pref <- do.call(rbind.data.frame, FV_final_pref)
+  setindex(FV_final_pref,NULL)
   #change variable names for mip
   FV_final_pref[logit_type=="pinco_tot", logit_type:="tot"]
   FV_final_pref[logit_type=="pchar", logit_type:="char"] 
@@ -997,6 +1289,7 @@ cols <- c("NG" = "#d11141",
   
   p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar],colours)
   swfigure(sw,print,p,sw_option="height=9,width=16")
+  
   
   
   ## Close output-pdf
