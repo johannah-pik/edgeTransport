@@ -22,7 +22,12 @@ Imports:
     readxl,
     rmarkdown,
     rootSolve,
-    madrat
+    madrat,
+    ggplot2,
+    luplot,
+    lusweave,
+    mip,
+    quitte
 Suggests:
     testthat,
     knitr,
