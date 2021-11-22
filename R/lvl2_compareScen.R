@@ -1,6 +1,9 @@
 #' Read in all information from previous EDGE runs and create
 #' the comparison.pdf
 #' 
+#' @param listofruns folder hosting REMIND input files. If NULL, a list of magclass objects is returned (set this option in case of a REMIND preprocessing run)
+#' @param hist path to a REMIND historical data file ("historical.mif")
+#' @param fileName path to the PDF file to be produced
 #'
 #' @import mip  
 #' @import data.table
@@ -14,17 +17,11 @@
 #' @importFrom magclass read.report mbind getRegions new.magpie getYears add_dimension setNames getNames<- time_interpolate
 
 
-
-lvl2_compareScen <- function(output_folder, listofruns, input_folder,hist, fileName="CompareScenarios.pdf"){
-  
-  # if no path in "listofruns" starts with "output_folder/" insert it at the beginning
-  # this is the case if listofruns was created in the lower case above !exists("outputdirs"), i.e. if this script was not called via Rscript output.R
-  
+lvl2_compareScen <- function(listofruns, hist, fileName="CompareScenarios.pdf"){
   
   scenNames <- c()
   demand_km <- demand_ej <- vintcomp <- newcomp <- shares <-pref <- mj_km_data <- loadFactor <- annual_mileage <- annual_sale <- list()
   count_scen <- 2
-  hist <- file.path(hist,"historical.mif")
  
   
   ## ---- Load historical data ----
@@ -188,9 +185,6 @@ cols <- c("NG" = "#d11141",
     }
     else {scenNames[i] <- sub("_.*", "", listofruns[[i]])}
     #add path to output folder if not provided
-    if(!any(grepl(output_folder,listofruns[[i]]))) {
-      listofruns[[i]] <- paste0(output_folder,"/",listofruns[[i]],"/level_2/")
-    }
     
     ## load input data from EDGE runs for comparison
     demand_km[[i]] <- readRDS(paste0(listofruns[[i]],"demandF_plot_pkm.RDS")) ## detailed energy services demand, million km
