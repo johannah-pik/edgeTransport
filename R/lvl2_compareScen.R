@@ -1,6 +1,9 @@
 #' Read in all information from previous EDGE runs and create
 #' the comparison.pdf
 #' 
+#' @param listofruns folder hosting REMIND input files. If NULL, a list of magclass objects is returned (set this option in case of a REMIND preprocessing run)
+#' @param hist path to a REMIND historical data file ("historical.mif")
+#' @param fileName path to the PDF file to be produced
 #'
 #' @import mip  
 #' @import data.table
@@ -14,17 +17,12 @@
 #' @importFrom magclass read.report mbind getRegions new.magpie getYears add_dimension setNames getNames<- time_interpolate
 
 
-
-lvl2_compareScen <- function(output_folder, listofruns, input_folder,hist, fileName="CompareScenarios.pdf"){
-  
-  # if no path in "listofruns" starts with "output_folder/" insert it at the beginning
-  # this is the case if listofruns was created in the lower case above !exists("outputdirs"), i.e. if this script was not called via Rscript output.R
-  
+lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
+                             mainReg="EUR", fileName="CompareScenarios.pdf"){
   
   scenNames <- c()
   demand_km <- demand_ej <- vintcomp <- newcomp <- shares <-pref <- mj_km_data <- loadFactor <- annual_mileage <- annual_sale <- list()
   count_scen <- 2
-  hist <- file.path(hist,"historical.mif")
  
   
   ## ---- Load historical data ----
@@ -40,38 +38,38 @@ lvl2_compareScen <- function(output_folder, listofruns, input_folder,hist, fileN
     "FE|Industry"="IEA"
   )
   ## read historical data
-  histData <- read.report(hist,as.list=FALSE)
-  y_hist <- intersect(y_hist, getYears(histData, as.integer=TRUE))
-  if(all(getRegions(data) %in% getRegions(histData))) {
-    histData = histData[getRegions(data),,]
-    if ( any(grepl("EDGE_SSP2",getNames(histData)))){
-      hist_edge = histData[,union(y_hist,y),]
-      histData = histData[,,"EDGE_SSP2", invert = T]
-    }
-    histData <- histData[,y_hist,]
-  } else {
-    if(!is.null(reg)){
-      ## fill up historical data for additional regions with 0
-      dataReg    <- getRegions(data)[-which(getRegions(data) %in% getRegions(histData))]
-      dummy_hist <- new.magpie(dataReg,getYears(histData),getNames(histData),fill=NA)
-      histData       <- mbind(histData,dummy_hist)
-      histData = histData[getRegions(data),,]
-      if ( any(grepl("EDGE_SSP2",getNames(histData)))){
-        ##EDGE projections are stored in histData. Retrieve them
-        hist_edge = histData[,union(y_hist,y),]
-        histData = histData[,,"EDGE_SSP2", invert = T]
-      }
-      histData <- histData[,y_hist,]
+  ## histData <- read.report(hist,as.list=FALSE)
+  ## y_hist <- intersect(y_hist, getYears(histData, as.integer=TRUE))
+  ## if(all(getRegions(data) %in% getRegions(histData))) {
+  ##   histData = histData[getRegions(data),,]
+  ##   if ( any(grepl("EDGE_SSP2",getNames(histData)))){
+  ##     hist_edge = histData[,union(y_hist,y),]
+  ##     histData = histData[,,"EDGE_SSP2", invert = T]
+  ##   }
+  ##   histData <- histData[,y_hist,]
+  ## } else {
+  ##   if(!is.null(reg)){
+  ##     ## fill up historical data for additional regions with 0
+  ##     dataReg    <- getRegions(data)[-which(getRegions(data) %in% getRegions(histData))]
+  ##     dummy_hist <- new.magpie(dataReg,getYears(histData),getNames(histData),fill=NA)
+  ##     histData       <- mbind(histData,dummy_hist)
+  ##     histData = histData[getRegions(data),,]
+  ##     if ( any(grepl("EDGE_SSP2",getNames(histData)))){
+  ##       ##EDGE projections are stored in histData. Retrieve them
+  ##       hist_edge = histData[,union(y_hist,y),]
+  ##       histData = histData[,,"EDGE_SSP2", invert = T]
+  ##     }
+  ##     histData <- histData[,y_hist,]
       
       
-    } else {
-      stop("historical data do not contain the choosen region")
-    }
-  }
+  ##   } else {
+  ##     stop("historical data do not contain the choosen region")
+  ##   }
+  ## }
   
   # copy of historic data replacing 0 with NA
-  histData_NA <- histData
-  histData_NA[histData_NA == 0] <- NA
+  ## histData_NA <- histData
+  ## histData_NA[histData_NA == 0] <- NA
   
   
   
@@ -152,7 +150,12 @@ cols <- c("NG" = "#d11141",
   Regionmapping_H12_world[,world:="GLO"]
   Regionmapping_H12_world <- Regionmapping_H12_world[!duplicated(Regionmapping_H12_world)]
   
-  GDP_country <- readRDS(file.path(file.path(input_folder, "mrremind"), "GDP_country.RDS"))
+  GDP_country <- {
+      x <- calcOutput("GDP", aggregate = F)
+      getSets(x)[1] <- "ISO3"
+      getSets(x)[2] <- "Year"
+      x
+  }
   GDP_country <- as.data.table(GDP_country)
   GDP_country[, year := as.numeric(gsub("y", "", Year))][, Year := NULL]
   GDP_country[, variable := paste0(sub("gdp_", "",variable))]
@@ -180,7 +183,10 @@ cols <- c("NG" = "#d11141",
   
   ## ---- Load scenario data ----
   
-  
+  level2path <- function(folder, fname){
+    path <- file.path(folder, "level_2", fname)
+  }
+
    for (i in 1:length(listofruns)) {
     if(any(grepl(sub("_.*", "", listofruns[[i]]),scenNames))) {
       scenNames[i] <- paste0(sub("_.*", "", listofruns[[i]]),"_",count_scen)
@@ -188,30 +194,27 @@ cols <- c("NG" = "#d11141",
     }
     else {scenNames[i] <- sub("_.*", "", listofruns[[i]])}
     #add path to output folder if not provided
-    if(!any(grepl(output_folder,listofruns[[i]]))) {
-      listofruns[[i]] <- paste0(output_folder,"/",listofruns[[i]],"/level_2/")
-    }
     
     ## load input data from EDGE runs for comparison
-    demand_km[[i]] <- readRDS(paste0(listofruns[[i]],"demandF_plot_pkm.RDS")) ## detailed energy services demand, million km
+    demand_km[[i]] <- readRDS(level2path(listofruns[[i]],"demandF_plot_pkm.RDS")) ## detailed energy services demand, million km
     demand_km[[i]]$scenario=scenNames[i]
-    demand_ej[[i]] <- readRDS(paste0(listofruns[[i]],"demandF_plot_EJ.RDS")) ## detailed final energy demand, EJ
+    demand_ej[[i]] <- readRDS(level2path(listofruns[[i]],"demandF_plot_EJ.RDS")) ## detailed final energy demand, EJ
     demand_ej[[i]]$scenario=scenNames[i]
-    vintcomp[[i]] <- readRDS(paste0(listofruns[[i]], "vintcomp.RDS"))
+    vintcomp[[i]] <- readRDS(level2path(listofruns[[i]], "vintcomp.RDS"))
     vintcomp[[i]]$scenario=scenNames[i]
-    newcomp[[i]] <- readRDS(paste0(listofruns[[i]],"newcomp.RDS"))
+    newcomp[[i]] <- readRDS(level2path(listofruns[[i]],"newcomp.RDS"))
     newcomp[[i]]$scenario=scenNames[i]
-    shares[[i]] <- readRDS(paste0(listofruns[[i]],"shares.RDS"))
+    shares[[i]] <- readRDS(level2path(listofruns[[i]],"shares.RDS"))
     shares[[i]]$scenario=scenNames[i]
-    pref[[i]] <- readRDS(paste0(listofruns[[i]],"pref_output.RDS"))
+    pref[[i]] <- readRDS(level2path(listofruns[[i]],"pref_output.RDS"))
     pref[[i]]$scenario=scenNames[i]
-    mj_km_data[[i]] <- readRDS(paste0(listofruns[[i]],"mj_km_data.RDS"))
+    mj_km_data[[i]] <- readRDS(level2path(listofruns[[i]],"mj_km_data.RDS"))
     mj_km_data[[i]]$scenario=scenNames[i]
-    loadFactor[[i]] <- readRDS(paste0(listofruns[[i]],"loadFactor.RDS"))
+    loadFactor[[i]] <- readRDS(level2path(listofruns[[i]],"loadFactor.RDS"))
     loadFactor[[i]]$scenario=scenNames[i]
-    annual_mileage[[i]] <- readRDS(paste0(listofruns[[i]],"annual_mileage.RDS"))
+    annual_mileage[[i]] <- readRDS(level2path(listofruns[[i]],"annual_mileage.RDS"))
     annual_mileage[[i]]$scenario=scenNames[i]
-    annual_sale[[i]] <- readRDS(paste0(listofruns[[i]],"annual_sales.RDS"))
+    annual_sale[[i]] <- readRDS(level2path(listofruns[[i]],"annual_sales.RDS"))
     annual_sale[[i]]$scenario=scenNames[i]
   }
   
