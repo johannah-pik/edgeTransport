@@ -439,14 +439,41 @@ cols <- c("NG" = "#d11141",
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
+  swlatex(sw,"\\subsubsection{Freight Trucks}")
+  
+  #Choose and aggregate freight sectors
+  plot_dem_ej_Frght_Trucks <- copy(plot_dem_ej)
+  plot_dem_ej_Frght_Trucks <- plot_dem_ej_Frght_Trucks[sector %in% c("trn_freight","trn_shipping_intl") & vehicle_type == "Trucks"]
+  plot_dem_ej_Frght_Trucks_tot <- plot_dem_ej_Frght_Trucks[,-c("sector","vehicle_type")]
+  plot_dem_ej_Frght_Trucks_tot <- plot_dem_ej_Frght_Trucks_tot[, value:=sum(value), by= c("period","region","scenario","FE_carrier")]
+  plot_dem_ej_Frght_Trucks_tot <- plot_dem_ej_Frght_Trucks_tot[!duplicated(plot_dem_ej_Frght_Trucks_tot)]
+  #Set FE_carrier as variable
+  setnames(plot_dem_ej_Frght_Trucks_tot,"FE_carrier","variable")
+  
+  p <- mipArea(plot_dem_ej_Frght_Trucks_tot[region==mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=3.5,width=7") 
+  
+  p <- mipBarYearData(plot_dem_ej_Frght_Trucks_tot[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_dem_ej_Frght_Trucks_tot[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=8")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_dem_ej_Frght_Trucks_tot[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")
+  
   # ### ---- Bunkers ---- 
   # swlatex(sw,"\\subsubsection{Bunkers}")
   # 
   # #Aggregate sectors
-  # plot_dem_ej_bunk_Tot <- copy(plot_dem_ej_bunk)
-  # plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[,sector:=NULL][,vehicle_type:=NULL]
-  # plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[, value:=sum(value),by= c("period","region","scenario","FE_carrier")]
-  # plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[!duplicated(plot_dem_ej_bunk_Tot)]
+  plot_dem_ej_bunk_Tot <- copy(plot_dem_ej_bunk)
+  plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[,sector:=NULL][,vehicle_type:=NULL]
+  plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[, value:=sum(value),by= c("period","region","scenario","FE_carrier")]
+  plot_dem_ej_bunk_Tot <- plot_dem_ej_bunk_Tot[!duplicated(plot_dem_ej_bunk_Tot)]
   # #Set FE_carrier as variable
   # setnames(plot_dem_ej_bunk_Tot,"FE_carrier","variable")
   # 
@@ -471,10 +498,10 @@ cols <- c("NG" = "#d11141",
   # swlatex(sw,"\\subsubsection{W/O Bunkers}")
   # 
   # #Aggregate sectors
-  # plot_dem_ej_wobunk_Tot <- copy(plot_dem_ej_wobunk)
-  # plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[,sector:=NULL][,vehicle_type:=NULL]
-  # plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[, value:=sum(value),by= c("period","region","scenario","FE_carrier")]
-  # plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[!duplicated(plot_dem_ej_wobunk_Tot)]
+  plot_dem_ej_wobunk_Tot <- copy(plot_dem_ej_wobunk)
+  plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[,sector:=NULL][,vehicle_type:=NULL]
+  plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[, value:=sum(value),by= c("period","region","scenario","FE_carrier")]
+  plot_dem_ej_wobunk_Tot <- plot_dem_ej_wobunk_Tot[!duplicated(plot_dem_ej_wobunk_Tot)]
   # #Set FE_carrier as variable
   # setnames(plot_dem_ej_wobunk_Tot,"FE_carrier","variable")
   # 
