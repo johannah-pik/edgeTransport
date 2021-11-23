@@ -187,12 +187,15 @@ cols <- c("NG" = "#d11141",
     path <- file.path(folder, "level_2", fname)
   }
 
-   for (i in 1:length(listofruns)) {
-    if(any(grepl(sub("_.*", "", listofruns[[i]]),scenNames))) {
-      scenNames[i] <- paste0(sub("_.*", "", listofruns[[i]]),"_",count_scen)
-      count_scen=count_scen+1
+  for (i in 1:length(listofruns)) {
+    demand <- fread(level2path(listofruns[[i]], "EDGE_output_ESdem.csv"))
+    scen <- paste(unique(demand$GDP_scenario), unique(demand$EDGE_scenario), sep="_")
+    scen <- gsub("gdp_", "", scen)
+
+    if(scen %in% scenNames){
+      scen <- paste(scen, i, sep="_")
     }
-    else {scenNames[i] <- sub("_.*", "", listofruns[[i]])}
+    scenNames[i] <- scen
     #add path to output folder if not provided
 
     ## load input data from EDGE runs for comparison
@@ -251,9 +254,9 @@ cols <- c("NG" = "#d11141",
   swlatex(sw,"\\tableofcontents\\newpage")
 
   ## empty page
-  swlatex(sw,"\\newpage")
-  swlatex(sw,"\\thispagestyle{empty}")
-  swlatex(sw,"\\mbox{}")
+  ## swlatex(sw,"\\newpage")
+  ## swlatex(sw,"\\thispagestyle{empty}")
+  ## swlatex(sw,"\\mbox{}")
   swlatex(sw,"\\newpage")
 
 
