@@ -18,125 +18,13 @@
 
 
 lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
-                             mainReg="EUR", fileName="CompareScenarios.pdf"){
+                             mainReg="EUR", fileName="CompareScenarios.pdf", load_Cache=FALSE, mrremind_folder=NULL){
   
   scenNames <- c()
   demand_km <- demand_ej <- vintcomp <- newcomp <- shares <-pref <- mj_km_data <- loadFactor <- annual_mileage <- annual_sale <- list()
   count_scen <- 2
  
-  
-  ## ---- Load historical data ----
-  
-    
-  ## models for historical data
-  histmap = list(
-    "Population"="WDI",
-    "GDP|PPP"="James_IMF",
-    "FE"="IEA",
-    "FE|Transport"="IEA",
-    "FE|Buildings"="IEA",
-    "FE|Industry"="IEA"
-  )
-  ## read historical data
-  ## histData <- read.report(hist,as.list=FALSE)
-  ## y_hist <- intersect(y_hist, getYears(histData, as.integer=TRUE))
-  ## if(all(getRegions(data) %in% getRegions(histData))) {
-  ##   histData = histData[getRegions(data),,]
-  ##   if ( any(grepl("EDGE_SSP2",getNames(histData)))){
-  ##     hist_edge = histData[,union(y_hist,y),]
-  ##     histData = histData[,,"EDGE_SSP2", invert = T]
-  ##   }
-  ##   histData <- histData[,y_hist,]
-  ## } else {
-  ##   if(!is.null(reg)){
-  ##     ## fill up historical data for additional regions with 0
-  ##     dataReg    <- getRegions(data)[-which(getRegions(data) %in% getRegions(histData))]
-  ##     dummy_hist <- new.magpie(dataReg,getYears(histData),getNames(histData),fill=NA)
-  ##     histData       <- mbind(histData,dummy_hist)
-  ##     histData = histData[getRegions(data),,]
-  ##     if ( any(grepl("EDGE_SSP2",getNames(histData)))){
-  ##       ##EDGE projections are stored in histData. Retrieve them
-  ##       hist_edge = histData[,union(y_hist,y),]
-  ##       histData = histData[,,"EDGE_SSP2", invert = T]
-  ##     }
-  ##     histData <- histData[,y_hist,]
-      
-      
-  ##   } else {
-  ##     stop("historical data do not contain the choosen region")
-  ##   }
-  ## }
-  
-  # copy of historic data replacing 0 with NA
-  ## histData_NA <- histData
-  ## histData_NA[histData_NA == 0] <- NA
-  
-  
-  
-  
   ## ---- Create mappings ----
-  
- #Color mapping 
-  
-cols <- c("NG" = "#d11141",  
-  "Liquids" = "#8c8c8c",
-  "Hybrid Liquids" = "#ffc425",
-  "Hybrid Electric" = "#f37735",
-  "BEV" = "#00b159",
-  "Electricity" = "#00b159",
-  "Electric" = "#00b159",
-  "FCEV" = "#00aedb",
-  "char" = "#00aedb",
-  "tot" = "#00b159",
-  "av" = "#f37735",
-  "range" = "#ffc425",
-  "ref" = "#8c8c8c",
-  "risk" = "#d11141",
-  "Hydrogen" = "#00aedb",
-  "Biodiesel" = "#66a182",
-  "Synfuel" = "orchid",
-  "Oil" = "#2e4057",
-  "fuel price pkm" = "#edae49",
-  "Operating costs registration and insurance" = "#8d96a3",
-  "Operating costs maintenance" = "#00798c",
-  "Capital cost" = "#d1495b",
-  "International Aviation" = "#9acd32",
-  "AVBUNK" = "#9acd32",
-  "Domestic Aviation" = "#7cfc00",
-  "DOMESAIR" = "#7cfc00",
-  "Bus" = "#32cd32",
-  "Passenger Rail" = "#2e8b57",
-  "RAIL" = "#2e8b57",
-  "Freight Rail" = "#ee4000",
-  "Trucks" = "#ff6a6a",
-  "ROAD" = "#ff6a6a",
-  "ROAD LDV" = "#d11141",
-  "ROAD HDV" = "#f37735",
-  "International Shipping" = "#cd2626",
-  "MARBUNK" = "#cd2626",
-  "Domestic Shipping" = "#ff4040",
-  "DOMESNAV" = "#ff4040",
-  "Shipping" = "#ff4040",
-  "Dom. Shipping" = "#ff4040",
-  "no bunkers" = "#9acd32",
-  "bunkers" = "#87cefa",
-  "Truck" = "#ff7f50",
-  "Trucks (<3.5t)" = "#ff7f50",
-  "Trucks (3.5t-16)" = "#8b0000",
-  "Trucks (>16)" = "#fa8072",
-  "Motorbikes" = "#1874cd", #"dodgerblue3",
-  "Small Cars" = "#87cefa",
-  "Large Cars" = "#6495ed",
-  "Van" = "#40e0d0",
-  "LDV" = "#00bfff",
-  "Non motorized" = "#da70d6",
-  "Freight"="#ff0000",
-  "Freight (Inland)" = "#cd5555",
-  "Pass non LDV" = "#6b8e23",
-  "Pass" = "#66cdaa",
-  "Pass non LDV (Domestic)" = "#54ff9f",
-  "refined liquids enduse" = "#8c8c8c")
-  
   
   #Region Mapping
   RegionMappingH12 <- fread(system.file("extdata", "regionmappingH12.csv", package = "edgeTransport"))
@@ -150,19 +38,22 @@ cols <- c("NG" = "#d11141",
   Regionmapping_H12_world[,world:="GLO"]
   Regionmapping_H12_world <- Regionmapping_H12_world[!duplicated(Regionmapping_H12_world)]
   
-  GDP_country <- {
+  #Load GDP
+  if(load_Cache & file.exists(mrremind_folder)){
+    GDP_country = readRDS(file.path(mrremind_folder, "GDP_country.RDS"))
+  }else {GDP_country <- {
       x <- calcOutput("GDP", aggregate = F)
       getSets(x)[1] <- "ISO3"
       getSets(x)[2] <- "Year"
       x
-  }
+  }}
   GDP_country <- as.data.table(GDP_country)
   GDP_country[, year := as.numeric(gsub("y", "", Year))][, Year := NULL]
   GDP_country[, variable := paste0(sub("gdp_", "",variable))]
-  setnames(GDP_country, c("ISO3","variable", "value"),c("CountryCode","scenario", "weight"))
-  GDP_country <- aggregate_dt(GDP_country,Regionmapping_21_EU11[,-c("X","missingH12")],fewcol = "region", manycol = "CountryCode",datacols = "scenario",valuecol = "weight")
-  
-  #Maping for vehicle type aggregation
+  setnames(GDP_country, c("ISO3","variable", "value","year"),c("CountryCode","scenario", "weight","period"))
+  GDP_country_21 <- aggregate_dt(GDP_country,Regionmapping_21_EU11[,-c("X","missingH12")],yearcol = "period",fewcol = "region", manycol = "CountryCode",datacols = "scenario",valuecol = "weight")
+  GDP_country_12 <- aggregate_dt(GDP_country_21,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("scenario"),valuecol = "weight")
+  #Mapping for vehicle type aggregation
   Mapp_Aggr_vehtype = data.table(
     gran_vehtype = c("Compact Car","Large Car","Large Car and SUV","Light Truck and SUV", "Midsize Car","Mini Car","Subcompact Car","Van", "International Aviation_tmp_vehicletype",
                      "Domestic Ship_tmp_vehicletype","Freight Rail_tmp_vehicletype","Truck (0-3.5t)" ,"Truck (18t)","Truck (26t)","Truck (40t)","Truck (7.5t)","Domestic Aviation_tmp_vehicletype",
@@ -188,12 +79,13 @@ cols <- c("NG" = "#d11141",
   }
 
    for (i in 1:length(listofruns)) {
-    if(any(grepl(sub("_.*", "", listofruns[[i]]),scenNames))) {
-      scenNames[i] <- paste0(sub("_.*", "", listofruns[[i]]),"_",count_scen)
+    if(any(grepl(listofruns[[i]],scenNames))) {
+      scenNames[i] <- sub("_20.*", "", listofruns[[i]])
+      scenNames[i] <- paste0(sub(".*/", "", scenNames[i]),"_",count_scen)
       count_scen=count_scen+1
-    }
-    else {scenNames[i] <- sub("_.*", "", listofruns[[i]])}
-    #add path to output folder if not provided
+    }else {
+    scenNames[i] <- sub("_20.*", "", listofruns[[i]])
+    scenNames[i] <- sub(".*/", "", scenNames[i])}
     
     ## load input data from EDGE runs for comparison
     demand_km[[i]] <- readRDS(level2path(listofruns[[i]],"demandF_plot_pkm.RDS")) ## detailed energy services demand, million km
@@ -217,6 +109,64 @@ cols <- c("NG" = "#d11141",
     annual_sale[[i]] <- readRDS(level2path(listofruns[[i]],"annual_sales.RDS"))
     annual_sale[[i]]$scenario=scenNames[i]
   }
+  
+  SSP_Scen <- unique(sub("-.*", "", scenNames)) 
+  GDP_country_21 <- GDP_country_21[scenario %in% SSP_Scen]
+  GDP_country_12 <- GDP_country_12[scenario %in% SSP_Scen]
+  
+  ## ---- Preprocess plot_data ----
+
+  ### Final energy
+  dem_ej <- do.call(rbind.data.frame, demand_ej)
+  
+  plot_dem_ej <- copy(dem_ej)
+  
+  #rename columns for mip
+  setnames(plot_dem_ej,c("demand_EJ","year"),c("value","period"))
+  plot_dem_ej <- plot_dem_ej[,c("value","period","region","scenario","sector","technology", "vehicle_type")]
+  plot_dem_ej[,unit:= "EJ/yr"]
+  #Aggregate regions
+  plot_dem_ej <- aggregate_dt(plot_dem_ej,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("technology","scenario","sector","vehicle_type","unit"),valuecol = "value")
+  plot_dem_ej_glo <- aggregate_dt(plot_dem_ej,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("technology","scenario","sector","vehicle_type","unit"),valuecol = "value")
+  setnames(plot_dem_ej,"missingH12", "region")
+  setnames(plot_dem_ej_glo, "world", "region")
+  plot_dem_ej<- rbind(plot_dem_ej,plot_dem_ej_glo)
+  plot_dem_ej <- plot_dem_ej[!duplicated(plot_dem_ej)]
+  
+  #Rename technologies by energy carrier 
+  plot_dem_ej[technology %in% c("FCEV","Hydrogen"),technology:="FE|Hydrogen"]
+  plot_dem_ej[technology %in% c("BEV","Electric"),technology:="FE|Electricity"]
+  plot_dem_ej[technology == "Liquids",technology:="FE|Liquids"]
+  plot_dem_ej[technology == "NG",technology:="FE|Gases"]
+  setnames(plot_dem_ej,"technology","FE_carrier")
+  #Group vehicle types for plotting
+  plot_dem_ej <- merge(plot_dem_ej,Mapp_Aggr_vehtype, by.x="vehicle_type" ,by.y="gran_vehtype")
+  plot_dem_ej <- plot_dem_ej[,-c("vehicle_type")]
+  setnames(plot_dem_ej,"aggr_vehtype","vehicle_type")
+  
+  #Filter for bunkers/no bunkers
+  plot_dem_ej_wobunk <- plot_dem_ej[international=="no bunkers"]
+  plot_dem_ej_bunk <- plot_dem_ej[international=="bunkers"]
+  plot_dem_ej_wwobunk<- copy(plot_dem_ej)
+  plot_dem_ej_wwobunk <- plot_dem_ej_wwobunk[, c("value","period","region","scenario","international","unit")]
+  plot_dem_ej <- plot_dem_ej[,-c("international")]
+  plot_dem_ej_wobunk <- plot_dem_ej_wobunk[,-c("international")]
+  plot_dem_ej_bunk <- plot_dem_ej_bunk[,-c("international")]
+  
+  #Aggregate by technology for each sector and vehicle type
+  plot_dem_ej[, value:=sum(value), by= c("period","region","scenario","sector","FE_carrier", "vehicle_type", "unit")]
+  plot_dem_ej <- plot_dem_ej[!duplicated(plot_dem_ej)]
+  plot_dem_ej_wobunk[, value:=sum(value), by= c("period","region","scenario","sector","FE_carrier", "vehicle_type", "unit")]
+  plot_dem_ej_wobunk <- plot_dem_ej_wobunk[!duplicated(plot_dem_ej_wobunk)]
+  plot_dem_ej_bunk[, value:=sum(value), by= c("period","region","scenario","sector","FE_carrier", "vehicle_type", "unit")]
+  plot_dem_ej_bunk <- plot_dem_ej_bunk[!duplicated(plot_dem_ej_bunk)]
+  plot_dem_ej_wwobunk[, value:=sum(value), by= c("period","region","scenario","international", "unit")]
+  plot_dem_ej_wwobunk <- plot_dem_ej_wwobunk[!duplicated(plot_dem_ej_wwobunk)]
+  
+  
+  
+  
+  
   
   
   
@@ -262,51 +212,6 @@ cols <- c("NG" = "#d11141",
   ## ---- FE energy by carrier ----
   swlatex(sw,"\\subsection{Final energy by carrier}")
 
-  dem_ej <- do.call(rbind.data.frame, demand_ej)
-  
-  plot_dem_ej <- copy(dem_ej)
-  
-  #rename columns for mip
-  setnames(plot_dem_ej,c("demand_EJ","year"),c("value","period"))
-  plot_dem_ej <- plot_dem_ej[,c("value","period","region","scenario","sector","technology", "vehicle_type")]
-  plot_dem_ej[,unit:= "EJ/yr"]
-  #Aggregate regions
-  plot_dem_ej <- aggregate_dt(plot_dem_ej,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("technology","scenario","sector","vehicle_type","unit"),valuecol = "value")
-  plot_dem_ej_glo <- aggregate_dt(plot_dem_ej,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("technology","scenario","sector","vehicle_type","unit"),valuecol = "value")
-  setnames(plot_dem_ej,"missingH12", "region")
-  setnames(plot_dem_ej_glo, "world", "region")
-  plot_dem_ej<- rbind(plot_dem_ej,plot_dem_ej_glo)
-  plot_dem_ej <- plot_dem_ej[!duplicated(plot_dem_ej)]
-  
-  #Rename technologies by energy carrier 
-  plot_dem_ej[technology %in% c("FCEV","Hydrogen"),technology:="FE|Hydrogen"]
-  plot_dem_ej[technology %in% c("BEV","Electric"),technology:="FE|Electricity"]
-  plot_dem_ej[technology == "Liquids",technology:="FE|Liquids"]
-  plot_dem_ej[technology == "NG",technology:="FE|Gases"]
-  setnames(plot_dem_ej,"technology","FE_carrier")
-  #Group vehicle types for plotting
-  plot_dem_ej <- merge(plot_dem_ej,Mapp_Aggr_vehtype, by.x="vehicle_type" ,by.y="gran_vehtype")
-  plot_dem_ej <- plot_dem_ej[,-c("vehicle_type")]
-  setnames(plot_dem_ej,"aggr_vehtype","vehicle_type")
-
-  #Filter for bunkers/no bunkers
-  plot_dem_ej_wobunk <- plot_dem_ej[international=="no bunkers"]
-  plot_dem_ej_bunk <- plot_dem_ej[international=="bunkers"]
-  plot_dem_ej_wwobunk<- copy(plot_dem_ej)
-  plot_dem_ej_wwobunk <- plot_dem_ej_wwobunk[, c("value","period","region","scenario","international","unit")]
-  plot_dem_ej <- plot_dem_ej[,-c("international")]
-  plot_dem_ej_wobunk <- plot_dem_ej_wobunk[,-c("international")]
-  plot_dem_ej_bunk <- plot_dem_ej_bunk[,-c("international")]
-  
-  #Aggregate by technology for each sector and vehicle type
-  plot_dem_ej[, value:=sum(value), by= c("period","region","scenario","sector","FE_carrier", "vehicle_type", "unit")]
-  plot_dem_ej <- plot_dem_ej[!duplicated(plot_dem_ej)]
-  plot_dem_ej_wobunk[, value:=sum(value), by= c("period","region","scenario","sector","FE_carrier", "vehicle_type", "unit")]
-  plot_dem_ej_wobunk <- plot_dem_ej_wobunk[!duplicated(plot_dem_ej_wobunk)]
-  plot_dem_ej_bunk[, value:=sum(value), by= c("period","region","scenario","sector","FE_carrier", "vehicle_type", "unit")]
-  plot_dem_ej_bunk <- plot_dem_ej_bunk[!duplicated(plot_dem_ej_bunk)]
-  plot_dem_ej_wwobunk[, value:=sum(value), by= c("period","region","scenario","international", "unit")]
-  plot_dem_ej_wwobunk <- plot_dem_ej_wwobunk[!duplicated(plot_dem_ej_wwobunk)]
   
   ### ---- Total ----
   swlatex(sw,"\\subsubsection{Total}")
@@ -581,7 +486,7 @@ cols <- c("NG" = "#d11141",
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_modes[!region==mainReg],scales="free_y")
+  p <- mipArea(plot_dem_ej_modes[!region==mainReg], stack_priority = c("variable"),scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
@@ -638,7 +543,7 @@ cols <- c("NG" = "#d11141",
   swfigure(sw,print,p,sw_option="height=9,width=8")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_dem_ej_modes[!region==mainReg],scales="free_y")
+  p <- mipArea(plot_dem_ej_modes[!region==mainReg],stack_priority = c("variable"),scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
 
@@ -1074,7 +979,7 @@ cols <- c("NG" = "#d11141",
   #Set vehicle type as variable
   setnames(plot_Energy_services_Pass_bunk,"vehicle_type","variable")
   
-  p <- mipArea(plot_Energy_services_Pass_bunk[region== mainReg], scales="free_y")
+  p <- mipArea(plot_Energy_services_Pass_bunk[region== mainReg], stack_priority = c("variable"), scales="free_y")
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4,width=7")
   
@@ -1086,7 +991,7 @@ cols <- c("NG" = "#d11141",
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_Energy_services_Pass_bunk[!region==mainReg],scales="free_y")
+  p <- mipArea(plot_Energy_services_Pass_bunk[!region==mainReg],stack_priority = c("variable"), scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn") 
   
@@ -1106,7 +1011,7 @@ cols <- c("NG" = "#d11141",
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_Energy_services_Frght_wobunk[!region==mainReg],scales="free_y")
+  p <- mipArea(plot_Energy_services_Frght_wobunk[!region==mainReg],stack_priority = c("variable"),scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")
   
@@ -1126,7 +1031,7 @@ cols <- c("NG" = "#d11141",
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_Energy_services_Frght_bunk[!region==mainReg],scales="free_y")
+  p <- mipArea(plot_Energy_services_Frght_bunk[!region==mainReg],stack_priority = c("variable"),scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn") 
   
@@ -1214,21 +1119,22 @@ cols <- c("NG" = "#d11141",
   FV_final_pref <- do.call(rbind.data.frame, FV_final_pref)
   setindex(FV_final_pref,NULL)
   #change variable names for mip
-  FV_final_pref[logit_type=="pinco_tot", logit_type:="tot"]
-  FV_final_pref[logit_type=="pchar", logit_type:="char"] 
-  FV_final_pref[logit_type=="pmod_av", logit_type:="av"] 
-  FV_final_pref[logit_type=="prange", logit_type:="range"]
-  FV_final_pref[logit_type=="pref", logit_type:="ref"] 
-  FV_final_pref[logit_type=="prisk", logit_type:="risk"] 
+  FV_final_pref[logit_type=="pinco_tot", logit_type:="Inconvenience cost total"]
+  FV_final_pref[logit_type=="pchar", logit_type:="Charger"] 
+  FV_final_pref[logit_type=="pmod_av", logit_type:="Model availability"] 
+  FV_final_pref[logit_type=="prange", logit_type:="Range anxiety"]
+  FV_final_pref[logit_type=="pref", logit_type:="Ref. stations availability"] 
+  FV_final_pref[logit_type=="prisk", logit_type:="Risk"] 
   FV_final_pref[,SSP:=sub("-.*","",scenario)]
-  setnames(FV_final_pref, c("scenario","SSP"),c("techscen","scenario"))
+  setnames(FV_final_pref, c("scenario","SSP", "year"),c("techscen","scenario","period"))
   
   FV_final_pref <- aggregate_dt(FV_final_pref,
                        Regionmapping_21_H12,
                        manycol = "region",
                        fewcol = "missingH12",
+                       yearcol = "period",
                        datacols = c("vehicle_type", "technology", "sector", "subsector_L1", "subsector_L2", "subsector_L3", "logit_type","techscen","scenario"),
-                       weights = GDP_country[year%in%unique(FV_final_pref$year)& scenario%in%unique(FV_final_pref$scenario)])
+                       weights = GDP_country_21[period%in%unique(FV_final_pref$period)& scenario%in%unique(FV_final_pref$scenario)])
   FV_final_pref[,scenario:=NULL]
   setnames(FV_final_pref,c("techscen","missingH12"),c("scenario","region"))
   
@@ -1236,89 +1142,140 @@ cols <- c("NG" = "#d11141",
   
   swlatex(sw,"\\subsubsection{BEV}")
   FV_final_pref_LSUV <- FV_final_pref[vehicle_type == "Large Car and SUV" & technology == "BEV"]
-  FV_final_pref_LSUV <- FV_final_pref_LSUV[,c("year","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="$/pkm"]
+  FV_final_pref_LSUV <- FV_final_pref_LSUV[,c("period","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="$/pkm"]
   FV_final_pref_LSUV <- FV_final_pref_LSUV[!duplicated(FV_final_pref_LSUV)]
-  setnames(FV_final_pref_LSUV, c("year", "logit_type"),c("period", "variable"))
-  colours <- cols[names(cols) %in% FV_final_pref_LSUV$variable]
+  setnames(FV_final_pref_LSUV, c("logit_type"),c("variable"))
+
   
   
-  p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar],colours)
+  p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\subsubsection{FCEV}")
   FV_final_pref_LSUV <- FV_final_pref[vehicle_type == "Large Car and SUV"& technology == "FCEV"]
-  FV_final_pref_LSUV <- FV_final_pref_LSUV[,c("year","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
+  FV_final_pref_LSUV <- FV_final_pref_LSUV[,c("period","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   FV_final_pref_LSUV <- FV_final_pref_LSUV[!duplicated(FV_final_pref_LSUV)]
-  setnames(FV_final_pref_LSUV, c("year", "logit_type"),c("period", "variable"))
-  colours <- cols[names(cols) %in% FV_final_pref_LSUV$variable]
-  
-  p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar],colours)
+  setnames(FV_final_pref_LSUV, c("logit_type"),c("variable"))
+
+  p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\subsubsection{Liquids}")
   FV_final_pref_LSUV <- FV_final_pref[vehicle_type == "Large Car and SUV"& technology == "Liquids"]
-  FV_final_pref_LSUV <- FV_final_pref_LSUV[,c("year","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
+  FV_final_pref_LSUV <- FV_final_pref_LSUV[,c("period","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   FV_final_pref_LSUV <- FV_final_pref_LSUV[!duplicated(FV_final_pref_LSUV)]
-  setnames(FV_final_pref_LSUV, c("year", "logit_type"),c("period", "variable"))
-  #set colours
-  colours <- cols[names(cols) %in% FV_final_pref_LSUV$variable]
+  setnames(FV_final_pref_LSUV, c("logit_type"),c("variable"))
   
-  
-  
-  p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar],colours)
+  p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\subsubsection{NG}")
   FV_final_pref_LSUV <- FV_final_pref[vehicle_type == "Large Car and SUV"& technology == "NG"]
-  FV_final_pref_LSUV <- FV_final_pref_LSUV[,c("year","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
+  FV_final_pref_LSUV <- FV_final_pref_LSUV[,c("period","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   FV_final_pref_LSUV <- FV_final_pref_LSUV[!duplicated(FV_final_pref_LSUV)]
-  setnames(FV_final_pref_LSUV, c("year", "logit_type"),c("period", "variable"))
-  colours <- cols[names(cols) %in% FV_final_pref_LSUV$variable]
+  setnames(FV_final_pref_LSUV, c("logit_type"),c("variable"))
+
   
-  p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar],colours)
+  p <- mipBarYearData(FV_final_pref_LSUV[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\subsection{Example compact car}")
   
   swlatex(sw,"\\subsubsection{BEV}")
   FV_final_pref_CCar <- FV_final_pref[vehicle_type == "Compact Car" & technology == "BEV"]
-  FV_final_pref_CCar <- FV_final_pref_CCar[,c("year","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
+  FV_final_pref_CCar <- FV_final_pref_CCar[,c("period","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   FV_final_pref_CCar <- FV_final_pref_CCar[!duplicated(FV_final_pref_CCar)]
-  setnames(FV_final_pref_CCar, c("year", "logit_type"),c("period", "variable"))
-  colours <- cols[names(cols) %in% FV_final_pref_CCar$variable]
+  setnames(FV_final_pref_CCar, c("logit_type"),c("variable"))
+ 
   
-  p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar],colours)
+  p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\subsubsection{FCEV}")
   FV_final_pref_CCar <- FV_final_pref[vehicle_type == "Compact Car"& technology == "FCEV"]
-  FV_final_pref_CCar <- FV_final_pref_CCar[,c("year","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
+  FV_final_pref_CCar <- FV_final_pref_CCar[,c("period","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   FV_final_pref_CCar <- FV_final_pref_CCar[!duplicated(FV_final_pref_CCar)]
-  setnames(FV_final_pref_CCar, c("year", "logit_type"),c("period", "variable"))
-  colours <- cols[names(cols) %in% FV_final_pref_CCar$variable]
+  setnames(FV_final_pref_CCar, c("logit_type"),c("variable"))
   
-  p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar],colours)
+  
+  p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\subsubsection{Liquids}")
   FV_final_pref_CCar <- FV_final_pref[vehicle_type == "Compact Car"& technology == "Liquids"]
-  FV_final_pref_CCar <- FV_final_pref_CCar[,c("year","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
+  FV_final_pref_CCar <- FV_final_pref_CCar[,c("period","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   FV_final_pref_CCar <- FV_final_pref_CCar[!duplicated(FV_final_pref_CCar)]
-  setnames(FV_final_pref_CCar, c("year", "logit_type"),c("period", "variable"))
-  colours <- cols[names(cols) %in% FV_final_pref_CCar$variable]
+  setnames(FV_final_pref_CCar, c("logit_type"),c("variable"))
+
   
-  p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar],colours)
+  p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\subsubsection{NG}")
   FV_final_pref_CCar <- FV_final_pref[vehicle_type == "Compact Car"& technology == "NG"]
-  FV_final_pref_CCar <- FV_final_pref_CCar[,c("year","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
+  FV_final_pref_CCar <- FV_final_pref_CCar[,c("period","region","scenario","logit_type","value")][,model:= "EDGE-Transport"][,unit:="EJ/yr"]
   FV_final_pref_CCar <- FV_final_pref_CCar[!duplicated(FV_final_pref_CCar)]
-  setnames(FV_final_pref_CCar, c("year", "logit_type"),c("period", "variable"))
-  colours <- cols[names(cols) %in% FV_final_pref_CCar$variable]
+  setnames(FV_final_pref_CCar, c("logit_type"),c("variable"))
+
   
-  p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar],colours)
+  p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\section{Annual sales}")
+  annual_sale <- do.call(rbind.data.frame, annual_sale)
+  
+  plot_annual_sale <- copy(annual_sale)
+  
+  #rename columns for mip
+  setnames( plot_annual_sale,c("shareFS1","year","scenario"),c("value","period","scenario_com"))
+  plot_annual_sale <-  plot_annual_sale[,c("value","period","region","scenario_com","technology", "vehicle_type")]
+  plot_annual_sale[,unit:= "-"]
+  y_as= c(2025,2030,2050,2100)
+  plot_annual_sale <- plot_annual_sale[period %in% y_as]
+  plot_annual_sale[, scenario:= sub("-.*", "", scenario_com)]
+  #Aggregate regions
+  plot_annual_sale <- aggregate_dt(plot_annual_sale,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" , datacols = c("technology","scenario_com","scenario","vehicle_type","unit"),valuecol = "value",weights=GDP_country_21[period %in% y_as])
+  plot_annual_sale_glo <- aggregate_dt(plot_annual_sale,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("technology","scenario","vehicle_type","unit"),valuecol = "value",weights=GDP_country_12[period %in% y_as])
+  setnames(plot_annual_sale,"missingH12", "region")
+  setnames(plot_annual_sale_glo, "world", "region")
+  plot_annual_sale<- rbind(plot_annual_sale,plot_annual_sale_glo)
+  plot_annual_sale <- plot_annual_sale[!duplicated(plot_annual_sale)]
+  plot_annual_sale[,scenario:=NULL]
+  setnames(plot_annual_sale, "scenario_com","scenario")
+  
+  #Group vehicle types for plotting
+  plot_annual_sale <- merge(plot_annual_sale,Mapp_Aggr_vehtype, by.x="vehicle_type" ,by.y="gran_vehtype")
+  plot_annual_sale <- plot_annual_sale[,-c("vehicle_type")]
+  setnames(plot_annual_sale,"aggr_vehtype","vehicle_type")
+  
+  #Aggregate by vehicle type and technology for each sector
+  plot_annual_sale[, value:=sum(value), by= c("period","region","scenario", "vehicle_type", "unit","international","technology")]
+  plot_annual_sale <- plot_annual_sale[!duplicated(plot_annual_sale)]
+
+
+  swlatex(sw,"\\subsection{LDV's by technology}")
+  
+  plot_annual_sale_LDV <- plot_annual_sale[vehicle_type %in% c("Small Cars","Large Cars")]
+  plot_annual_sale_LDV <- plot_annual_sale_LDV[,-c("international","vehicle_type")]
+  plot_annual_sale_LDV[,value:=sum(value), by=c("period","region","scenario","unit", "technology")]
+  plot_annual_sale_LDV <- plot_annual_sale_LDV[!duplicated(plot_annual_sale_LDV)]
+  setnames(plot_annual_sale_LDV,"technology","variable")
+  
+  p <- mipArea(plot_annual_sale_LDV[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_annual_sale_LDV[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_annual_sale_LDV[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_annual_sale_LDV[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
   
   
   
