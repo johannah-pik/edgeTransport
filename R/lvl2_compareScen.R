@@ -20,10 +20,132 @@
 lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
                              mainReg="EUR", fileName="CompareScenarios.pdf", load_Cache=FALSE, mrremind_folder=NULL){
   
+  
+  lineplots_perCap <- function(data, vars, percap_factor, ylabstr,
+                               global=FALSE, mainReg_plot=mainReg, per_gdp=FALSE, histdata_plot=NULL){
+    
+
+    ## models for historical data
+    histmap = list(
+      "Population"="WDI",
+      "GDP|PPP"="James_IMF",
+      "FE"="IEA",
+      "FE|Transport"="IEA",
+      "FE|Buildings"="IEA",
+      "FE|Industry"="IEA"
+    )
+    
+    items <- c(vars,
+               "Population (million)",
+               "GDP|PPP (billion US$2005/yr)")
+    var <- as.data.table(as.quitte(data[,, items]))[, "unit" := NULL]
+    
+    plain_items <- gsub("(.+) \\(.+\\)", "\\1", items)
+    
+    if(!is.null(histdata_plot)){
+      if(!all(items %in% getNames(histdata_plot, dim=3))){
+        missing <- items[!items %in% getNames(histdata_plot, dim=3)]
+        stop(paste("Items missing in historical dataset:",
+                   paste(missing, collapse=", ")))
+      }else if(!all(plain_items %in% names(histmap))){
+        missing <- items[!plain_items %in% names(histmap)]
+        stop(paste("No model defined for item in historical dataset:",
+                   paste(missing, collapse=", ")))
+      }else{
+        hist_dt <- as.data.table(as.quitte(histdata_plot[,, items]))
+        models <- unlist(histmap[plain_items])
+        varhist <- hist_dt[
+          model %in% models][ # IEA: energy, IMF: GDP, WDI: Population
+            , c("unit", "model") := list(NULL, "REMIND")]
+        var <- rbind(var, varhist)
+      }
+    }
+    
+    plain_vars <- gsub("(.+) \\(.+\\)", "\\1", vars)
+    
+    variable <- Population <- NULL
+    region <- `GDP|PPP` <- model <- value <- scenario <- NULL
+    
+    hvar <- data.table::dcast(var, ... ~ variable)
+    
+    for(fe in plain_vars){
+      hvar[, (fe) := get(fe)/Population*percap_factor]
+    }
+    
+    if(per_gdp){
+      hvar[, `GDP|PPP` := `GDP|PPP`/Population]
+      var <- data.table::melt(hvar, id.vars=c("model", "scenario", "region", "period", "GDP|PPP"))
+    }else{
+      hvar[, `GDP|PPP` := NULL]
+      var <- data.table::melt(hvar, id.vars=c("model", "scenario", "region", "period"))
+    }
+    
+    var <- var[variable != "Population"][
+      , variable := factor(variable, levels=plain_vars)]
+    
+    highlight_yrs <- c(2030, 2050, 2070)
+    highlights <- var[scenario != "historical" & period %in% highlight_yrs]
+    
+    reg_cols <- plotstyle(as.character(unique(var$region)))
+    reg_labels <- plotstyle(as.character(unique(var$region)), out="legend")
+    
+    var <- var[value > 0]
+    if(per_gdp){
+      if(global){
+        p <- ggplot() +
+          geom_line(data=var[scenario != "historical" & region == mainReg_plot],
+                    aes(x=`GDP|PPP`, y=value, linetype=scenario)) +
+          geom_point(data=var[scenario == "historical" & region == mainReg_plot],
+                     aes(x=`GDP|PPP`, y=value), shape=4) +
+          geom_point(data=highlights[region == mainReg_plot], aes(x=`GDP|PPP`, y=value), shape=1)
+      }else{
+        p <- ggplot() +
+          geom_line(data=var[scenario != "historical" & region != mainReg_plot],
+                    aes(x=`GDP|PPP`, y=value, linetype=scenario, color=region)) +
+          geom_point(data=var[scenario == "historical" & region != mainReg_plot],
+                     aes(x=`GDP|PPP`, y=value, color=region), shape=4) +
+          geom_point(data=highlights[region != mainReg_plot], aes(x=`GDP|PPP`, y=value, color=region), shape=1) +
+          scale_color_manual(values = reg_cols,  labels = reg_labels)
+      }
+      
+      p <- p +
+        facet_wrap(~ variable, scales="free_y") +
+        ylab(ylabstr) +
+        xlab("GDP PPP per Cap. (kUS$2005)") +
+        expand_limits(y=0) +							
+        theme_minimal()
+      
+    }else{
+      if(global){
+        p <- ggplot() +
+          geom_line(data=var[scenario != "historical" & region == mainReg_plot],
+                    aes(x=period, y=value, linetype=scenario)) +
+          geom_point(data=var[scenario == "historical" & region == mainReg_plot],
+                     aes(x=period, y=value), shape=4)
+      }else{
+        p <- ggplot() +
+          geom_line(data=var[scenario != "historical" & region != mainReg_plot],
+                    aes(x=period, y=value, linetype=scenario, color=region)) +
+          geom_point(data=var[scenario == "historical" & region != mainReg_plot],
+                     aes(x=period, y=value, color=region), shape=4) +
+          scale_color_manual(values = reg_cols,  labels = reg_labels)
+      }
+      p <- p +
+        facet_wrap(~ variable, scales="free_y") +
+        xlab("year") +
+        ylab(ylabstr) +
+        expand_limits(y=0) +
+        theme_minimal()
+      
+    }
+    return(p)
+  }
+  
   scenNames <- c()
   demand_km <- demand_ej <- vintcomp <- newcomp <- shares <-pref <- mj_km_data <- loadFactor <- annual_mileage <- annual_sale <- list()
   count_scen <- 2
  
+
   ## ---- Create mappings ----
   
   #Region Mapping
@@ -41,6 +163,7 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
   #Load GDP
   if(load_Cache & file.exists(mrremind_folder)){
     GDP_country = readRDS(file.path(mrremind_folder, "GDP_country.RDS"))
+    POP = readRDS(file.path(mrremind_folder,"POP_country.RDS"))
   }else {GDP_country <- {
       x <- calcOutput("GDP", aggregate = F)
       getSets(x)[1] <- "ISO3"
@@ -51,8 +174,25 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
   GDP_country[, year := as.numeric(gsub("y", "", Year))][, Year := NULL]
   GDP_country[, variable := paste0(sub("gdp_", "",variable))]
   setnames(GDP_country, c("ISO3","variable", "value","year"),c("CountryCode","scenario", "weight","period"))
-  GDP_country_21 <- aggregate_dt(GDP_country,Regionmapping_21_EU11[,-c("X","missingH12")],yearcol = "period",fewcol = "region", manycol = "CountryCode",datacols = "scenario",valuecol = "weight")
-  GDP_country_12 <- aggregate_dt(GDP_country_21,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("scenario"),valuecol = "weight")
+  GDP_21 <- aggregate_dt(GDP_country,Regionmapping_21_EU11[,-c("X","missingH12")],yearcol = "period",fewcol = "region", manycol = "CountryCode",datacols = "scenario",valuecol = "weight")
+  GDP_13 <- aggregate_dt(GDP_21,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("scenario"),valuecol = "weight")
+  GDP_13_glo <- aggregate_dt(GDP_13,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("scenario"),valuecol = "weight")
+  setnames(GDP_13_glo, "world","region")
+  setnames(GDP_13, "missingH12","region")
+  GDP_13 <- rbind(GDP_13, GDP_13_glo)
+  
+  POP <- as.data.table(POP)
+  POP[, year := as.numeric(gsub("y", "", year))]
+  POP[, variable := paste0(sub("pop_", "",variable))]
+  setnames(POP, c("iso2c","variable", "value","year"),c("CountryCode","scenario", "value","period"))
+  POP_21 <- aggregate_dt(POP,Regionmapping_21_EU11[,-c("X","missingH12")],yearcol = "period",fewcol = "region", manycol = "CountryCode",datacols = "scenario",valuecol = "value")
+  POP_13 <- aggregate_dt(POP_21,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" ,datacols = c("scenario"),valuecol = "value")
+  POP_13_glo <- aggregate_dt(POP_13,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("scenario"),valuecol = "value")
+  setnames(POP_13_glo, "world","region")
+  setnames(POP_13, "missingH12","region")
+  POP_13 <- rbind(POP_13, POP_13_glo)
+  
+
   #Mapping for vehicle type aggregation
   Mapp_Aggr_vehtype = data.table(
     gran_vehtype = c("Compact Car","Large Car","Large Car and SUV","Light Truck and SUV", "Midsize Car","Mini Car","Subcompact Car","Van", "International Aviation_tmp_vehicletype",
@@ -88,7 +228,7 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
     scenNames[i] <- sub(".*/", "", scenNames[i])}
     
     ## load input data from EDGE runs for comparison
-    demand_km[[i]] <- readRDS(level2path(listofruns[[i]],"demandF_plot_pkm.RDS")) ## detailed energy services demand, million km
+    demand_km[[i]] <- readRDS(level2path(listofruns[[i]],"demandF_plot_pkm.RDS")) ## detailed energy services demand, million pkm
     demand_km[[i]]$scenario=scenNames[i]
     demand_ej[[i]] <- readRDS(level2path(listofruns[[i]],"demandF_plot_EJ.RDS")) ## detailed final energy demand, EJ
     demand_ej[[i]]$scenario=scenNames[i]
@@ -110,9 +250,31 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
     annual_sale[[i]]$scenario=scenNames[i]
   }
   
-  SSP_Scen <- unique(sub("-.*", "", scenNames)) 
-  GDP_country_21 <- GDP_country_21[scenario %in% SSP_Scen]
-  GDP_country_12 <- GDP_country_12[scenario %in% SSP_Scen]
+  SSP_Scen <-sub("-.*", "", scenNames) 
+  
+  #Extend POP and GDP for all Scenarios
+  
+  GDP_13_scen <- list()
+  POP_13_scen <- list()
+  GDP_21_scen <- list()
+  POP_21_scen <- list()
+  
+  
+  for (i in 1:length(SSP_Scen)){
+    GDP_13_tmp <- GDP_13[scenario == SSP_Scen[i]]
+    GDP_13_tmp[,scenario:=scenNames[i]]
+    GDP_13_scen <-rbind(GDP_13_scen,GDP_13_tmp)
+    POP_13_tmp <- POP_13[scenario == SSP_Scen[i]]
+    POP_13_tmp[,scenario:=scenNames[i]]
+    POP_13_scen <-rbind(POP_13_scen,POP_13_tmp)
+    GDP_21_tmp <- GDP_21[scenario == SSP_Scen[i]]
+    GDP_21_tmp[,scenario:=scenNames[i]]
+    GDP_21_scen <-rbind(GDP_21_scen,GDP_21_tmp)
+    POP_21_tmp <- POP_21[scenario == SSP_Scen[i]]
+    POP_21_tmp[,scenario:=scenNames[i]]
+    POP_21_scen <-rbind(POP_21_scen,POP_21_tmp)} 
+  
+
   
   ## ---- Preprocess plot_data ----
 
@@ -163,13 +325,7 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
   plot_dem_ej_wwobunk[, value:=sum(value), by= c("period","region","scenario","international", "unit")]
   plot_dem_ej_wwobunk <- plot_dem_ej_wwobunk[!duplicated(plot_dem_ej_wwobunk)]
   
-  
-  
-  
-  
-  
-  
-  
+ 
   ## ---- Open output-pdf ----
   
   template <-  c("\\documentclass[a4paper,landscape,twocolumn]{article}",
@@ -915,7 +1071,7 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
   #rename columns for mip
   setnames(plot_Energy_services,c("demand_F","year"),c("value","period"))
   plot_Energy_services <- plot_Energy_services[,c("value","period","region","scenario","sector","technology", "vehicle_type")]
-  plot_Energy_services[,unit:= "km/yr"]
+  plot_Energy_services[,unit:= "million pkm/yr"]
   #Aggregate regions
   plot_Energy_services <- aggregate_dt(plot_Energy_services,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" , datacols = c("technology","scenario","sector","vehicle_type","unit"),valuecol = "value")
   plot_Energy_services_glo <- aggregate_dt(plot_Energy_services,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("technology","scenario","sector","vehicle_type","unit"),valuecol = "value")
@@ -1107,6 +1263,73 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")   
   
+  
+  
+  
+  
+  
+  
+  
+  swlatex(sw,"\\subsubsection{Energy Services for Passenger Transport (per Capita, year)}")
+  
+  ES_pass <- copy(plot_Energy_services)
+  ES_pass <- ES_pass[sector %in% c("trn_pass","trn_aviation_intl")][,variable:="ES|Transport|Pass"]
+  ES_pass_Road_LDV <- copy(plot_Energy_services)
+  ES_pass_Road_LDV <- ES_pass_Road_LDV[sector %in% c("trn_pass") & vehicle_type %in% c("Small Cars","Large Cars")][, variable:="ES|Transport|Pass|Road|LDV"]
+  ES_pass_Road_nonLDV <- copy(plot_Energy_services)
+  ES_pass_Road_nonLDV <- ES_pass_Road_nonLDV[sector %in% c("trn_pass") & !vehicle_type %in% c("Small Cars","Large Cars")][,variable:="ES|Transport|Pass|non-LDV"]
+  ES_pass <- ES_pass[,.(value=sum(value)),by=c("region","scenario","period","unit","variable")]
+  ES_pass_Road_LDV <- ES_pass_Road_LDV[,.(value=sum(value)),by=c("region","scenario","period","unit","variable")]
+  ES_pass_Road_nonLDV <- ES_pass_Road_nonLDV[,.(value=sum(value)),by=c("region","scenario","period","unit","variable")]
+  GDP_13_scen <- GDP_13_scen[,variable:= "GDP|PPP"][,unit:="billion US$2005/yr"]
+  setnames(GDP_13_scen, c("weight"),c("value"))
+  POP_13_scen <- POP_13_scen[,variable:= "Population"][,unit:="million"]
+
+  
+
+  
+  
+  data <- rbind (ES_pass, ES_pass_Road_LDV,  ES_pass_Road_nonLDV, GDP_13_scen, POP_13_scen)
+  data[,model:= "EDGE-T"]
+  
+  items<- c(
+    "ES|Transport|Pass (million pkm/yr)",
+    "ES|Transport|Pass|Road|LDV (million pkm/yr)",
+    "ES|Transport|Pass|non-LDV (million pkm/yr)"
+  )
+  
+ 
+  p <- lineplots_perCap(data, items, 1, "Mobility Demand per Cap. [km/yr]",
+                        global = T, per_gdp = F)
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  p <- lineplots_perCap(data, items, 1, "Mobility Demand per Cap. [km/yr]",
+                        global = F, per_gdp = F)
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  
+  ## ---- ES passenger transport per capita (GDP domain, line graph)----
+  
+  swlatex(sw,"\\subsubsection{Energy Services for Passanger Transport (per Capita, GDP)}")
+  
+  p <- lineplots_perCap(data, items, 1, "Mobility Demand per Cap. [km/yr]",
+                        global = T, per_gdp = T)
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  p <- lineplots_perCap(data, items, 1, "Mobility Demand per Cap. [km/yr]",
+                        global = F, per_gdp = T)
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   ## ---- Costs----   
   FV_final_pref <- list()
   
@@ -1125,18 +1348,15 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
   FV_final_pref[logit_type=="prange", logit_type:="Range anxiety"]
   FV_final_pref[logit_type=="pref", logit_type:="Ref. stations availability"] 
   FV_final_pref[logit_type=="prisk", logit_type:="Risk"] 
-  FV_final_pref[,SSP:=sub("-.*","",scenario)]
-  setnames(FV_final_pref, c("scenario","SSP", "year"),c("techscen","scenario","period"))
-  
+  setnames(FV_final_pref, c("year"),c("period"))
   FV_final_pref <- aggregate_dt(FV_final_pref,
                        Regionmapping_21_H12,
                        manycol = "region",
                        fewcol = "missingH12",
                        yearcol = "period",
-                       datacols = c("vehicle_type", "technology", "sector", "subsector_L1", "subsector_L2", "subsector_L3", "logit_type","techscen","scenario"),
-                       weights = GDP_country_21[period%in%unique(FV_final_pref$period)& scenario%in%unique(FV_final_pref$scenario)])
-  FV_final_pref[,scenario:=NULL]
-  setnames(FV_final_pref,c("techscen","missingH12"),c("scenario","region"))
+                       datacols = c("vehicle_type", "technology", "sector", "subsector_L1", "subsector_L2", "subsector_L3", "logit_type","scenario"),
+                       weights = GDP_21_scen[period%in%unique(FV_final_pref$period)])
+  setnames(FV_final_pref,c("missingH12"),c("region"))
   
   swlatex(sw,"\\subsection{Example large car and SUV}")
   
@@ -1221,61 +1441,265 @@ lvl2_compareScen <- function(listofruns, hist, y_bar=c(2010,2030,2050,2100),
   p <- mipBarYearData(FV_final_pref_CCar[period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
-  swlatex(sw,"\\section{Annual sales}")
+  
+  
+  ## ---- LDVs vintages and sales ----    
+  
   annual_sale <- do.call(rbind.data.frame, annual_sale)
+  vintcomp <- do.call(rbind.data.frame, vintcomp)
+  newcomp <- do.call(rbind.data.frame, newcomp)
+  loadFactor <- do.call(rbind.data.frame, loadFactor)
+  annual_mileage <- do.call(rbind.data.frame, annual_mileage)
   
-  plot_annual_sale <- copy(annual_sale)
+  VS1_shares <- list()
   
-  #rename columns for mip
-  setnames( plot_annual_sale,c("shareFS1","year","scenario"),c("value","period","scenario_com"))
-  plot_annual_sale <-  plot_annual_sale[,c("value","period","region","scenario_com","technology", "vehicle_type")]
-  plot_annual_sale[,unit:= "-"]
-  y_as= c(2025,2030,2050,2100)
-  plot_annual_sale <- plot_annual_sale[period %in% y_as]
-  plot_annual_sale[, scenario:= sub("-.*", "", scenario_com)]
+  for (i in 1:length(shares)) {
+    VS1_shares[[i]] <- copy(shares[[i]]$VS1_shares)
+    VS1_shares[[i]]$scenario <- copy(shares[[i]]$scenario)
+  }
+  VS1_shares <- do.call(rbind.data.frame, VS1_shares)
+  
+  plot_vintcomp_LDV <- copy(vintcomp[subsector_L1 == "trn_pass_road_LDV_4W"])
+  plot_vintcomp_LDV <- plot_vintcomp_LDV[,.(totdem, region, subsector_L1, year, technology,vehicle_type, sector, sharetech_vint, scenario)]
+  plot_newcomp_LDV <- copy(newcomp[subsector_L1 == "trn_pass_road_LDV_4W"])
+  plot_newcomp_LDV <- plot_newcomp_LDV[,.(region, subsector_L1, year, technology,vehicle_type, sector, sharetech_new, scenario)]
+  
+  allfleet <- merge(plot_newcomp_LDV, plot_vintcomp_LDV, all =TRUE, by = c("region", "sector", "subsector_L1", "vehicle_type", "technology",  "year", "scenario"))
+  allfleet <- allfleet[sector=="trn_pass"]
+  allfleet <- merge(allfleet, VS1_shares[subsector_L1 == "trn_pass_road_LDV_4W",.(shareVS1 = share, region, year, vehicle_type, subsector_L1, scenario)], all.x=TRUE, by = c("region", "year", "vehicle_type", "subsector_L1","scenario"))
+  allfleet[,vintdem:=totdem*sharetech_vint*shareVS1]
+  allfleet[,newdem:=totdem*sharetech_new*shareVS1]
+  allfleet <- melt(allfleet, id.vars = c("region", "sector", "subsector_L1", "vehicle_type", "technology",
+                                      "year","scenario"), measure.vars = c("vintdem", "newdem"))
+  allfleet <- as.data.table(allfleet)
+  allfleet[,alpha:=ifelse(variable == "vintdem", 0, 1)]
+  allfleet <- merge(allfleet, loadFactor, by = c("region", "year", "sector", "subsector_L1", "vehicle_type", "technology","scenario"))
+  allfleet <- merge(allfleet, annual_mileage, by = c("region", "year", "sector", "subsector_L1", "vehicle_type", "technology","scenario"))
+  
+  #fleetcomp <- allfleet[,.(value = sum(value/loadFactor/vkm.veh)), by = c("region", "year", "vehicle_type","scenario")]
+  allfleet <- allfleet[,.(value = sum(value/loadFactor/vkm.veh)), by = c("region", "technology", "variable", "year","scenario","vehicle_type")]
+  #allfleet <- allfleet[,.(value = sum(value)), by = c("region", "technology", "variable", "year","scenario")]
+  
   #Aggregate regions
-  plot_annual_sale <- aggregate_dt(plot_annual_sale,Regionmapping_21_H12,fewcol ="missingH12",yearcol = "period", manycol = "region" , datacols = c("technology","scenario_com","scenario","vehicle_type","unit"),valuecol = "value",weights=GDP_country_21[period %in% y_as])
-  plot_annual_sale_glo <- aggregate_dt(plot_annual_sale,Regionmapping_H12_world,fewcol ="world",yearcol = "period", manycol = "missingH12" ,datacols = c("technology","scenario","vehicle_type","unit"),valuecol = "value",weights=GDP_country_12[period %in% y_as])
-  setnames(plot_annual_sale,"missingH12", "region")
-  setnames(plot_annual_sale_glo, "world", "region")
-  plot_annual_sale<- rbind(plot_annual_sale,plot_annual_sale_glo)
-  plot_annual_sale <- plot_annual_sale[!duplicated(plot_annual_sale)]
-  plot_annual_sale[,scenario:=NULL]
-  setnames(plot_annual_sale, "scenario_com","scenario")
+  allfleet <- aggregate_dt(allfleet,Regionmapping_21_H12,fewcol ="missingH12", manycol = "region" , datacols = c("technology","scenario","variable","vehicle_type"),valuecol = "value")
+  allfleet_glo <- aggregate_dt(allfleet,Regionmapping_H12_world,fewcol ="world", manycol = "missingH12" ,datacols = c("technology","scenario","variable","vehicle_type"),valuecol = "value")
+  setnames(allfleet,"missingH12", "region")
+  setnames(allfleet_glo, "world", "region")
+  allfleet<- rbind(allfleet,allfleet_glo)
+  allfleet <- allfleet[!duplicated(allfleet)]
   
-  #Group vehicle types for plotting
-  plot_annual_sale <- merge(plot_annual_sale,Mapp_Aggr_vehtype, by.x="vehicle_type" ,by.y="gran_vehtype")
-  plot_annual_sale <- plot_annual_sale[,-c("vehicle_type")]
-  setnames(plot_annual_sale,"aggr_vehtype","vehicle_type")
+ #allfleet[,alphaval := ifelse(variable =="vintdem", 1,0)]
   
-  #Aggregate by vehicle type and technology for each sector
-  plot_annual_sale[, value:=sum(value), by= c("period","region","scenario", "vehicle_type", "unit","international","technology")]
-  plot_annual_sale <- plot_annual_sale[!duplicated(plot_annual_sale)]
-
-
-  swlatex(sw,"\\subsection{LDV's by technology}")
+  swlatex(sw,"\\section{LDV stock and sales}")
+    
+  swlatex(sw,"\\subsection{LDV stock by technology}")
+  plot_LDV_stock_tech <- allfleet[variable == "vintdem",.(value=sum(value)),by = c("region", "technology", "year","scenario")]
+  setnames(plot_LDV_stock_tech,c("technology","year"),c("variable","period"))
+  plot_LDV_stock_tech[,unit:= "million Veh"]
   
-  plot_annual_sale_LDV <- plot_annual_sale[vehicle_type %in% c("Small Cars","Large Cars")]
-  plot_annual_sale_LDV <- plot_annual_sale_LDV[,-c("international","vehicle_type")]
-  plot_annual_sale_LDV[,value:=sum(value), by=c("period","region","scenario","unit", "technology")]
-  plot_annual_sale_LDV <- plot_annual_sale_LDV[!duplicated(plot_annual_sale_LDV)]
-  setnames(plot_annual_sale_LDV,"technology","variable")
-  
-  p <- mipArea(plot_annual_sale_LDV[region== mainReg], scales="free_y")
+  p <- mipArea(plot_LDV_stock_tech[region== mainReg], scales="free_y")
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4,width=7")
   
-  p <- mipBarYearData(plot_annual_sale_LDV[region==mainReg & period %in% y_bar])
+  p <- mipBarYearData(plot_LDV_stock_tech[region==mainReg & period %in% y_bar])
   p <- p + theme(legend.position="none")
   swfigure(sw,print,p,sw_option="height=4.5,width=7")
   
-  p <- mipBarYearData(plot_annual_sale_LDV[!region==mainReg & period %in% y_bar])
+  p <- mipBarYearData(plot_LDV_stock_tech[!region==mainReg & period %in% y_bar])
   swfigure(sw,print,p,sw_option="height=9,width=16")
   
   swlatex(sw,"\\onecolumn")
-  p <- mipArea(plot_annual_sale_LDV[!region==mainReg],scales="free_y")
+  p <- mipArea(plot_LDV_stock_tech[!region==mainReg],scales="free_y")
   swfigure(sw,print,p,sw_option="height=8,width=16")
   swlatex(sw,"\\twocolumn")   
+  
+  swlatex(sw,"\\subsubsection{LDV stock by vehicle type}")
+  
+  plot_LDV_stock_veht <- allfleet[variable == "vintdem",.(value=sum(value)),by = c("region", "vehicle_type", "year","scenario")]
+  setnames(plot_LDV_stock_veht,c("vehicle_type","year"),c("variable","period"))
+  plot_LDV_stock_veht[,unit:= "million Veh"]
+  
+  p <- mipArea(plot_LDV_stock_veht[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_LDV_stock_veht[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_LDV_stock_veht[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_LDV_stock_veht[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
+    
+  swlatex(sw,"\\subsubsection{LDV sales by technology}")
+  
+  plot_LDV_sales_tech <- allfleet[variable == "newdem",.(value=sum(value)),by = c("region", "technology", "year","scenario")]
+  setnames(plot_LDV_sales_tech,c("technology","year"),c("variable","period"))
+  plot_LDV_sales_tech[,unit:= "million Veh"]
+  
+  p <- mipArea(plot_LDV_sales_tech[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_LDV_sales_tech[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_LDV_sales_tech[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_LDV_sales_tech[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
+  
+  swlatex(sw,"\\subsection{LDV sales by vehicle type}")
+  
+  plot_LDV_sales_veht <- allfleet[variable == "newdem",.(value=sum(value)),by = c("region", "vehicle_type", "year","scenario")]
+  setnames(plot_LDV_sales_veht,c("vehicle_type","year"),c("variable","period"))
+  plot_LDV_stock_veht[,unit:= "million Veh"]
+  
+  p <- mipArea(plot_LDV_sales_veht[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_LDV_sales_veht[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_LDV_sales_veht[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_LDV_sales_veht[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")    
+
+  ## ---- Trucks vintages and sales ----    
+  
+  
+  plot_vintcomp_Trucks <- copy(vintcomp[subsector_L1 == "trn_freight_road_tmp_subsector_L1"])
+  plot_vintcomp_Trucks <- plot_vintcomp_LDV[,.(totdem, region, subsector_L1, year, technology,vehicle_type, sector, sharetech_vint, scenario)]
+  plot_newcomp_Trucks <- copy(newcomp[subsector_L1 == "trn_freight_road_tmp_subsector_L1"])
+  plot_newcomp_Trucks <- plot_newcomp_Trucks[,.(region, subsector_L1, year, technology,vehicle_type, sector, sharetech_new, scenario)]
+  allfleet <- merge(plot_newcomp_Trucks, plot_vintcomp_Trucks, all =TRUE, by = c("region", "sector", "subsector_L1", "vehicle_type", "technology",  "year", "scenario"))
+  allfleet <- allfleet[sector=="trn_freight"]
+  allfleet <- merge(allfleet, VS1_shares[,.(shareVS1 = share, region, year, vehicle_type, subsector_L1, scenario)], all.x=TRUE, by = c("region", "year", "vehicle_type", "subsector_L1","scenario"))
+  allfleet[,vintdem:=totdem*sharetech_vint*shareVS1]
+  allfleet[,newdem:=totdem*sharetech_new*shareVS1]
+  allfleet <- melt(allfleet, id.vars = c("region", "sector", "subsector_L1", "vehicle_type", "technology",
+                                         "year","scenario"), measure.vars = c("vintdem", "newdem"))
+  allfleet <- as.data.table(allfleet)
+  allfleet[,alpha:=ifelse(variable == "vintdem", 0, 1)]
+  allfleet <- merge(allfleet, loadFactor, by = c("region", "year", "sector", "subsector_L1", "vehicle_type", "technology","scenario"))
+  
+  #fleetcomp <- allfleet[,.(value = sum(value/loadFactor/vkm.veh)), by = c("region", "year", "vehicle_type","scenario")]
+  allfleet <- allfleet[,.(value = sum(value/loadFactor/50000)), by = c("region", "technology", "variable", "year","scenario","vehicle_type")]
+  #allfleet <- allfleet[,.(value = sum(value)), by = c("region", "technology", "variable", "year","scenario")]
+  
+  #Aggregate regions
+  allfleet <- aggregate_dt(allfleet,Regionmapping_21_H12,fewcol ="missingH12", manycol = "region" , datacols = c("technology","scenario","variable","vehicle_type"),valuecol = "value")
+  allfleet_glo <- aggregate_dt(allfleet,Regionmapping_H12_world,fewcol ="world", manycol = "missingH12" ,datacols = c("technology","scenario","variable","vehicle_type"),valuecol = "value")
+  setnames(allfleet,"missingH12", "region")
+  setnames(allfleet_glo, "world", "region")
+  allfleet<- rbind(allfleet,allfleet_glo)
+  allfleet <- allfleet[!duplicated(allfleet)]
+
+  swlatex(sw,"\\section{Truck stock and sales}")
+  
+  swlatex(sw,"\\subsection{Truck stock by technology}")
+  plot_Trucks_stock_tech <- allfleet[variable == "vintdem",.(value=sum(value)),by = c("region", "technology", "year","scenario")]
+  setnames(plot_Trucks_stock_tech,c("technology","year"),c("variable","period"))
+  plot_Trucks_stock_tech[,unit:= "million Veh"]
+  
+  p <- mipArea(plot_Trucks_stock_tech[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Trucks_stock_tech[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Trucks_stock_tech[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Trucks_stock_tech[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
+  
+  swlatex(sw,"\\subsection{Truck stock by vehicle type}")
+  
+  plot_Trucks_stock_veht <- allfleet[variable == "vintdem",.(value=sum(value)),by = c("region", "vehicle_type", "year","scenario")]
+  setnames(plot_Trucks_stock_veht,c("vehicle_type","year"),c("variable","period"))
+  plot_Trucks_stock_veht[,unit:= "million Veh"]
+  
+  p <- mipArea(plot_Trucks_stock_veht[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Trucks_stock_veht[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Trucks_stock_veht[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Trucks_stock_veht[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
+  
+  swlatex(sw,"\\subsection{Truck sales by technology}")
+  
+  plot_Trucks_sales_tech <- allfleet[variable == "newdem",.(value=sum(value)),by = c("region", "technology", "year","scenario")]
+  setnames(plot_Trucks_sales_tech,c("technology","year"),c("variable","period"))
+  plot_Trucks_sales_tech[,unit:= "million Veh"]
+  
+  p <- mipArea(plot_Trucks_sales_tech[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Trucks_sales_tech[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Trucks_sales_tech[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Trucks_sales_tech[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")   
+  
+  swlatex(sw,"\\subsection{Truck sales by vehicle type}")
+  
+  plot_Trucks_sales_veht <- allfleet[variable == "newdem",.(value=sum(value)),by = c("region", "vehicle_type", "year","scenario")]
+  setnames(plot_Trucks_sales_veht,c("vehicle_type","year"),c("variable","period"))
+  plot_Trucks_stock_veht[,unit:= "million Veh"]
+  
+  p <- mipArea(plot_Trucks_sales_veht[region== mainReg], scales="free_y")
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4,width=7")
+  
+  p <- mipBarYearData(plot_Trucks_sales_veht[region==mainReg & period %in% y_bar])
+  p <- p + theme(legend.position="none")
+  swfigure(sw,print,p,sw_option="height=4.5,width=7")
+  
+  p <- mipBarYearData(plot_Trucks_sales_veht[!region==mainReg & period %in% y_bar])
+  swfigure(sw,print,p,sw_option="height=9,width=16")
+  
+  swlatex(sw,"\\onecolumn")
+  p <- mipArea(plot_Trucks_sales_veht[!region==mainReg],scales="free_y")
+  swfigure(sw,print,p,sw_option="height=8,width=16")
+  swlatex(sw,"\\twocolumn")  
+  
+  
+  
   
   
   
