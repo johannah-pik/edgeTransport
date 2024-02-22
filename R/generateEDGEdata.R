@@ -526,6 +526,7 @@ toolGenerateEDGEdata <- function(input_folder, output_folder, cache_folder = NUL
     saveRDS(logit_data$pref_data, file = level2path("pref_output.RDS"))
     saveRDS(REMINDdat$LF, file = level2path("loadFactor.RDS"))
     saveRDS(REMINDdat$AM, file = level2path("annual_mileage.RDS"))
+    saveRDS(REMINDdat$costs, file = level2path("OPEXnonFuel.RDS"))
     dem_bunk = merge(EU_data$dem_eurostat[vehicle_type %in% c("International Ship_tmp_vehicletype", "International Aviation_tmp_vehicletype")], REMIND2ISO_MAPPING, by = "iso")
     dem_bunk = dem_bunk[,.(MJ = sum(MJ)), by = c("region", "year", "vehicle_type")]
     saveRDS(dem_bunk, file = level2path("EurostatBunkers.RDS"))

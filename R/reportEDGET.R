@@ -38,6 +38,8 @@ toolReportEDGET <- function(output_folder = ".",
               full_demand_vkm <- vintage_demand_vkm <- stock_demand <- sales_demand <- full_demand_vkm <-
                 typ <- FE <- tot_vint_demand <- non_fuel_price <- UE_efficiency <- NULL
 
+
+
   #pkm or tkm is called km in the reporting. Vehicle km are called vkm
   yrs <- c(seq(2005, 2060, 5), seq(2070, 2100, 10))
   Aggrdata <- fread(system.file("extdata", "EDGETdataAggregation.csv", package = "edgeTransport"), header = TRUE)
@@ -171,7 +173,9 @@ toolReportEDGET <- function(output_folder = ".",
                      "FE" = "FE|Transport|",
                      "ES" = "ES|Transport|",
                      "VKM" = "ES|Transport|VKM|",
-                     "CC" = "Capital Cost|Transport|")
+                     "CC" = "Capital Cost|Transport|",
+                     "OPEXnonFuel" = "Non-fuel Operating Cost|Transport|",
+                     "OPEXfuel" = "Fuel Cost|Transport|")
 
     var <- c("Pass", "Freight")
 
@@ -186,7 +190,9 @@ toolReportEDGET <- function(output_folder = ".",
                    "FE" = "EJ/yr",
                    "ES" = if(var0 == "Pass"){"bn pkm/yr"}else{"bn tkm/yr"},
                    "VKM" = "bn vkm/yr",
-                   "CC" = "bn US$2005")
+                   "CC" = "bn US$2005/yr",
+                   "OPEXnonFuel" = "bn US$2005/yr",
+                   "OPEXfuel" = "bn US$2005/yr")
 
         #Aggregate data
         datatable0 <- copy(datatable)
@@ -414,11 +420,12 @@ toolReportEDGET <- function(output_folder = ".",
   }
 
 
+
   reportTotals <- function(aggrname, datatable, varlist){
 
     vars <- varlist[[aggrname]]
     #access the first element in vars
-    
+
 
     if (length(unique(datatable[variable %in% vars]$variable)) < length(vars)){
       browser()
@@ -469,6 +476,56 @@ toolReportEDGET <- function(output_folder = ".",
   setnames(demand_ej, "demand_EJ", "value")
   load_factor <- readRDS(datapath(fname = "loadFactor.RDS"))
   annual_mileage <- readRDS(datapath(fname = "annual_mileage.RDS"))
+  OPEXnonFuel <- readRDS(datapath(fname = "OPEXnonFuel.RDS"))
+  OPEXfuel <- readRDS(datapath(fname = "logit_data.RDS"))
+  OPEXfuel <- OPEXfuel$prices_list$FV
+  OPEXfuel[, c("tot_price", "tot_VOT_price", "non_fuel_price") := NULL]
+  setnames(OPEXfuel, "fuel_price_pkm", "value")
+
+  # For those types CAPEX and OPEXnonFuel are reported together, we have to apply our assumptions
+  #1. Busses
+  ## busses
+  ## https://mdpi-res.com/d_attachment/wevj/wevj-11-00056/article_deploy/wevj-11-00056.pdf?version=1597829235
+  ## for electric busses: veh + batt. = 25% of TCO
+  OPEXnonFuel[variable == "CAPEX and non-fuel OPEX" & vehicle_type == "Bus_tmp_vehicletype"  & technology %in% c("Electric", "FCEV"), value := value * 0.75]
+  OPEXnonFuel[variable == "CAPEX and non-fuel OPEX" & vehicle_type == "Bus_tmp_vehicletype"  & technology %in% c("Electric", "FCEV"), variable := "Operating costs"]
+  ## -> diesel busses: 15% of TCO
+  OPEXnonFuel[variable == "CAPEX and non-fuel OPEX" & vehicle_type == "Bus_tmp_vehicletype"  & technology %in% c("Liquids", "NG"), value := value * 0.85]
+  OPEXnonFuel[variable == "CAPEX and non-fuel OPEX" & vehicle_type == "Bus_tmp_vehicletype"  & technology %in% c("Liquids", "NG"), variable := "Operating costs"]
+  #2: Ships
+  ## CCS ships doi:10.1016/j.egypro.2014.11.285
+  ## CAPEX ~ 30%
+  OPEXnonFuel[variable == "CAPEX and non-fuel OPEX" & subsector_L3 %in% c("Domestic Ship", "International Ship"), value := value * 0.7]
+  OPEXnonFuel[variable == "CAPEX and non-fuel OPEX" & subsector_L3 %in% c("Domestic Ship", "International Ship"), variable := "Operating costs"]
+  #3: Rail
+  ## https://www.unescap.org/sites/default/files/1.%20Part%20A.%20Point%20to%20point%20railway%20traffic%20costing%20model.pdf
+  ## O&M 80% for low traffic lines
+  ## 50% for high traffic lines
+  ## -> 60% O&M -> CAPEX share = 40%
+  OPEXnonFuel[subsector_L3 %in% c("Freight Rail", "Passenger Rail", "HSR"), value := value * 0.6]
+  OPEXnonFuel[subsector_L3 %in% c("Freight Rail", "Passenger Rail", "HSR"), variable := "Operating costs"]
+  ## trucks
+  ## https://theicct.org/sites/default/files/publications/TCO-BETs-Europe-white-paper-v4-nov21.pdf
+  ## p. 11: retail price = 150k for diesel, 500 - 200k for BEV
+  ## p. 22: TCO 550 for diesel, TCO = 850 - 500k for BEV
+  ## CAPEX share diesel = 27%, 60-40% for BEV -> 50%
+  OPEXnonFuel[subsector_L3 == "trn_freight_road" & technology %in% c("Liquids", "NG"), value := value * 0.7]
+  OPEXnonFuel[subsector_L3 == "trn_freight_road" & technology %in% c("Electric", "FCEV"),  value := value * 0.5]
+  OPEXnonFuel[subsector_L3 == "trn_freight_road", variable := "Operating costs"]
+
+  OPEXnonFuel[variable == "non-fuel OPEX", variable := "Operating costs"]
+  OPEXnonFuel <- OPEXnonFuel[!grepl("Capital costs.*", variable)]
+  OPEXnonFuel <- OPEXnonFuel[!grepl("CAPEX", variable)]
+  OPEXnonFuel <- OPEXnonFuel[, .(value = sum(value)), by = c("year", "region", "vehicle_type", "technology", "sector", "subsector_L3", "subsector_L2", "subsector_L1")]
+  ESdemand <- copy(demand_km)
+  setnames(ESdemand, "value", "ES")
+  OPEXnonFuel <- merge(OPEXnonFuel, ESdemand, by = intersect(names(OPEXnonFuel), names(ESdemand)), all.x = TRUE)
+  # unit billion US$2005/yr
+  OPEXnonFuel[, value := value * ES][, ES := NULL]
+
+  OPEXfuel <- merge(OPEXfuel, ESdemand, by = intersect(names(OPEXfuel), names(ESdemand)), all.x = TRUE)
+  OPEXfuel[, value := value * ES][, ES := NULL]
+
 
   if (length(annual_mileage) > 4) {
     # Same is done in lvl2_createoutput
@@ -490,6 +547,16 @@ toolReportEDGET <- function(output_folder = ".",
   repFE <- reporting(
     dt = demand_ej,
     mode = "FE"
+  )
+
+  repOPEXnonFuel <- reporting(
+    dt = OPEXnonFuel,
+    mode = "OPEXnonFuel"
+  )
+
+  repOPEXfuel <- reporting(
+    dt = OPEXfuel,
+    mode = "OPEXfuel"
   )
 
   repCapCosts <- NULL
@@ -519,7 +586,9 @@ toolReportEDGET <- function(output_folder = ".",
     reportingEmi(
       repFE = repFE,
       gdx = gdx),
-    repCapCosts
+    repCapCosts,
+    repOPEXnonFuel,
+    repOPEXfuel
     )
 
   varsl <- list(
@@ -550,7 +619,20 @@ toolReportEDGET <- function(output_folder = ".",
     `FE|Transport|LDV|Hydrogen` = c("FE|Transport|Pass|Road|LDV|Hydrogen"),
     `FE|Transport|non-LDV|Gases` = c("FE|Transport|Pass|non-LDV|Gases","FE|Transport|Freight|Road|Gases"),
     `FE|Transport|non-LDV|Electricity` = c("FE|Transport|Pass|non-LDV|Electricity","FE|Transport|Freight|Road|Electricity","FE|Transport|Freight|Rail|Electricity"),
-    `FE|Transport|non-LDV|Hydrogen` = c("FE|Transport|Pass|non-LDV|Hydrogen","FE|Transport|Freight|Road|Hydrogen")
+    `FE|Transport|non-LDV|Hydrogen` = c("FE|Transport|Pass|non-LDV|Hydrogen","FE|Transport|Freight|Road|Hydrogen"),
+
+    `Operating Cost|Transport|Pass|Road|Bus` = c("Fuel Cost|Transport|Pass|Road|Bus", "Non-fuel Operating Cost|Transport|Pass|Road|Bus"),
+    `Operating Cost|Transport|Freight|Road` = c("Fuel Cost|Transport|Freight|Road", "Non-fuel Operating Cost|Transport|Freight|Road"),
+    `Operating Cost|Transport|Pass|Road|LDV` = c("Fuel Cost|Transport|Pass|Road|LDV", "Non-fuel Operating Cost|Transport|Pass|Road|LDV"),
+    `Operating Cost|Transport|Pass|Rail` = c("Fuel Cost|Transport|Pass|Rail", "Non-fuel Operating Cost|Transport|Pass|Rail"),
+    `Operating Cost|Transport|Freight|Navigation` = c("Fuel Cost|Transport|Freight|Navigation", "Non-fuel Operating Cost|Transport|Freight|Navigation"),
+    `Operating Cost|Transport|Pass|Aviation|Domestic` = c("Fuel Cost|Transport|Pass|Aviation|Domestic", "Non-fuel Operating Cost|Transport|Pass|Aviation|Domestic"),
+    `Operating Cost|Transport|Pass|w/o bunkers` = c("Fuel Cost|Transport|Pass|w/o bunkers", "Non-fuel Operating Cost|Transport|Pass|w/o bunkers"),
+    `Operating Cost|Transport|Freight|w/o bunkers` = c("Fuel Cost|Transport|Freight|w/o bunkers", "Non-fuel Operating Cost|Transport|Freight|w/o bunkers"),
+
+    `Capital Cost|Transport|w/o bunkers` = c("Capital Cost|Transport|Pass|w/o bunkers", "Capital Cost|Transport|Freight|w/o bunkers"),
+    `Fuel Cost|Transport|w/o bunkers` = c("Fuel Cost|Transport|Pass|w/o bunkers", "Fuel Cost|Transport|Freight|w/o bunkers"),
+    `Non-fuel Operating Cost|Transport|w/o bunkers` = c("Non-fuel Operating Cost|Transport|Pass|w/o bunkers", "Non-fuel Operating Cost|Transport|Freight|w/o bunkers")
     )
 
   names <- names(varsl)
@@ -568,7 +650,8 @@ toolReportEDGET <- function(output_folder = ".",
   `FE|Transport|Road|Electricity` = c("FE|Transport|Pass|Road|Electricity", "FE|Transport|Freight|Road|Electricity"),
   `FE|Transport|Road|Liquids` = c("FE|Transport|Pass|Road|Liquids", "FE|Transport|Freight|Road|Liquids"),
   `FE|Transport|Road|Hydrogen` = c("FE|Transport|Pass|Road|Hydrogen", "FE|Transport|Freight|Road|Hydrogen"),
-  `FE|Transport|Road|Gases` = c("FE|Transport|Pass|Road|Gases", "FE|Transport|Freight|Road|Gases")
+  `FE|Transport|Road|Gases` = c("FE|Transport|Pass|Road|Gases", "FE|Transport|Freight|Road|Gases"),
+  `Operating Cost|Transport|w/o bunkers` = c("Operating Cost|Transport|Pass|w/o bunkers", "Operating Cost|Transport|Freight|w/o bunkers")
   )
   names <- names(varsl)
 
@@ -751,7 +834,6 @@ toolReportEDGET <- function(output_folder = ".",
 
       # Calculate Inconvenience Cost from share Weight
       priceData_sw <- copy(prefData)
-      priceData_sw <- priceData_sw[logit_type == "sw"][, logit_type := NULL]
       setnames(priceData_sw, "value", "sw")
       priceData_sw <- merge(priceData_sw, logitExp, all.x = TRUE)
 
@@ -994,11 +1076,11 @@ toolReportEDGET <- function(output_folder = ".",
 
   #Calculate useful energy
   UE <- toMIF[grepl("FE", variable) & grepl("Electric|Liquids|Hydrogen", variable)] #select only FE for electricity, liquids and hydrogen
-  
-  
+
+
   #create new column named technology and assign values based on variables in UE.varialbe: if the variable contains "Electricity" then technology is "Electric", if the variable contains "Liquids" then technology is "Liquids", if the variable contains "Hydrogen" then technology is "Hydrogen"
   UE[, technology := ifelse(grepl("Electricity", variable), "Electric", ifelse(grepl("Liquids", variable), "Liquids", ifelse(grepl("Hydrogen", variable), "Hydrogen", NA)))]
-  
+
   UE <- merge(UE, Mapp_UE, technology) #merge with efficiencies
   UE[, value:= value*UE_efficiency][, c("variable", "technology", "UE_efficiency"):= list(gsub("FE","UE", variable), NULL, NULL)] #calculate useful energy
 
