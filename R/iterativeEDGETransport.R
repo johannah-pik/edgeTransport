@@ -225,7 +225,8 @@ iterativeEdgeTransport <- function() {
       endogenousCosts = endogenousCosts,
       vehSalesAndModeShares = vehSalesAndModeShares$shares,
       ESdemandFVsalesLevel = ESdemandFVsalesLevel,
-      helpers = helpers
+      helpers = helpers,
+      vehicleDepreciationFactors = vehicleDepreciationFactors
     )
 
     storeData(outputFolder = outputFolder, varsList = outputRaw)

@@ -39,7 +39,7 @@ toolUpdateEndogenousCosts <- function(dataEndoCosts,
   bmodelav <- -12   ## value based on Greene 2001
   coeffrisk <- 3800 ## value based on Pettifor 2017
 
-  policyYears <- seq(policyStartYear, 2100, 1)
+  policyYears <- seq(policyStartYear, 2101, 1)
   # preventing dataEndoCosts to be updated outside of the function
   dataEndoCosts <- copy(dataEndoCosts)
 
@@ -268,7 +268,6 @@ toolUpdateEndogenousCosts <- function(dataEndoCosts,
   outputYears <- c(1990, seq(2005, 2100, by = 1), 2110, 2130, 2150)
   endogenousCosts <- lapply(endogenousCosts, approx_dt, outputYears, "period", "value",
                        setdiff(names(updatedEndogenousCosts), c("period", "value")), extrapolate = TRUE)
-
 
   return(endogenousCosts)
 }
