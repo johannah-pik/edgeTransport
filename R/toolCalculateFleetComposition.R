@@ -44,6 +44,7 @@ toolCalculateFleetComposition <- function(ESdemandFVsalesLevel,
                              c("region", "subsectorL3"),
                              extrapolate = TRUE)
   vehDepreciationFactors <- copy(vehDepreciationFactors)
+
   vehDepreciationFactors <- merge(vehDepreciationFactors,
                                   unique(helpers$decisionTree[, c("univocalName", "subsectorL3")]), by = "univocalName")
   vehDepreciationFactors <- unique(vehDepreciationFactors[, c("indexUsagePeriod", "depreciationFactor", "subsectorL3")])
