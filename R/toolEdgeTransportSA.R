@@ -4,10 +4,11 @@
 #' a choice model to determine transport mode and technology shares, a demand regression
 #' and a fleet tracking for cars, busses and trucks
 #'
-#' @param SSPscen SSP or SDP scenario
-#' @param transportPolScen EDGE-T transport policy scenario
+#' @param SSPscen SSP or SDP scenarios
+#' @param transportPolScen EDGE-T transport policy scenarios
 #' @param isICEban optional enabling of ICE ban
-#' @param demScen Demand scenario, used to apply reduction factors on total demands from the regression
+#' @param demScen Demand scenarios, used to apply reduction factors on total demands from the regression
+#' @param startyear First time point in which policy differentiation sets in, cm_startyear in REMIND
 #' @param gdxPath Path to a GDX file to load price signals from a REMIND run
 #' @param outputFolder Path to folder for storing output data
 #' @param isStored Optional saving of intermediate RDS files
@@ -15,51 +16,68 @@
 #' @param isTransportExtendedReported Optional extension of transport reporting providing more detailed variables
 #' @param isREMINDinputReported Optional reporting of REMIND input data
 #' @param isAnalyticsReported Optional reporting of analytics data (e.g. variables over iterations)
+#' @param testIterative development setting: make standalone and iterative scripts comparable, sets sectorESdemand = REMINDsectorESdemand and iterations = 1 (cost module)
 #' @returns Transport input data for REMIND
-#' @author Johanna Hoppe, Jarusch Müßel, Alois Dirnaichner, Marianna Rottoli
+#' @author Johanna Hoppe, Jarusch Müßel, Alois Dirnaichner, Marianna Rottoli, Alex K. Hagen
 #' @import data.table
 #' @importFrom reporttransport reportEdgeTransport storeData
-#' @importFrom madrat getConfig
 #' @export
-
 toolEdgeTransportSA <- function(SSPscen,
                                 transportPolScen,
-                                isICEban = FALSE,
-                                demScen = "default",
+                                isICEban = c(FALSE, FALSE),
+                                demScen = c("default", "default"),
+                                startyear = 2030,
                                 gdxPath = NULL,
                                 outputFolder = NULL,
                                 isStored = TRUE,
                                 isTransportReported = TRUE,
                                 isTransportExtendedReported = FALSE,
                                 isREMINDinputReported = FALSE,
-                                isAnalyticsReported = FALSE){
+                                isAnalyticsReported = FALSE,
+                                testIterative = FALSE){
 
   # bind variables locally to prevent NSE notes in R CMD CHECK
-  variable <- NULL
+  variable <- version <- region <- vehicleType <- technology <- period <- NULL
+
+  #To trigger the madrat caching even if changes are only applied to the csv files, we include here the version number of edget
+  version <- "3.2.0"
+
+  commonParams <- toolGetCommonParameters(startyear, isICEban[1], isICEban[2])
+
+  # cm_startyear in REMIND is first timepoint where differentiation is observed
+  # allEqYear in EDGET is last timepoint in which all scenarios are equal, earliest 2020
+  allEqYear <- commonParams$allEqYear
+  # Years in which ICEban is in effect
+  ICEbanYears <- commonParams$ICEbanYears
 
   # set GDP cutoff to differentiate between regions
-  GDPcutoff <- 30800 # [constant 2017 US$MER]
-  # Year when scenario differentiation sets in
-  policyStartYear <- 2021
+  GDPcutoff <- commonParams$GDPcutoff
   # last time step of historical data
-  baseYear <- 2010
+  baseYear <- commonParams$baseYear
   # share of electricity in Hybrid electric vehicles
-  hybridElecShare <- 0.4
+  hybridElecShare <- commonParams$hybridElecShare
 
   ########################################################
   ## Load input data
   ########################################################
+
   if (is.null(outputFolder) & isStored) stop("Please provide an outputfolder to store your results")
 
-  inputs <- toolLoadInputs(SSPscen, transportPolScen, demScen, gdxPath, hybridElecShare)
-  if (is.null(gdxPath)) {gdxPath <- file.path(getConfig("sourcefolder"),
-                                              "REMINDinputForTransportStandalone", "v1.2", "fulldata.gdx")}
-  if (!file.exists(gdxPath)) stop("Please provide valid path to REMIND fulldata.gdx as input for fuel costs")
+  inputs <- toolLoadInputs(SSPscen, transportPolScen, demScen, hybridElecShare, allEqYear)
+
+  if (!is.null(gdxPath) && !file.exists(gdxPath)) {
+    stop("Please provide valid path to REMIND fulldata.gdx as input for fuel costs")
+  }
+
+  ## Load fuel costs from REMIND
+  REMINDfuelCosts <- toolLoadREMINDfuelCosts(gdxPath = gdxPath,
+                                             hybridElecShare = hybridElecShare,
+                                             helpers = inputs$helpers)
 
   helpers <- inputs$helpers
   genModelPar <- inputs$genModelPar
   scenModelPar <- inputs$scenModelPar
-  inputDataRaw <- inputs$inputDataRaw
+  inputDataRaw <- append(inputs$inputDataRaw, list(REMINDfuelCosts = REMINDfuelCosts))
 
   # If no demand scenario specific factors are applied, the demScen equals the SSPscen
   if (is.null(scenModelPar$scenParDemFactors)) demScen <- SSPscen
@@ -71,25 +89,29 @@ toolEdgeTransportSA <- function(SSPscen,
   scenSpecInputData <- toolPrepareScenInputData(genModelPar,
                                                 scenModelPar,
                                                 inputDataRaw,
-                                                policyStartYear,
+                                                allEqYear,
                                                 GDPcutoff,
-                                                helpers,
-                                                isICEban)
+                                                helpers)
 
   ########################################################
   ## Calibrate historical preferences
   ########################################################
-  histPrefs <- toolCalibrateHistPrefs(scenSpecInputData$combinedCAPEXandOPEX,
-                                      inputDataRaw$histESdemand,
-                                      inputDataRaw$timeValueCosts,
-                                      genModelPar$lambdasDiscreteChoice,
-                                      helpers)
+  sharesToBeCalibrated <- toolCalculateSharesDecisionTree(inputDataRaw$histESdemand, helpers)
+  histPrefs <- toolCalibratePreferences(sharesToBeCalibrated,
+                                        scenSpecInputData$combinedCAPEXandOPEX,
+                                        inputDataRaw$timeValueCosts,
+                                        genModelPar$lambdasDiscreteChoice,
+                                        helpers)
+  # Don't use calibrated shareweights for LDV 4w, as they receive inconvenience costs
+  histPrefs$calibratedPreferences <- histPrefs$calibratedPreferences[!(subsectorL3 == "trn_pass_road_LDV_4W" & level == "FV")]
 
-  scenSpecPrefTrends <- rbind(histPrefs$historicalPreferences,
+  scenSpecPrefTrends <- rbind(histPrefs$calibratedPreferences,
                               scenSpecInputData$scenSpecPrefTrends)
   scenSpecPrefTrends <- toolApplyMixedTimeRes(scenSpecPrefTrends,
                                               helpers)
-  if (isICEban) scenSpecPrefTrends <- toolApplyICEbanOnPreferences(scenSpecPrefTrends, helpers)
+  if (isICEban[1] | isICEban[2]) {
+    scenSpecPrefTrends <- toolApplyICEbanOnPreferences(scenSpecPrefTrends, helpers, ICEbanYears)
+  }
   scenSpecPrefTrends <- toolNormalizePreferences(scenSpecPrefTrends)
 
   #-------------------------------------------------------
@@ -120,7 +142,6 @@ toolEdgeTransportSA <- function(SSPscen,
   dataEndogenousCosts <- toolPrepareDataEndogenousCosts(inputData,
                                                         genModelPar$lambdasDiscreteChoice,
                                                         helpers)
-
   #################################################
   ## Demand regression module
   #################################################
@@ -133,8 +154,15 @@ toolEdgeTransportSA <- function(SSPscen,
                                          scenModelPar$scenParRegionalDemRegression,
                                          scenModelPar$scenParDemFactors,
                                          baseYear,
-                                         policyStartYear,
+                                         allEqYear,
                                          helpers)
+
+  if (testIterative) {
+    # development setting:
+    # to compare standalone calculations with iterative,
+    # get REMINDsectorESdemand from gdx
+    sectorESdemand <- toolLoadREMINDesDemand(gdxPath, helpers)
+  }
 
   #------------------------------------------------------
   # Start of iterative section
@@ -142,6 +170,12 @@ toolEdgeTransportSA <- function(SSPscen,
 
   fleetVehiclesPerTech <- NULL
   iterations <- 3
+
+  if (testIterative) {
+    # development setting:
+    # to compare standalone calculations with iterative, set iterations to 1
+    iterations <- 1
+  }
 
   if (isAnalyticsReported) {
     endogenousCostsIterations <- list()
@@ -160,12 +194,13 @@ toolEdgeTransportSA <- function(SSPscen,
     endogenousCosts <- toolUpdateEndogenousCosts(dataEndogenousCosts,
                                                  vehicleDepreciationFactors,
                                                  scenModelPar$scenParIncoCost,
-                                                 policyStartYear,
+                                                 allEqYear,
                                                  inputData$timeValueCosts,
                                                  inputData$scenSpecPrefTrends,
                                                  genModelPar$lambdasDiscreteChoice,
                                                  helpers,
-                                                 isICEban,
+                                                 (isICEban[1] | isICEban[2]),
+                                                 ICEbanYears,
                                                  fleetVehiclesPerTech)
 
     if (isAnalyticsReported) {
@@ -184,12 +219,13 @@ toolEdgeTransportSA <- function(SSPscen,
                                                 helpers)
     if (isAnalyticsReported) {
       costsDiscreteChoiceIterations[[i]] <- lapply(copy(vehSalesAndModeShares$costsDiscreteChoice),
-                                               function(x){ x[, variable := paste0(variable, "|Iteration ", i)]})
+                                                   function(x){ x[, variable := paste0(variable, "|Iteration ", i)]})
     }
+
     ESdemandFVsalesLevel <- toolCalculateFVdemand(sectorESdemand,
                                                   vehSalesAndModeShares$shares,
                                                   helpers,
-                                                  inputData$histESdemand,
+                                                  NULL,
                                                   baseYear)
     print("Calculation of vehicle sales and mode shares finished")
     #################################################
@@ -218,19 +254,30 @@ toolEdgeTransportSA <- function(SSPscen,
   #################################################
   ## Reporting
   #################################################
-  # Rename transportPolScen if ICE ban is activated
-  if (isICEban & (transportPolScen %in% c("Mix1", "Mix2", "Mix3", "Mix4"))) transportPolScen <- paste0(transportPolScen, "ICEban")
+  # SSPscen <- SSPscen[2]
+  # transportPolScen <- transportPolScen[2]
+  # demScen <- demScen[2]
 
-  print(paste("Run", SSPscen, transportPolScen, "demand scenario", demScen, "finished"))
+  # Rename transportPolScen if ICE ban is activated
+  if (isICEban[1] & (transportPolScen[1] %in% c("Mix1", "Mix2", "Mix3", "Mix4"))) transportPolScen[1] <- paste0(transportPolScen[1], "ICEban")
+  if (isICEban[2] & (transportPolScen[2] %in% c("Mix1", "Mix2", "Mix3", "Mix4"))) transportPolScen[2] <- paste0(transportPolScen[2], "ICEban")
+
+  print(paste("Run", SSPscen[2], transportPolScen[2], "demand scenario", demScen[2], "with startyear", startyear, "finished"))
 
   # Save data
   outputFolder <- file.path(outputFolder, paste0(format(Sys.time(), "%Y-%m-%d_%H.%M.%S"),
-                                                 "-", SSPscen, "-", transportPolScen, "-", demScen))
+                                                 "-sy", startyear, "-", SSPscen[2], "-", transportPolScen[2], "-", demScen[2]))
+  if (testIterative) {
+    print("EDGET was running in development mode to enable comparison of results to the iterative script.")
+    otputFolder <- file.path(outputFolder, paste0(format(Sys.time(), "%Y-%m-%d_%H.%M.%S"),
+                                                  "-sy", startyear, "-", SSPscen[2], "-", transportPolScen[2], "-", demScen[2], "-develop"))
+  }
 
   outputRaw <- list(
     SSPscen = SSPscen,
     transportPolScen = transportPolScen,
     demScen = demScen,
+    startyear = startyear,
     gdxPath = gdxPath,
     hybridElecShare = hybridElecShare,
     histPrefs = histPrefs,
@@ -249,7 +296,6 @@ toolEdgeTransportSA <- function(SSPscen,
   if (isAnalyticsReported) outputRaw <- append(outputRaw, list(endogenousCostsIterations = endogenousCostsIterations,
                                                                costsDiscreteChoiceIterations = costsDiscreteChoiceIterations,
                                                                fleetVehNumbersIterations = fleetVehNumbersIterations))
-
   if (isStored) storeData(outputFolder = outputFolder, varsList = outputRaw)
 
   output <- reportEdgeTransport(outputFolder,
@@ -260,5 +306,5 @@ toolEdgeTransportSA <- function(SSPscen,
                                 isREMINDinputReported,
                                 isStored)
 
-return(output)
+  return(output)
 }

@@ -35,16 +35,16 @@ toolCalculateFleetComposition <- function(ESdemandFVsalesLevel,
   # calculate total energy service demand for modes with tracked fleets ---------------------------------
   fleetESdemand <- copy(ESdemandFVsalesLevel)
   fleetESdemand <- fleetESdemand[grepl("Bus.*|.*4W|.*freight_road.*", subsectorL3)]
-  fleetESdemand <- fleetESdemand[, .(totalESdemand = sum(value)), by = c("region", "period", "subsectorL3")]
+  fleetESdemand <- fleetESdemand[, .(totalESdemand = sum(value[period >= 2005])), by = c("region", "period", "subsectorL3")]
 
   # calculate distribution of total demand on construction years -----------------------------------------
   # change to yearly resolution
-  timesteps <- seq(1990, 2101, by = 1)
+  startY <- 2005 - max(vehDepreciationFactors$serviceLife)
+  timesteps <- seq(startY, 2100, by = 1)
   fleetESdemand <- approx_dt(fleetESdemand, timesteps, "period", "totalESdemand",
                              c("region", "subsectorL3"),
                              extrapolate = TRUE)
   vehDepreciationFactors <- copy(vehDepreciationFactors)
-
   vehDepreciationFactors <- merge(vehDepreciationFactors,
                                   unique(helpers$decisionTree[, c("univocalName", "subsectorL3")]), by = "univocalName")
   vehDepreciationFactors <- unique(vehDepreciationFactors[, c("indexUsagePeriod", "depreciationFactor", "subsectorL3")])
@@ -75,7 +75,6 @@ toolCalculateFleetComposition <- function(ESdemandFVsalesLevel,
 
   # Initialize columns for fleet tracking (to have them in the data.table before the construction year columns)
   fleetESdemand[, c("vintagesDemand", "earlyRetirement", "earlyRetirementRate") := 0]
-
   for (i in constructionYears) {
     for (j in contributionYears) {
       vehDepreciation <- copy(vehDepreciationFactors)[, period := i + indexUsagePeriod][, indexUsagePeriod := NULL]
