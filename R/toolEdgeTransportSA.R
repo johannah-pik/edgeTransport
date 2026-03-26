@@ -26,7 +26,7 @@ toolEdgeTransportSA <- function(SSPscen,
                                 transportPolScen,
                                 isICEban = c(FALSE, FALSE),
                                 demScen = c("default", "default"),
-                                startyear = 2030,
+                                startyear = 2021,
                                 gdxPath = NULL,
                                 outputFolder = NULL,
                                 isStored = TRUE,
@@ -37,10 +37,10 @@ toolEdgeTransportSA <- function(SSPscen,
                                 testIterative = FALSE){
 
   # bind variables locally to prevent NSE notes in R CMD CHECK
-  variable <- version <- region <- vehicleType <- technology <- period <- NULL
+  level <- subsectorL3 <- variable <- version <- region <- vehicleType <- technology <- period <- NULL
 
   #To trigger the madrat caching even if changes are only applied to the csv files, we include here the version number of edget
-  version <- "3.2.0"
+  version <- "3.13.1"
 
   commonParams <- toolGetCommonParameters(startyear, isICEban[1], isICEban[2])
 
@@ -96,13 +96,16 @@ toolEdgeTransportSA <- function(SSPscen,
   ########################################################
   ## Calibrate historical preferences
   ########################################################
-  histPrefs <- toolCalibrateHistPrefs(scenSpecInputData$combinedCAPEXandOPEX,
-                                      inputDataRaw$histESdemand,
-                                      inputDataRaw$timeValueCosts,
-                                      genModelPar$lambdasDiscreteChoice,
-                                      helpers)
+  sharesToBeCalibrated <- toolCalculateSharesDecisionTree(inputDataRaw$histESdemand, helpers)
+  histPrefs <- toolCalibratePreferences(sharesToBeCalibrated,
+                                        scenSpecInputData$combinedCAPEXandOPEX,
+                                        inputDataRaw$timeValueCosts,
+                                        genModelPar$lambdasDiscreteChoice,
+                                        helpers)
+  # Don't use calibrated shareweights for LDV 4w, as they receive inconvenience costs
+  histPrefs$calibratedPreferences <- histPrefs$calibratedPreferences[!(subsectorL3 == "trn_pass_road_LDV_4W" & level == "FV")]
 
-  scenSpecPrefTrends <- rbind(histPrefs$historicalPreferences,
+  scenSpecPrefTrends <- rbind(histPrefs$calibratedPreferences,
                               scenSpecInputData$scenSpecPrefTrends)
   scenSpecPrefTrends <- toolApplyMixedTimeRes(scenSpecPrefTrends,
                                               helpers)
