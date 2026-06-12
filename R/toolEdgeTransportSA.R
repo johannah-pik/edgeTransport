@@ -109,9 +109,6 @@ toolEdgeTransportSA <- function(SSPscen,
                               scenSpecInputData$scenSpecPrefTrends)
   scenSpecPrefTrends <- toolApplyMixedTimeRes(scenSpecPrefTrends,
                                               helpers)
-  if (isICEban[1] | isICEban[2]) {
-    scenSpecPrefTrends <- toolApplyICEbanOnPreferences(scenSpecPrefTrends, helpers, ICEbanYears)
-  }
   scenSpecPrefTrends <- toolNormalizePreferences(scenSpecPrefTrends)
 
   #-------------------------------------------------------
