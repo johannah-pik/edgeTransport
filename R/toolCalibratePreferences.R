@@ -10,7 +10,7 @@
 
 toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeValueCost, lambdas, helpers){
   # bind variables locally to prevent NSE notes in R CMD CHECK
-  period <- preference <- lambda <- share <- . <- value <- univocalName <- level <- subsectorL3 <- variable <- unit <- guess <- NULL
+  period <- preference <- lambda <- share <- . <- value <- univocalName <- level <- subsectorL3 <- variable <- unit <- guess <- variation <- successfulVariation <- NULL
     shareCheck <- shareDiff <- sharesToBecalibrated <- NULL
 
   # Optimization function: Non-linear set of equations to solve. Sha are the calculated shares from empirical data used to calibrate preferences x.
@@ -90,7 +90,8 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
 
       # Check solutions
       checkShares(dfPreference, groupingValue)
-      # Don't accept bad solutions
+      # Don't accept bad solutions — save the successful variation before resetting failures
+      dfPreference[!is.nan(preference) & shareDiff < tol & is.na(successfulVariation), successfulVariation := variation]
       dfPreference[shareDiff >= tol, preference := NaN]
 
       # exit the loop if all the preference are calculated and there are no NaNs
@@ -121,11 +122,11 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
 
     decisionFunctionData <- merge(totPrice, shares, by = intersect(names(totPrice), names(shares)), all.x = TRUE)
     # Treat zero entries outside the optimization
-    prefZero <- decisionFunctionData[share == 0][, preference := 0][, shareCheck := 0][, shareDiff := 0]
+    prefZero <- decisionFunctionData[share == 0][, preference := 0][, shareCheck := 0][, shareDiff := 0][, successfulVariation := 0]
     decisionFunctionData <- decisionFunctionData[!share == 0]
     # On fuel vehilce level (before time value price is applied, active modes have prices of zero and need to be treated separately)
     if (levelToCalibrate == "FV") {
-      prefActive <- decisionFunctionData[grepl(".*Walk.*|.*Cycle.*", subsectorL3)][, preference := 1][, shareCheck := 1][, shareDiff := 0]
+      prefActive <- decisionFunctionData[grepl(".*Walk.*|.*Cycle.*", subsectorL3)][, preference := 1][, shareCheck := 1][, shareDiff := 0][, successfulVariation := 0]
       decisionFunctionData <- decisionFunctionData[!grepl(".*Walk.*|.*Cycle.*", subsectorL3)]
     }
     decisionFunctionData <- merge(decisionFunctionData, lambdas,
@@ -133,7 +134,8 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
                                   all.x = TRUE)
     # Assign a lambda to branches where no decision is taken in the respective level.
     # The value of that lambda is not relevant
-    decisionFunctionData[is.na(lambda) & share == 1, lambda := -10]
+    # Initialize column, where successful price Variation of guesses is saved
+    decisionFunctionData[is.na(lambda) & share == 1, lambda := -10][, successfulVariation := NA_real_]
     # varyGuess inluences the impact of the price on the heuristic that determines the guesses for the solver.
     # The entries in the varyGuess vector are independent of each other and are applied to the heuristic/
     # tried out with the solver one after the other (without influencing the subsequent guess)
@@ -195,7 +197,8 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
                         variationOfGuesses,
                         colsDecisionTRee,
                         levelsDecisionTree)
-  FVpreferences <-  FV[, c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share"), with = FALSE][, level := "FV"]
+
+  FVpreferences <-  FV[, c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share", "successfulVariation"), with = FALSE][, level := "FV"]
   #---VS3 level---------------------
   levelToCalibrate <- "VS3"
   totPriceVS3 <- copy(FV)
@@ -210,6 +213,7 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
   # Time value cost are applied from level VS3 onwards and do not vary by technology. They need to be added just one time, as shares are anyway 1 if there is no decision on that level.
   # Then prices are kept for the upper levels
   totPriceVS3[, totPrice := totPrice + timeValueCost][, timeValueCost := NULL]
+
   VS3 <- calibrateLevel(levelToCalibrate,
                        totPriceVS3,
                        lambdas,
@@ -218,7 +222,7 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
                        colsDecisionTRee,
                        levelsDecisionTree)
   VS3preferences <- copy(VS3)[, colsDecisionTRee[!colsDecisionTRee %in% names(VS3)] := ""]
-  VS3preferences <- VS3preferences[,  c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share"), with = FALSE][, level := "VS3"]
+  VS3preferences <- VS3preferences[,  c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share", "successfulVariation"), with = FALSE][, level := "VS3"]
   #---S3S2 level---------------------
   levelToCalibrate <- "S3S2"
   totPriceS3S2 <- VS3[, .(totPrice = sum(share * totPrice)),
@@ -232,9 +236,10 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
                         colsDecisionTRee,
                         levelsDecisionTree)
   S3S2preferences <- copy(S3S2)[, colsDecisionTRee[!colsDecisionTRee %in% names(S3S2)] := ""]
-  S3S2preferences <- S3S2preferences[,  c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share"), with = FALSE][, level := "S3S2"]
+  S3S2preferences <- S3S2preferences[,  c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share", "successfulVariation"), with = FALSE][, level := "S3S2"]
   #---S2S1 level---------------------
   levelToCalibrate <- "S2S1"
+
   totPriceS2S1 <- S3S2[, .(totPrice = sum(share * totPrice)),
                by = c("region", "period", "sector", "subsectorL1", "subsectorL2")]
   S2S1 <- calibrateLevel(levelToCalibrate,
@@ -245,7 +250,7 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
                          colsDecisionTRee,
                          levelsDecisionTree)
   S2S1preferences <- copy(S2S1)[, colsDecisionTRee[!colsDecisionTRee %in% names(S2S1)] := ""]
-  S2S1preferences <- S2S1preferences[,  c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share"), with = FALSE][, level := "S2S1"]
+  S2S1preferences <- S2S1preferences[,  c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share", "successfulVariation"), with = FALSE][, level := "S2S1"]
   #---S1S level---------------------
   levelToCalibrate <- "S1S"
   totPriceS1S <- S2S1[, .(totPrice = sum(share * totPrice)),
@@ -259,15 +264,17 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
                          levelsDecisionTree)
 
   S1Spreferences <- copy(S1S)[, colsDecisionTRee[!colsDecisionTRee %in% names(S1S)] := ""]
-  S1Spreferences <- S1Spreferences[,  c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share"), with = FALSE][, level := "S1S"]
+  S1Spreferences <- S1Spreferences[,  c(colsDecisionTRee, "period", "preference", "shareCheck", "shareDiff", "share", "successfulVariation"), with = FALSE][, level := "S1S"]
 
   # ---Combination of all levels----
   calibratedPreferences <- rbind(FVpreferences, VS3preferences, S3S2preferences, S2S1preferences, S1Spreferences)
   # Keep data and share differences in calibrationReport for later assessment
   calibrationReport <- copy(calibratedPreferences)
-  if (nrow(calibrationReport[shareDiff >= 0.01]) >= 1) stop(paste0("Calibrated shares differ
-                                                      by more than 0.01 from provided shares. Please provide better guesses for the calibration.
-                                                      Affected levels:", unique(calibrationReport$levels)))
+
+  if (nrow(calibrationReport[shareDiff >= 0.01]) >= 1) {
+  stop(paste0("Calibrated shares differ by more than 0.01 from provided shares. Please provide better guesses for the calibration.
+   Affected levels:", unique(calibrationReport[shareDiff >= 0.01]$level)))
+  }
 
 
   calibratedPreferences[, c("shareCheck", "shareDiff", "share") := NULL]
