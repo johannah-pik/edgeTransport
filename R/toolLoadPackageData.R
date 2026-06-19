@@ -72,11 +72,6 @@ toolLoadPackageData <- function(SSPs, transportPolS, demScenario = NULL) {
 
   if (nrow(scenParPrefTrends) == 0) scenParPrefTrends <- NULL
 
-  # Transport policy scenario inconvenience cost factors
-  scenParIncoCost <- fread(system.file("extdata/scenParIncoCost.csv",
-                                       package = "edgeTransport", mustWork = TRUE), header = TRUE)
-  scenParIncoCost[, "startYearCat" := fcase( SSPscen == SSPs[1] & transportPolScen == transportPolS[1], "origin", SSPscen == SSPs[2] & transportPolScen == transportPolS[2], "final")]
-  scenParIncoCost <- scenParIncoCost[!is.na(startYearCat)][, c("transportPolScen", "SSPscen") := NULL]
   # Transport policy scenario demand reduction factors
   scenParDemFactors <- fread(system.file("extdata/scenParDemFactors.csv",
                                          package = "edgeTransport", mustWork = TRUE), header = TRUE)
@@ -145,7 +140,6 @@ toolLoadPackageData <- function(SSPs, transportPolS, demScenario = NULL) {
       scenParDemRegression = scenParDemRegression,
       scenParRegionalDemRegression = scenParRegionalDemRegression,
       scenParPrefTrends = scenParPrefTrends,
-      scenParIncoCost = scenParIncoCost,
       scenParDemFactors = scenParDemFactors,
       scenParEnergyIntensity = scenParEnergyIntensity,
       scenParLoadFactor = scenParLoadFactor,

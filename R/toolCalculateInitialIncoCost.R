@@ -13,60 +13,22 @@
 toolCalculateInitialIncoCost <- function(combinedCost, incoCostStartVal, annuity, loadFactor, annualMileage, helpers) {
   # bind variables locally to prevent NSE notes in R CMD CHECK
   period <- value <- variable <- region <- unit <- univocalName <- subsectorL3 <- . <- NULL
-  ratio <- average <- technology <- incoCostType <- FVvehvar <- regionCode12 <- NULL
+  ratio <- average <- technology <- incoCostType <- regionCode12 <- NULL
 
   incoCostStartVal <- copy(incoCostStartVal)
-  incoCostStartVal <- melt(incoCostStartVal, id.vars = c("region", "incoCostType", "FVvehvar", "technology", "unit"),
+  incoCostStartVal <- melt(incoCostStartVal, id.vars = c("region", "vehicleType", "technology", "unit"),
                            variable.name = "period")
   incoCostStartVal[, value := as.double(value)]
-  # map incocost start values on regions
-  # they are provided either globally (GLO) or for single regions (out of 12 or 21)
-  # choose first the individual ones
-  individualIncoCost21 <- incoCostStartVal[region %in% helpers$regionmappingISOto21to12$regionCode21]
-  individualIncoCost12 <- merge(incoCostStartVal,
-                                unique(helpers$regionmappingISOto21to12[, c("regionCode21", "regionCode12")]),
-                                by.x = "region", by.y = "regionCode12", allow.cartesian = TRUE)
-  individualIncoCost12[, region := NULL]
-  setnames(individualIncoCost12, "regionCode21", "region")
-  GLO <- unique(helpers$regionmappingISOto21to12[, "regionCode21"])[, region := "GLO"]
-  incoCostGLO <- merge(incoCostStartVal, GLO, by = "region", allow.cartesian = TRUE)
-  incoCostGLO[, region := NULL]
-  setnames(incoCostGLO, "regionCode21", "region")
-  incoCostStartValReg <- rbind(individualIncoCost21, individualIncoCost12[!region %in% individualIncoCost21$region],
-                               incoCostGLO[!region %in% individualIncoCost21$region
-                                           & !region %in% individualIncoCost12$region])
-  ## use ICE price difference to DEU to introduce regional differentiation in all regions apart from EU regions
-  # this is done for the 2020 value of model availability and range anxiety and for all years for risk aversion
-  # and sationsAvailability for BEV and Hybrid electric
-  # Q: This procedure is not really straight forward - maybe we get to a more systemic approach?
-  EUreg <- unique(helpers$regionmappingISOto21to12[regionCode12 == "EUR"])$regionCode21
-  reference <- combinedCost[! variable == "Fuel price" & period == 2020]
-  reference <- reference[, .(value = sum(value)), by = c("region", "univocalName", "technology", "period")]
-  reference <- reference[, .(average = mean(value)), by = c("region", "technology")]
-
-  reference[, ratio := average / average[technology == "Liquids" & region == "DEU"]][, average := NULL]
-  incoCostStartValReg <- merge(incoCostStartValReg, reference, by = c("region", "technology"), allow.cartesian = TRUE)
-  # Q: The application of the ratio is also a bit weird
-  incoCostStartValReg[!region %in% EUreg & period == 2020 & incoCostType %in% c("modelAvailability", "rangeAnxiety"),
-                      value := value * ((ratio - 1) / 2 + 1)]
-  incoCostStartValReg[!region %in% EUreg & incoCostType == "riskAversion", value := value * ((ratio - 1) / 2 + 1)]
-  incoCostStartValReg[!region %in% EUreg & incoCostType == "stationsAvailability"
-                      & technology %in% c("BEV", "Hybrid electric"), value := value * ((ratio - 1) / 2 + 1)]
-  incoCostStartValReg[, ratio := NULL]
-
-  # map data on decision tree and interpolate missing timesteps <= 2020
-  incoCostStartValReg <- merge(helpers$mitigationTechMap[, c("FVvehvar", "univocalName")], incoCostStartValReg,
-                               by = "FVvehvar", all.y = TRUE, allow.cartesian = TRUE)[, FVvehvar := NULL]
+  
   # get rid of levels for the years, as approx_dt cannot handle them
   incoCostStartValReg[, period := as.numeric(as.character(period))]
   incoCostStartValReg <- approx_dt(incoCostStartValReg, unique(helpers$dtTimeRes[period <= 2020]$period),
-                                   "period", "value", idxcols = c("region", "incoCostType", "univocalName",
+                                   "period", "value", idxcols = c("region", "univocalName",
                                                                   "technology", "unit"), extrapolate = TRUE)
 
   # map on decision tree for LDV 4 Wheelers
-  decTree <- unique(helpers$decisionTree[subsectorL3 == "trn_pass_road_LDV_4W", c("region", "univocalName", "technology")])
-  incoCostStartValReg <- merge(decTree, incoCostStartValReg, by = c("region", "univocalName", "technology"),
-                               all.x = TRUE, allow.cartesian = TRUE)
+  incoCostStartValReg <- merge(helpers$decisionTree, incoCostStartValReg, by = c("region", "univocalName", "technology"),
+                               all.y = TRUE, allow.cartesian = TRUE)
   setnames(incoCostStartValReg, "incoCostType", "variable")
 
   # convert to US$/pkm
