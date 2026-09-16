@@ -182,17 +182,10 @@ iterativeEdgeTransport <- function() {
                                         inputDataRaw$timeValueCosts,
                                         genModelPar$lambdasDiscreteChoice,
                                         helpers)
-  # Don't use calibrated shareweights for LDV 4w, as they receive inconvenience costs
-  histPrefs$calibratedPreferences <- histPrefs$calibratedPreferences[!(subsectorL3 == "trn_pass_road_LDV_4W" & level == "FV")]
-
   scenSpecPrefTrends <- rbind(histPrefs$calibratedPreferences,
                               scenSpecInputData$scenSpecPrefTrends)
   scenSpecPrefTrends <- toolApplyMixedTimeRes(scenSpecPrefTrends,
                                               helpers)
-
-  if (isICEban[1] | isICEban[2]) {
-    scenSpecPrefTrends <- toolApplyICEbanOnPreferences(scenSpecPrefTrends, helpers, ICEbanYears)
-  }
   scenSpecPrefTrends <- toolNormalizePreferences(scenSpecPrefTrends)
 
   #######################################################

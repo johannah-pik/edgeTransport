@@ -34,7 +34,7 @@ toolUpdateEndogenousCosts <- function(dataEndoCosts,
   # Greene 2001 (orig. -20 for Stations), Pettifor 2017 (Risk aversion)
   incoCostCoeffs <- data.table(
     incoCostType = c("Stations availability", "Model availability", "Risk aversion"),
-    coefficient  = c(-5, -12, 3800)
+    coefficient  = c(-5, -12, 3800))
   policyYears <- seq(2021, 2100, 1)
   # preventing dataEndoCosts to be updated outside of the function
   dataEndoCosts <- copy(dataEndoCosts)

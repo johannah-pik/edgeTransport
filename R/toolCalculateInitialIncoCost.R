@@ -14,7 +14,7 @@ toolCalculateInitialIncoCost <- function(combinedCost, incoCostStartVal, annuity
   # bind variables locally to prevent NSE notes in R CMD CHECK
   period <- value <- variable <- region <- unit <- univocalName <- subsectorL3 <- . <- NULL
   ratio <- average <- technology <- incoCostType <- regionCode12 <- NULL
-
+browser()
   incoCostStartVal <- copy(incoCostStartVal)
   incoCostStartVal <- melt(incoCostStartVal, id.vars = c("region", "vehicleType", "technology", "unit"),
                            variable.name = "period")
