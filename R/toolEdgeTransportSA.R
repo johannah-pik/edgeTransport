@@ -117,7 +117,7 @@ toolEdgeTransportSA <- function(SSPscen,
     scenSpecEnIntensity = scenSpecInputData$scenSpecEnIntensity,
     combinedCAPEXandOPEX = scenSpecInputData$combinedCAPEXandOPEX,
     upfrontCAPEXtrackedFleet = scenSpecInputData$upfrontCAPEXtrackedFleet,
-    initialIncoCosts = scenSpecInputData$initialIncoCosts,
+  #  initialIncoCosts = scenSpecInputData$initialIncoCosts,
     annualMileage = inputDataRaw$annualMileage,
     timeValueCosts = inputDataRaw$timeValueCosts,
     histESdemand = inputDataRaw$histESdemand,
@@ -187,16 +187,16 @@ toolEdgeTransportSA <- function(SSPscen,
     # provide endogenous updates to cost components -----------
     # number of vehicles changes in the vehicle stock module and serves
     # as new input for endogenous cost update
-    endogenousCosts <- toolUpdateEndogenousCosts(dataEndogenousCosts,
-                                                 vehicleDepreciationFactors,
-                                                 allEqYear,
-                                                 inputData$timeValueCosts,
-                                                 inputData$scenSpecPrefTrends,
-                                                 genModelPar$lambdasDiscreteChoice,
-                                                 helpers,
-                                                 (isICEban[1] | isICEban[2]),
-                                                 ICEbanYears,
-                                                 fleetVehiclesPerTech)
+   # endogenousCosts <- toolUpdateEndogenousCosts(dataEndogenousCosts,
+   #                                              vehicleDepreciationFactors,
+   #                                              allEqYear,
+   #                                              inputData$timeValueCosts,
+   #                                              inputData$scenSpecPrefTrends,
+   #                                              genModelPar$lambdasDiscreteChoice,
+   #                                              helpers,
+   #                                              (isICEban[1] | isICEban[2]),
+   #                                              ICEbanYears,
+   #                                              fleetVehiclesPerTech)
 
     if (isAnalyticsReported) {
       endogenousCostsIterations[[i]] <- lapply(copy(endogenousCosts),
@@ -210,7 +210,7 @@ toolEdgeTransportSA <- function(SSPscen,
     # calculate vehicle sales shares and mode shares for all levels of the decisionTree
     vehSalesAndModeShares <- toolDiscreteChoice(inputData,
                                                 genModelPar,
-                                                endogenousCosts$updatedEndogenousCosts,
+                                               # endogenousCosts$updatedEndogenousCosts,
                                                 helpers)
     if (isAnalyticsReported) {
       costsDiscreteChoiceIterations[[i]] <- lapply(copy(vehSalesAndModeShares$costsDiscreteChoice),

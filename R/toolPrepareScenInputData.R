@@ -80,17 +80,17 @@ toolPrepareScenInputData <- function(genModelPar, scenModelPar, inputDataRaw, al
                                             helpers)
 
   # Annualization and formatting of non-monetary costs -------------------------------------------------
-  initialIncoCosts <- toolCalculateInitialIncoCost(transportCosts$combinedCAPEXandOPEX,
-                                                   genModelPar$incoCostStartVal, annuity, scenSpecLoadFactor,
-                                                   inputDataRaw$annualMileage, helpers)
+  #initialIncoCosts <- toolCalculateInitialIncoCost(transportCosts$combinedCAPEXandOPEX,
+  #                                                 genModelPar$incoCostStartVal, annuity, scenSpecLoadFactor,
+  #                                                 inputDataRaw$annualMileage, helpers)
 
   scenSpecInputData <- list(
     scenSpecPrefTrends = scenSpecPrefTrends,
     scenSpecLoadFactor = scenSpecLoadFactor,
     scenSpecEnIntensity = scenSpecEnIntensity,
     combinedCAPEXandOPEX = transportCosts$combinedCAPEXandOPEX,
-    upfrontCAPEXtrackedFleet = transportCosts$upfrontCAPEXtrackedFleet,
-    initialIncoCosts = initialIncoCosts)
+    upfrontCAPEXtrackedFleet = transportCosts$upfrontCAPEXtrackedFleet)
+   # initialIncoCosts = initialIncoCosts)
 
   return(scenSpecInputData)
 }

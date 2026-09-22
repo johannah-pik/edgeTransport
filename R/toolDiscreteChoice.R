@@ -5,14 +5,13 @@
 #' @author Johanna Hoppe
 #' @param input dataset for discrete choice module
 #' @param generalModelPar general model parameter
-#' @param updatedEndoCosts updated endogenous costs
 #' @param helpers list of helpers
 #' @returns calculated shares
 #' @import data.table
 #' @export
 
 
-toolDiscreteChoice <- function(input, generalModelPar, updatedEndoCosts, helpers) {
+toolDiscreteChoice <- function(input, generalModelPar, helpers) { # updatedEndoCosts #' @param updatedEndoCosts updated endogenous costs
   # bind variables locally to prevent NSE notes in R CMD CHECK
   type <- level <- vehicleType <- subsectorL1 <- pref <- lambda <- . <- value <- zeroTypes <- share <- NULL
   totPrice <- testShares <- variable <- univocalName <- period <- technology <- subsectorL3 <- subsectorL2 <- unit <- NULL
@@ -23,8 +22,8 @@ toolDiscreteChoice <- function(input, generalModelPar, updatedEndoCosts, helpers
   # detailed resolution of CAPEX and OPEX not needed
   CAPEXandOPEX[, type := "Monetary Costs"]
   # vehicles that have endogenous inconvenience costs receive these in addition
-  updatedEndoCosts[, type := "Inconvenience costs"]
-  allCostsFV <- rbind(CAPEXandOPEX, updatedEndoCosts)
+ # updatedEndoCosts[, type := "Inconvenience costs"]
+  allCostsFV <- copy(CAPEXandOPEX) #rbind(CAPEXandOPEX, updatedEndoCosts)
   # vehicles that have preference trends receive these instead
   prefTrends <- copy(input$scenSpecPrefTrends)
   setnames(prefTrends, "value", "pref")
@@ -33,7 +32,7 @@ toolDiscreteChoice <- function(input, generalModelPar, updatedEndoCosts, helpers
   FVshares <- merge(allCostsFV, prefTrendsFV, by = intersect(names(allCostsFV), names(prefTrends)), all.x = TRUE, allow.cartesian = TRUE)
   # vehicleTypes with endogenous inconvenience costs have no preferences, which means that all preferences
   # are set to 1 (equivalent expression) as there is no decision for cycling and walking, they have to receive 1 as well
-  FVshares[vehicleType %in% unique(updatedEndoCosts$vehicleType) | subsectorL1 %in% c("Cycle", "Walk"), pref := 1]
+  FVshares[subsectorL1 %in% c("Cycle", "Walk"), pref := 1] #FVshares[vehicleType %in% unique(updatedEndoCosts$vehicleType) | subsectorL1 %in% c("Cycle", "Walk"), pref := 1]
   lambdas <- generalModelPar$lambdasDiscreteChoice[level == "FV"][, level := NULL]
   FVshares <- merge(FVshares, lambdas, by = intersect(names(FVshares), names(lambdas)), all.x = TRUE)
   # no technology decision for active modes, hence no lambda is supplied
