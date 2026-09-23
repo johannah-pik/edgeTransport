@@ -40,7 +40,7 @@ toolEdgeTransportSA <- function(SSPscen,
   level <- subsectorL3 <- variable <- version <- region <- vehicleType <- technology <- period <- NULL
 
   #To trigger the madrat caching even if changes are only applied to the csv files, we include here the version number of edget
-  version <- "3.13.1"
+  version <- "3.16.0"
 
   commonParams <- toolGetCommonParameters(startyear, isICEban[1], isICEban[2])
 
@@ -209,7 +209,7 @@ toolEdgeTransportSA <- function(SSPscen,
     #################################################
     # calculate vehicle sales shares and mode shares for all levels of the decisionTree
     vehSalesAndModeShares <- toolDiscreteChoice(inputData,
-                                                genModelPar,
+                                                genModelPar$lambdasDiscreteChoice,
                                                # endogenousCosts$updatedEndogenousCosts,
                                                 helpers)
     if (isAnalyticsReported) {

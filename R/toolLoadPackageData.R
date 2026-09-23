@@ -117,18 +117,6 @@ toolLoadPackageData <- function(SSPs, transportPolS, demScenario = NULL) {
   scenParLoadFactor <- scenParLoadFactor[!is.na(startYearCat)][, c("SSPscen", "demScen") := NULL]
   if (nrow(scenParLoadFactor) == 0) scenParLoadFactor <- NULL
 
-  ## helpers
-  mitigationTechMap <- fread(system.file("extdata", "helpersMitigationTechmap.csv",
-                                         package = "edgeTransport"))
-  regionmappingISOto21to12 <- fread(system.file("extdata", "helpersRegionmappingISOto21to12.csv",
-                                                    package = "edgeTransport"))
-  reportingNames <- fread(system.file("extdata", "helpersReportingNames.csv",
-                                      package = "edgeTransport"), skip = 1)
-  reportingAggregation <- fread(system.file("extdata", "helpersReportingAggregation.csv",
-                                      package = "edgeTransport"), skip = 1)
-  mapEdgeToREMIND <- fread(system.file("extdata/helpersMappingEdgeTtoREMINDcategories.csv",
-                                       package = "edgeTransport", mustWork = TRUE))
-
   return(
     list(
       decisionTree = decisionTree,
@@ -142,12 +130,7 @@ toolLoadPackageData <- function(SSPs, transportPolS, demScenario = NULL) {
       scenParPrefTrends = scenParPrefTrends,
       scenParDemFactors = scenParDemFactors,
       scenParEnergyIntensity = scenParEnergyIntensity,
-      scenParLoadFactor = scenParLoadFactor,
-      mitigationTechMap = mitigationTechMap,
-      regionmappingISOto21to12 = regionmappingISOto21to12,
-      mapEdgeToREMIND = mapEdgeToREMIND,
-      reportingNames = reportingNames,
-      reportingAggregation = reportingAggregation
+      scenParLoadFactor = scenParLoadFactor
     )
   )
 
