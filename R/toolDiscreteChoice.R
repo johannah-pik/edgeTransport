@@ -33,7 +33,7 @@ toolDiscreteChoice <- function(input, lambdasDiscreteChoice,  helpers) { #update
 
   # vehicleTypes with endogenous inconvenience costs have no preferences, which means that all preferences
   # are set to 1 (equivalent expression) as there is no decision for cycling and walking, they have to receive 1 as well
-  FVshares[vehicleType %in% unique(updatedEndoCosts$vehicleType) | subsectorL1 %in% c("Cycle", "Walk"), pref := 1]
+  FVshares[subsectorL1 %in% c("Cycle", "Walk"), pref := 1] # vehicleType %in% unique(updatedEndoCosts$vehicleType) | 
   lambdas <- lambdasDiscreteChoice[level == "FV"][, level := NULL]
   FVshares <- merge(FVshares, lambdas, by = intersect(names(FVshares), names(lambdas)), all.x = TRUE)
   # no technology decision for active modes, hence no lambda is supplied
