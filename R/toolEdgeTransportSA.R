@@ -135,9 +135,9 @@ toolEdgeTransportSA <- function(SSPscen,
 
   vehicleDepreciationFactors <- toolCalculateVehicleDepreciationFactors(genModelPar$annuityCalc,
                                                                         helpers)
-  dataEndogenousCosts <- toolPrepareDataEndogenousCosts(inputData,
-                                                        genModelPar$lambdasDiscreteChoice,
-                                                        helpers)
+  #dataEndogenousCosts <- toolPrepareDataEndogenousCosts(inputData,
+  #                                                      genModelPar$lambdasDiscreteChoice,
+  #                                                      helpers)
   #################################################
   ## Demand regression module
   #################################################
@@ -277,7 +277,7 @@ toolEdgeTransportSA <- function(SSPscen,
     hybridElecShare = hybridElecShare,
     histPrefs = histPrefs,
     fleetSizeAndComposition = fleetSizeAndComposition,
-    endogenousCosts = endogenousCosts,
+   # endogenousCosts = endogenousCosts,
     vehSalesAndModeShares = vehSalesAndModeShares$shares,
     sectorESdemand = sectorESdemand,
     ESdemandFVsalesLevel = ESdemandFVsalesLevel,
