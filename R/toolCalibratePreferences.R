@@ -54,7 +54,7 @@ toolCalibratePreferences <- function(sharesToBeCalibrated, combinedCosts, timeVa
   # Only accepts solutions, when the absolute difference between shares
   # calculated using the calibrated preferences and transferred shares to be calibrated < tol
 
-  calculatePreferences <- function(dfPreference, groupingValue, varyGuess, tol = 0.01){
+  calculatePreferences <- function(dfPreference, groupingValue, varyGuess, tol = 0.0005){
     fac <- shareDiff <- NULL
 
     # loops through all the initial points suggested until suitable preferences are found
