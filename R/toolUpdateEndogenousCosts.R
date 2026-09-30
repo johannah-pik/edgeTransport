@@ -5,7 +5,6 @@
 #'                      of policy years in a yearly resolution. Exogenous CAPEX and OPEX are provided over the full range.
 #'                      Endogenous cost components and FS3 shares are provided until 2020. Rest is filled with NA.
 #' @param depreciationFactors data.table containing vehicle depreciation factor for each year of service Life
-#' @param allEqYear year from which scenario-specific differentiation begins
 #' @param timeValue data.table containing mode specific time value costs based on speed and gdp
 #' @param preferences preference factor trends
 #' @param lambdas data.table containing exponents for discrete choice calculation
@@ -26,18 +25,20 @@ toolUpdateEndogenousCosts <- function(dataEndoCosts,
                                       helpers,
                                       vehiclesPerTech = NULL) {
   # bind variables locally to prevent NSE notes in R CMD CHECK
-  totVeh <- technology <- startValue <- period <- startYear <- targetYear <- targetValue <- NULL
-  FVvehvar <- regionCode12 <- region <- type <- endoCostRaw <- value <- indexUsagePeriod <- NULL
-  depreciationFactor <- FS3share <- variable <- FS3shareUpdate <- unit <- lateStart <- startYearCat <- NULL
-  coefficient <- incoCostType <- NULL
-  # coefficients driving endogenous decline of inconvenience costs with fleet adoption
-  # Greene 2001 (orig. -20 for Stations), Pettifor 2017 (Risk aversion)
-  incoCostCoeffs <- data.table(
-    incoCostType = c("Stations availability", "Model availability", "Risk aversion"),
-    coefficient  = c(-5, -12, 3800))
-  policyYears <- seq(2021, 2100, 1)
+  totVeh <- technology <- period <- region <- type <- endoCostRaw <- value <- indexUsagePeriod <- NULL
+  depreciationFactor <- FS3share <- variable <- FS3shareUpdate <- unit <- NULL
+  coefficient <- techFleetProxy <- proxyUpdate <- NULL
+  # Coefficient driving the endogenous decline of the inconvenience cost with fleet adoption.
+  # The calibrated inconvenience cost is (for now) not split into types (was: "Stations
+  # availability"/"Model availability"/"Risk aversion", Greene 2001, Pettifor 2017); a single
+  # coefficient is used for the one remaining ("Total") type as a starting point.
+  incoCostCoeff <- -12
   # preventing dataEndoCosts to be updated outside of the function
   dataEndoCosts <- copy(dataEndoCosts)
+  # the endogenous update starts after the last year covered by the calibrated inconvenience cost start values
+  anchorYear <- max(dataEndoCosts[type == "Inconvenience costs" & !is.na(value)]$period)
+  if (anchorYear < allEqYear) anchorYear <- allEqYear
+  policyYears <- seq(anchorYear + 1, 2100, 1)
 
   if (is.null(vehiclesPerTech)) {
     dataEndoCosts[, totVeh := 1]
@@ -47,114 +48,61 @@ toolUpdateEndogenousCosts <- function(dataEndoCosts,
   }
 
 
-  # join per-type coefficients; rows without a matching incoCostType get coefficient = NA
-  dataEndoCosts <- merge(dataEndoCosts, incoCostCoeffs,
-                         by.x = "variable", by.y = "incoCostType", all.x = TRUE)
+  # single coefficient for the one inconvenience cost type; other rows (e.g. Monetary costs) get NA
+  dataEndoCosts[, coefficient := ifelse(type == "Inconvenience costs", incoCostCoeff, NA_real_)]
 
-  ## Check if transportPol or SSPscen change is introduced with allEqYear
-  # If both stay the same, set allEqYear out of bounds such that it does not affect the calculation here
-  if (!"final" %in% scenParIncoCost$startYearCat){
-    allEqYear <- 2200
-  }
-
-
-  policyMask <- copy(scenParIncoCost)
-  # Expand regional and temporal resolution
-  regions <- unique(dataEndoCosts$region)
-  tempAndregions <- CJ(region = regions, period = policyYears)
-  tempAndregions[, all := "All"]
-  policyMask[, all := "All"]
-  policyMaskO <- merge(policyMask[startYearCat == "origin"], tempAndregions[period <= allEqYear], by = "all", allow.cartesian = TRUE)[, all := NULL]
-  policyMaskF <- merge(policyMask[startYearCat == "final"], tempAndregions[period > allEqYear], by = "all", allow.cartesian = TRUE)[, all := NULL]
-  policyMask <- rbind(policyMaskO, policyMaskF)
-  policyMask[, "startYearCat" := NULL]
-
-  policyMask <- dcast(policyMask, region + period + FVvehvar + technology ~ param, value.var = "value")
-  # At the start of the policy intervention, the inconvenience costs for ICEs are zero, as they are the predominant and well-established technology.
-  policyMask[, lateStart := FALSE]
-  policyMask[technology == "Liquids", startValue := ifelse(!is.na(startValue), startValue, 0)]
-  policyMask[technology == "Liquids" & startValue >0 , lateStart := TRUE]
-  policyMask[, `:=`(
-    startYear = as.numeric(startYear),
-    startValue = as.numeric(startValue),
-    targetYear = as.numeric(targetYear),
-    targetValue = as.numeric(targetValue)
-  )]
-  policyMask[, policyMask := linFunc(period, startYear, startValue, targetYear, targetValue, lateStart), by = c("region", "period", "technology")]
-  policyMask <- policyMask[, c("region", "period", "FVvehvar", "technology", "policyMask")]
-  policyMask <- rbind(policyMask, policyMaskPHEV)
-  policyMask <- merge(policyMask, helpers$mitigationTechMap[, c("univocalName", "FVvehvar")], all.x = TRUE, allow.cartesian = TRUE)[, FVvehvar := NULL]
-
-
-  # check whether policy mask is calculated correctly for respective technologys
-  if (anyNA(policyMask)) {
-    stop("Something went wrong with the calculation of the policyMask in toolUpdateEndogenousCosts() ")
-  }
-  dataEndoCosts <- merge(dataEndoCosts, policyMask, by = c("region", "period", "univocalName", "technology"), all.x = TRUE)
+  # NOTE: a policy mask phasing inconvenience costs in/out over policy years previously sat here.
+  # Removed for now: it depended on undefined objects and could never have run. Re-introduce it
+  # deliberately, with a clear design, when policy differentiation of inconvenience costs is
+  # needed again; until then endoCostRaw is not policy-masked.
 
   dataEndoCosts[type == "Inconvenience costs", endoCostRaw := value]
 
-  # initialize techFleetProxy so the ifelse statement below works
   dataEndoCosts[, techFleetProxy := 0]
 
-  # calculate the techFleetProxy values also for "historic years", where the shares are fixed
-  yearsSpinup <- seq(2010, policyYears[1] - 1, 1)
+  # the techFleetProxy is also calculated for "historic years", where the shares are fixed
+  yearsSpinup <- seq(2010, anchorYear, 1)
 
-
-  for (t in yearsSpinup) {
-    # calculate proxy for total vehicles of one technology in the fleet ----------------------------
-
+  for (t in c(yearsSpinup, policyYears)) {
+    # calculate proxy for total vehicles of one technology in the fleet at the start of year t ------
+    # weighted average of the market sales of the previous years multiplied with the total vehicle number
+    # depreciating in time. It is stored in period t, so that it also works for vehicle types
+    # that are not resolved annually (only the available previous periods contribute)
     vehDepreciation <- copy(depreciationFactors)
     vehDepreciation <- vehDepreciation[!indexUsagePeriod == 0]
     vehDepreciation[, period := t - indexUsagePeriod]
-    dataEndoCosts <- merge(dataEndoCosts, vehDepreciation[, c("period", "univocalName", "depreciationFactor")], by = c("period", "univocalName"), all.x = TRUE)
-    # calculate weighted average of the market sales multiplied with total vehicle number depreciating in time
-    # to get a proxy for total vehicles of one technology in the fleet
+    dataEndoCosts <- merge(dataEndoCosts, vehDepreciation[, c("period", "univocalName", "depreciationFactor")],
+                           by = c("period", "univocalName"), all.x = TRUE)
+    proxy <- dataEndoCosts[!is.na(depreciationFactor),
+                           .(proxyUpdate = sum(FS3share * totVeh * depreciationFactor) / sum(totVeh * depreciationFactor)),
+                           by = c("region", "univocalName", "technology", "variable")]
+    dataEndoCosts <- merge(dataEndoCosts, proxy, by = c("region", "univocalName", "technology", "variable"), all.x = TRUE)
+    dataEndoCosts[period == t & !is.na(proxyUpdate), techFleetProxy := proxyUpdate]
+    dataEndoCosts[, c("proxyUpdate", "depreciationFactor") := NULL]
 
-    dataEndoCosts[!is.na(depreciationFactor), techFleetProxy := ifelse(period == t-1,
-                                                                       sum(FS3share * totVeh * depreciationFactor) / sum(totVeh * depreciationFactor),
-                                                                       techFleetProxy),
-                  by = c("region", "univocalName", "technology", "variable")]
-    dataEndoCosts[, c("depreciationFactor") := NULL]
-  }
-
-  for (t in policyYears) {
-    # calculate proxy for total vehicles of one technology in the fleet ----------------------------
-
-    vehDepreciation <- copy(depreciationFactors)
-    vehDepreciation <- vehDepreciation[!indexUsagePeriod == 0]
-    vehDepreciation[, period := t - indexUsagePeriod]
-    dataEndoCosts <- merge(dataEndoCosts, vehDepreciation[, c("period", "univocalName", "depreciationFactor")], by = c("period", "univocalName"), all.x = TRUE)
-    # calculate weighted average of the market sales multiplied with total vehicle number depreciating in time
-    # to get a proxy for total vehicles of one technology in the fleet
-    dataEndoCosts[!is.na(depreciationFactor), techFleetProxy := ifelse(period == t-1,
-                                                                       sum(FS3share * totVeh * depreciationFactor) / sum(totVeh * depreciationFactor),
-                                                                       techFleetProxy),
-                  by = c("region", "univocalName", "technology", "variable")]
+    if (t %in% yearsSpinup) next
 
     dataEndoCosts[type == "Inconvenience costs" & !is.na(coefficient),
                   endoCostRaw := ifelse(period == t,
-                      pmax(value[period == 2020] - coefficient[1] * techFleetProxy[period == (t - 1)], 0),
-                    endoCostRaw),
+                                        value[period == anchorYear] * exp(coefficient[1] * techFleetProxy[period == t]),
+                                        endoCostRaw),
                   by = c("region", "technology", "vehicleType", "univocalName", "variable")]
 
-    # update raw endogenous costs-------------------------------------------------------------------
-    ## Stations availability featured by BEV, FCEV, Hybrid electric, Gases
-    dataEndoCosts[variable == "Stations availability" & technology %in% c("Gases"), endoCostRaw := ifelse(period == t,
-                                                                                                          pmax(value[period == 2020], value[period == 2020] * exp(techFleetProxy[period == (t - 3)] * bfuelav)),
-                                                                                                          endoCostRaw), by = c("region", "technology", "vehicleType", "univocalName")]
-
-    # check whether all inconvenience cost types were updated
+    # check whether the (single) inconvenience cost type was updated
     if (anyNA(dataEndoCosts[period == t & type == "Inconvenience costs"]$endoCostRaw)) {
       stop(paste0("Something went wrong with the calculation of the raw endogenous costs in toolUpdateEndogenousCosts() ", t))
     }
+    dataEndoCosts[period == t & type == "Inconvenience costs", value := endoCostRaw]
 
     # calculate FS3 share --------------------------------------------------------------------
+    # vehicle types that are not resolved annually have no entries in every year
+    if (nrow(dataEndoCosts[period == t]) == 0) next
     FS3shares <- toolCalculateFS3share(dataEndoCosts, t, timeValue, preferences, lambdas, helpers)
     setnames(FS3shares, "FS3share", "FS3shareUpdate")
     dataEndoCosts <- merge(dataEndoCosts, FS3shares, by = intersect(names(dataEndoCosts), names(FS3shares)), all.x = TRUE)
-    dataEndoCosts[period == t, FS3share := FS3shareUpdate][, c("FS3shareUpdate", "depreciationFactor") := NULL]
+    dataEndoCosts[period == t, FS3share := FS3shareUpdate][, c("FS3shareUpdate") := NULL]
   }
+  dataEndoCosts[, endoCostRaw := NULL]
 
   # Monetary costs and time value costs were needed to calculate the technology fleet proxy
   # They are stored already and should not be stored again together with the inconvenience costs
@@ -162,8 +110,8 @@ toolUpdateEndogenousCosts <- function(dataEndoCosts,
   dataEndoCosts[, c("FS3share", "type", "coefficient") := NULL]
 
   # For model behavior analysis all data is stored
-  updatedEndogenousCosts <- copy(dataEndoCosts)[, variable := paste0("Inconvenience costs|", variable)]
-  updatedEndogenousCosts <- updatedEndogenousCosts[, c("region", "sector", "subsectorL1", "subsectorL2", "subsectorL3", "vehicleType",
+  # variable is already "Inconvenience costs" (no split into subtypes anymore)
+  updatedEndogenousCosts <- copy(dataEndoCosts)[, c("region", "sector", "subsectorL1", "subsectorL2", "subsectorL3", "vehicleType",
                                                        "technology", "univocalName", "variable", "unit", "period", "value")]
 
   techFleetProxy <- copy(dataEndoCosts)

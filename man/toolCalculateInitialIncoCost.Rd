@@ -2,35 +2,21 @@
 % Please edit documentation in R/toolCalculateInitialIncoCost.R
 \name{toolCalculateInitialIncoCost}
 \alias{toolCalculateInitialIncoCost}
-\title{Apply regional differences for inconvenience cost start values based on ICE cost differences}
+\title{Prepare calibrated inconvenience cost start values}
 \usage{
-toolCalculateInitialIncoCost(
-  combinedCost,
-  incoCostStartVal,
-  annuity,
-  loadFactor,
-  annualMileage,
-  helpers
-)
+toolCalculateInitialIncoCost(incoCostStartVal, helpers)
 }
 \arguments{
-\item{combinedCost}{total cost of ownership}
-
-\item{incoCostStartVal}{start values for inconvenience costs}
-
-\item{annuity}{calculated annuity for different vehicle types}
-
-\item{loadFactor}{load factor data}
-
-\item{annualMileage}{annual mileage data}
+\item{incoCostStartVal}{calibrated inconvenience cost start values in US$2017/pkm or US$2017/tkm,
+already inverted from calibrated FV preferences (see ResembleScenarioParameters.RMD)}
 
 \item{helpers}{list with helpers}
 }
 \value{
-data.table including initial inconvenience costs from 1990-2020 for LDV 4W US$/(p|t)km
+data.table including initial inconvenience costs from 1990-2025 in US$2017/(p|t)km
 }
 \description{
-Apply regional differences for inconvenience cost start values based on ICE cost differences
+Prepare calibrated inconvenience cost start values
 }
 \author{
 Johanna Hoppe

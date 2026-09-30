@@ -39,8 +39,9 @@ toolLoadPackageData <- function(SSPs, transportPolS, demScenario = NULL) {
                                           package = "edgeTransport", mustWork = TRUE), header = TRUE)
   baselinePrefTrends[, "startYearCat" := fcase(SSPscen == SSPs[1], "origin", SSPscen == SSPs[2], "final")]
   baselinePrefTrends <- baselinePrefTrends[!is.na(startYearCat)][, SSPscen := NULL]
-  # Startparameter inconvenience costs
-  incoCostStartVal <- fread(system.file("extdata/genParIncoCostStartVal.csv",
+  # Startparameter inconvenience costs, calibrated from reference-run FV preferences
+  # (see ResembleScenarioParameters.RMD), already in US$2017/pkm or US$2017/tkm
+  incoCostStartVal <- fread(system.file("extdata/genParIncoCostStartValNew.csv",
                                         package = "edgeTransport", mustWork = TRUE), header = TRUE)
 
   genParDemRegression <- fread(system.file("extdata/genParDemRegression.csv",

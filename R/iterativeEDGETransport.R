@@ -195,11 +195,12 @@ iterativeEdgeTransport <- function() {
                                           inputDataRaw$timeValueCosts,
                                           genModelPar$lambdasDiscreteChoice,
                                           helpers)
-    # Don't use calibrated shareweights for LDV 4w, as they receive inconvenience costs
-    histPrefs$calibratedPreferences <- histPrefs$calibratedPreferences[!(subsectorL3 == "trn_pass_road_LDV_4W" & level == "FV")]
-
     scenSpecPrefTrends <- rbind(histPrefs$calibratedPreferences,
                                 scenSpecInputData$scenSpecPrefTrends)
+    # Vehicle types that receive inconvenience costs (LDV 4W/2W, Bus, trucks) get no FV preferences
+    # (neither calibrated nor scenario specific), as the inconvenience costs replace them
+    incoCostSubsectors <- unique(scenSpecInputData$initialIncoCosts$subsectorL3)
+    scenSpecPrefTrends <- scenSpecPrefTrends[!(subsectorL3 %in% incoCostSubsectors & level == "FV")]
     scenSpecPrefTrends <- toolApplyMixedTimeRes(scenSpecPrefTrends,
                                                 helpers)
 
@@ -361,14 +362,10 @@ iterativeEdgeTransport <- function() {
   # as new input for endogenous cost update
   endogenousCosts <- toolUpdateEndogenousCosts(dataEndogenousCosts,
                                                vehicleDepreciationFactors,
-                                               scenParIncoCost,
-                                               allEqYear,
                                                inputData$timeValueCosts,
                                                inputData$scenSpecPrefTrends,
                                                genModelPar$lambdasDiscreteChoice,
                                                helpers,
-                                               (isICEban[1] | isICEban[2]),
-                                               ICEbanYears,
                                                fleetVehiclesPerTech)
 
   print("Endogenous updates to cost components finished")

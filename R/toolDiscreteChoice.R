@@ -5,25 +5,30 @@
 #' @author Johanna Hoppe
 #' @param input dataset for discrete choice module
 #' @param lambdasDiscreteChoice lambdas from the general model parameters
+#' @param updatedEndoCosts updated endogenous inconvenience costs for vehicle types with fleet tracking
 #' @param helpers list of helpers
 #' @returns calculated shares
 #' @import data.table
 #' @export
 
 
-toolDiscreteChoice <- function(input, lambdasDiscreteChoice,  helpers) { #updatedEndoCosts, #' @param updatedEndoCosts updated endogenous costs
+toolDiscreteChoice <- function(input, lambdasDiscreteChoice, updatedEndoCosts, helpers) {
   # bind variables locally to prevent NSE notes in R CMD CHECK
   type <- level <- vehicleType <- subsectorL1 <- pref <- lambda <- . <- value <- zeroTypes <- share <- NULL
   totPrice <- testShares <- variable <- univocalName <- period <- technology <- subsectorL3 <- subsectorL2 <- unit <- NULL
-
+  browser()
   # calculate all FV shares --------------------------------------------------------------------
   CAPEXandOPEX <- copy(input$combinedCAPEXandOPEX)
   CAPEXandOPEX <- merge(CAPEXandOPEX, helpers$decisionTree, by = c("region", "univocalName", "technology"), all.x = TRUE)
   # detailed resolution of CAPEX and OPEX not needed
   CAPEXandOPEX[, type := "Monetary Costs"]
   # vehicles that have endogenous inconvenience costs receive these in addition
- # updatedEndoCosts[, type := "Inconvenience costs"]
-  allCostsFV <- copy(CAPEXandOPEX) #rbind(CAPEXandOPEX, updatedEndoCosts)
+  # (restricted to the temporal resolution of the monetary costs of the respective vehicle type)
+  incoCosts <- copy(updatedEndoCosts)
+  incoCosts[, type := "Inconvenience costs"]
+  incoCosts <- merge(incoCosts, unique(CAPEXandOPEX[, c("region", "univocalName", "technology", "period")]),
+                     by = c("region", "univocalName", "technology", "period"))
+  allCostsFV <- rbind(CAPEXandOPEX, incoCosts, use.names = TRUE)
   # vehicles that have preference trends receive these instead
   prefTrends <- copy(input$scenSpecPrefTrends)
   setnames(prefTrends, "value", "pref")
@@ -33,7 +38,7 @@ toolDiscreteChoice <- function(input, lambdasDiscreteChoice,  helpers) { #update
 
   # vehicleTypes with endogenous inconvenience costs have no preferences, which means that all preferences
   # are set to 1 (equivalent expression) as there is no decision for cycling and walking, they have to receive 1 as well
-  FVshares[subsectorL1 %in% c("Cycle", "Walk"), pref := 1] # vehicleType %in% unique(updatedEndoCosts$vehicleType) | 
+  FVshares[vehicleType %in% unique(incoCosts$vehicleType) | subsectorL1 %in% c("Cycle", "Walk"), pref := 1]
   lambdas <- lambdasDiscreteChoice[level == "FV"][, level := NULL]
   FVshares <- merge(FVshares, lambdas, by = intersect(names(FVshares), names(lambdas)), all.x = TRUE)
   # no technology decision for active modes, hence no lambda is supplied

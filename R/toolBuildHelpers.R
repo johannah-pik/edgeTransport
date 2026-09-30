@@ -34,6 +34,7 @@ toolBuildHelpers <- function(decisionTree,
                   "trn_freight_road", "trn_pass", "trn_freight")
   filterEntries <- getFilterEntriesUnivocalName(categories, decisionTree)
   filterEntries[["trackedFleet"]] <- c(filterEntries[["trn_pass_road_LDV_4W"]],
+                                      filterEntries[["trn_pass_road_LDV_2W"]],
                                        filterEntries[["trn_freight_road"]],
                                        getFilterEntriesUnivocalName("Bus", decisionTree)[["Bus"]])
 

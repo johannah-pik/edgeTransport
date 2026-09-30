@@ -16,19 +16,23 @@ toolPrepareDataEndogenousCosts <- function(inputData, lambdas, helpers) {
   # merge input data with decision tree
   # select only modes that feature inconvenience costs
   # bind with inconvenience cost start values
-  monetaryCosts <- inputData$combinedCAPEXandOPEX[univocalName %in% helpers$filterEntries$trn_pass_road_LDV_4W]
+  inconvenienceCosts <- copy(inputData$initialIncoCosts)
+  inconvenienceCosts <- inconvenienceCosts[, c("region", "period", "technology", "univocalName", "unit", "variable", "value")]
+  inconvenienceCosts[, type := "Inconvenience costs"]
+  incoCostModes <- unique(inconvenienceCosts$univocalName)
+
+  monetaryCosts <- inputData$combinedCAPEXandOPEX[univocalName %in% incoCostModes]
   monetaryCosts[, type := "Monetary costs"]
   monetaryCosts <- monetaryCosts[, .(value = sum(value)), by = .(region, period, technology, univocalName, type, unit)]
   monetaryCosts[, variable := "CAPEX and OPEX"]
-  inconvenienceCosts <- inputData$initialIncoCosts
-  inconvenienceCosts[, type := "Inconvenience costs"]
 
-  # insert NAs for future years to be filled in updateEndogenousCosts()
-  highTimeRes <- data.table(period = unique(helpers$dtTimeRes$period))
-  prevTimeRes <- unique(inconvenienceCosts$period)
-  inconvenienceCosts <- approx_dt(inconvenienceCosts, highTimeRes, "period", "value", extrapolate = TRUE)
-  inconvenienceCosts[!period %in% prevTimeRes, value := NA]
-  combinedCosts <- rbind(monetaryCosts, inconvenienceCosts)
+  # insert NAs for future years (in the temporal resolution of each vehicle type) to be filled in toolUpdateEndogenousCosts()
+  futureTimeRes <- helpers$dtTimeRes[univocalName %in% incoCostModes & period > max(inconvenienceCosts$period)]
+  futureIncoCosts <- merge(unique(inconvenienceCosts[, -c("period", "value")]), futureTimeRes,
+                           by = "univocalName", allow.cartesian = TRUE)
+  futureIncoCosts[, value := NA_real_]
+  inconvenienceCosts <- rbind(inconvenienceCosts, futureIncoCosts, use.names = TRUE)
+  combinedCosts <- rbind(monetaryCosts, inconvenienceCosts, use.names = TRUE)
   combinedCosts <- merge(combinedCosts, helpers$decisionTree, by = intersect(names(combinedCosts),
                                                                              names(helpers$decisionTree)), all.x = TRUE)
 
@@ -36,7 +40,7 @@ toolPrepareDataEndogenousCosts <- function(inputData, lambdas, helpers) {
   # (needed to calculate the vehicle sales depreciating in time
   # to get a proxy for the fleet share in the iterative section)
   timesteps <- unique(combinedCosts$period)
-  FS3share <- toolCalculateFS3share(combinedCosts, timesteps[timesteps <= 2020], inputData$timeValueCosts,
+  FS3share <- toolCalculateFS3share(combinedCosts, timesteps[timesteps <= 2025], inputData$timeValueCosts,
                                     inputData$scenSpecPrefTrends, lambdas, helpers)
 
   # merge back to combined costs

@@ -1,0 +1,1138 @@
+region;vehicleType;technology;unit;1990;2005;2010;2015;2020;2025
+CAZ;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.26
+CAZ;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.77
+CAZ;Bus_tmp_vehicletype;Gases;US$2017/pkm;0.27;0.34;0.32;0.32;0.32;0.27
+CAZ;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Compact Car;BEV;US$2017/pkm;1.69;1.69;1.69;1.23;0.77;0.4
+CAZ;Compact Car;FCEV;US$2017/pkm;1.68;1.68;1.68;1.56;1.44;0.85
+CAZ;Compact Car;Gases;US$2017/pkm;1.68;1.68;1.68;1.6;1.52;0.95
+CAZ;Compact Car;Hybrid electric;US$2017/pkm;0.87;0.87;0.87;0.89;0.91;0.52
+CAZ;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Large Car;BEV;US$2017/pkm;1.38;1.38;1.38;1.01;0.63;0.34
+CAZ;Large Car;FCEV;US$2017/pkm;1.38;1.38;1.38;1.28;1.17;0.73
+CAZ;Large Car;Gases;US$2017/pkm;1.38;1.38;1.38;1.31;1.24;0.82
+CAZ;Large Car;Hybrid electric;US$2017/pkm;0.71;0.71;0.71;0.72;0.74;0.44
+CAZ;Large Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Large Car and SUV;BEV;US$2017/pkm;1.09;1.09;1.1;0.8;0.5;0.23
+CAZ;Large Car and SUV;FCEV;US$2017/pkm;1.08;1.09;1.09;1.01;0.94;0.53
+CAZ;Large Car and SUV;Gases;US$2017/pkm;1.08;1.09;1.09;1.04;0.99;0.6
+CAZ;Large Car and SUV;Hybrid electric;US$2017/pkm;0.56;0.56;0.56;0.58;0.59;0.31
+CAZ;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Midsize Car;BEV;US$2017/pkm;1.36;1.37;1.38;1.01;0.63;0.31
+CAZ;Midsize Car;FCEV;US$2017/pkm;1.36;1.37;1.37;1.28;1.18;0.68
+CAZ;Midsize Car;Gases;US$2017/pkm;1.36;1.37;1.37;1.31;1.25;0.77
+CAZ;Midsize Car;Hybrid electric;US$2017/pkm;0.7;0.7;0.71;0.72;0.74;0.41
+CAZ;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Mini Car;BEV;US$2017/pkm;1.38;1.38;1.38;1;0.63;0.31
+CAZ;Mini Car;FCEV;US$2017/pkm;1.37;1.37;1.37;1.27;1.17;0.7
+CAZ;Mini Car;Gases;US$2017/pkm;1.37;1.37;1.37;1.3;1.24;0.79
+CAZ;Mini Car;Hybrid electric;US$2017/pkm;0.71;0.71;0.71;0.72;0.74;0.42
+CAZ;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.4
+CAZ;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.4
+CAZ;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.46
+CAZ;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Subcompact Car;BEV;US$2017/pkm;1.48;1.48;1.48;1.07;0.69;0.36
+CAZ;Subcompact Car;FCEV;US$2017/pkm;1.47;1.47;1.47;1.36;1.28;0.8
+CAZ;Subcompact Car;Gases;US$2017/pkm;1.34;1.34;1.34;1.27;1.24;0.82
+CAZ;Subcompact Car;Hybrid electric;US$2017/pkm;0.76;0.76;0.76;0.77;0.81;0.48
+CAZ;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+CAZ;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;3.28
+CAZ;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;8.29
+CAZ;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;7.96
+CAZ;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+CAZ;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.51
+CAZ;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.19
+CAZ;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;0.78
+CAZ;Truck (18t);Liquids;US$2017/tkm;100;100;100;0;0;0
+CAZ;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.24
+CAZ;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.56
+CAZ;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;0.37
+CAZ;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+CAZ;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.09
+CAZ;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.22
+CAZ;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;0.15
+CAZ;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+CAZ;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.43
+CAZ;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;1.09
+CAZ;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;1.04
+CAZ;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+CAZ;Van;BEV;US$2017/pkm;0.9;0.9;0.9;0.66;0.41;0.14
+CAZ;Van;FCEV;US$2017/pkm;0.9;0.9;0.9;0.83;0.77;0.33
+CAZ;Van;Gases;US$2017/pkm;0.9;0.9;0.9;0.86;0.81;0.39
+CAZ;Van;Hybrid electric;US$2017/pkm;0.46;0.46;0.46;0.47;0.48;0.18
+CAZ;Van;Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;0.12;0.07;0.02
+CHA;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.28
+CHA;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;0.14;0.06;0.06;0.06;0.06
+CHA;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Compact Car;BEV;US$2017/pkm;0.96;0.98;0.98;0.64;0.3;0.05
+CHA;Compact Car;FCEV;US$2017/pkm;0.95;0.97;0.98;0.92;0.89;0.32
+CHA;Compact Car;Gases;US$2017/pkm;0.87;0.89;0.9;0.87;0.87;0.36
+CHA;Compact Car;Hybrid electric;US$2017/pkm;0.49;0.5;0.5;0.57;0.65;0.23
+CHA;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Large Car and SUV;BEV;US$2017/pkm;0.76;0.79;0.8;0.59;0.27;0.05
+CHA;Large Car and SUV;FCEV;US$2017/pkm;0.76;0.77;0.77;0.71;0.8;0.34
+CHA;Large Car and SUV;Gases;US$2017/pkm;0.69;0.71;0.72;0.79;0.77;0.37
+CHA;Large Car and SUV;Hybrid electric;US$2017/pkm;0.39;0.4;0.41;0.52;0.58;0.24
+CHA;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Mini Car;BEV;US$2017/pkm;1.01;1.03;1.04;0.68;0.3;0.04
+CHA;Mini Car;FCEV;US$2017/pkm;1;1.02;1.03;0.97;0.92;0.23
+CHA;Mini Car;Gases;US$2017/pkm;1;1.02;1.03;1;0.97;0.29
+CHA;Mini Car;Hybrid electric;US$2017/pkm;0.52;0.53;0.53;0.6;0.67;0.17
+CHA;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Moped;BEV;US$2017/pkm;100;100;100;0.01;0;0
+CHA;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Motorcycle (50-250cc);BEV;US$2017/pkm;0.03;0.04;0.03;0.01;0;0
+CHA;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;0.01;0;0
+CHA;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Subcompact Car;BEV;US$2017/pkm;0.81;0.84;0.85;0.65;0.3;0.04
+CHA;Subcompact Car;FCEV;US$2017/pkm;0.81;0.81;0.82;0.76;0.89;0.26
+CHA;Subcompact Car;Gases;US$2017/pkm;0.74;0.83;0.88;0.88;0.88;0.3
+CHA;Subcompact Car;Hybrid electric;US$2017/pkm;0.42;0.43;0.43;0.57;0.66;0.19
+CHA;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+CHA;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;0.11
+CHA;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;14.15
+CHA;Truck (0-3_5t);Gases;US$2017/tkm;100;26.78;18.42;21.41;29.91;5.59
+CHA;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+CHA;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0
+CHA;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.57
+CHA;Truck (18t);Gases;US$2017/tkm;100;0.43;0.26;0.33;0.78;0.42
+CHA;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0.01
+CHA;Truck (26t);BEV;US$2017/tkm;100;100;100;0.06;0.03;0
+CHA;Truck (26t);FCEV;US$2017/tkm;100;100;100;0.36;0.28;0.14
+CHA;Truck (26t);Gases;US$2017/tkm;100;0.26;0.16;0.06;0.03;0.05
+CHA;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0.02
+CHA;Truck (40t);BEV;US$2017/tkm;100;100;100;0.03;0.01;0
+CHA;Truck (40t);FCEV;US$2017/tkm;100;100;100;0.16;0.13;0.06
+CHA;Truck (40t);Gases;US$2017/tkm;100;0.13;0.08;0.02;0.01;0.02
+CHA;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0.01
+CHA;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0
+CHA;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;1.77
+CHA;Truck (7_5t);Gases;US$2017/tkm;100;1.02;0.63;0.78;1.56;0.66
+CHA;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0.01
+DEU;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.16
+DEU;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.94
+DEU;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;100;0.23;0.15;0.12;0.15
+DEU;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+DEU;Compact Car;BEV;US$2017/pkm;1.42;1.41;1.4;0.99;0.67;0.15
+DEU;Compact Car;FCEV;US$2017/pkm;1.41;1.4;1.4;1.36;1.53;0.58
+DEU;Compact Car;Gases;US$2017/pkm;0.88;0.87;0.87;0.96;1.21;0.52
+DEU;Compact Car;Hybrid electric;US$2017/pkm;0.73;0.72;0.72;0.57;0.48;0.02
+DEU;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+DEU;Large Car and SUV;BEV;US$2017/pkm;1.06;1.05;1.05;0.74;0.5;0.11
+DEU;Large Car and SUV;FCEV;US$2017/pkm;1.06;1.05;1.05;1.02;1.15;0.52
+DEU;Large Car and SUV;Gases;US$2017/pkm;0.87;0.86;0.86;0.95;1.2;0.62
+DEU;Large Car and SUV;Hybrid electric;US$2017/pkm;0.54;0.54;0.54;0.42;0.36;0
+DEU;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0.03
+DEU;Midsize Car;BEV;US$2017/pkm;1.39;1.38;1.37;0.97;0.66;0.15
+DEU;Midsize Car;FCEV;US$2017/pkm;1.38;1.37;1.37;1.34;1.5;0.58
+DEU;Midsize Car;Gases;US$2017/pkm;0.88;0.87;0.87;0.96;1.21;0.52
+DEU;Midsize Car;Hybrid electric;US$2017/pkm;0.71;0.7;0.7;0.55;0.47;0.02
+DEU;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+DEU;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.11
+DEU;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+DEU;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.26
+DEU;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+DEU;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.39
+DEU;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+DEU;Subcompact Car;BEV;US$2017/pkm;1.71;1.69;1.69;1.19;0.81;0.21
+DEU;Subcompact Car;FCEV;US$2017/pkm;1.7;1.68;1.68;1.64;1.85;0.73
+DEU;Subcompact Car;Gases;US$2017/pkm;0.88;0.88;0.87;0.97;1.22;0.52
+DEU;Subcompact Car;Hybrid electric;US$2017/pkm;0.87;0.87;0.86;0.68;0.58;0.08
+DEU;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+DEU;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.66
+DEU;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;6.99
+DEU;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;7.24;5.46;7.11
+DEU;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+DEU;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.81
+DEU;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.88
+DEU;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;100
+DEU;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+DEU;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.39
+DEU;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.91
+DEU;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+DEU;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+DEU;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.23
+DEU;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.53
+DEU;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+DEU;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+DEU;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;1.28
+DEU;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;3.36
+DEU;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+DEU;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECE;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.31
+ECE;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.99
+ECE;Bus_tmp_vehicletype;Gases;US$2017/pkm;1.25;1.1;100;4.12;3.04;3.99
+ECE;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECE;Compact Car;BEV;US$2017/pkm;1.56;1.61;1.63;1.15;0.78;0.18
+ECE;Compact Car;FCEV;US$2017/pkm;1.55;1.6;1.62;1.59;1.79;0.59
+ECE;Compact Car;Gases;US$2017/pkm;1.4;1.44;1.45;1.61;2.02;0.45
+ECE;Compact Car;Hybrid electric;US$2017/pkm;0.8;0.82;0.83;0.66;0.56;0.08
+ECE;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECE;Large Car and SUV;BEV;US$2017/pkm;1.25;1.3;1.31;0.93;0.63;0.14
+ECE;Large Car and SUV;FCEV;US$2017/pkm;1.24;1.29;1.31;1.28;1.45;0.53
+ECE;Large Car and SUV;Gases;US$2017/pkm;1.27;1.32;1.34;1.49;1.88;0.56
+ECE;Large Car and SUV;Hybrid electric;US$2017/pkm;0.64;0.66;0.67;0.53;0.45;0.05
+ECE;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECE;Midsize Car;BEV;US$2017/pkm;1.56;1.62;1.63;1.16;0.79;0.19
+ECE;Midsize Car;FCEV;US$2017/pkm;1.55;1.61;1.63;1.59;1.8;0.62
+ECE;Midsize Car;Gases;US$2017/pkm;1.39;1.44;1.45;1.6;2.02;0.49
+ECE;Midsize Car;Hybrid electric;US$2017/pkm;0.8;0.83;0.84;0.66;0.56;0.09
+ECE;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECE;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.03
+ECE;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECE;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.1
+ECE;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ECE;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.15
+ECE;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ECE;Subcompact Car;BEV;US$2017/pkm;1.84;1.92;1.95;1.38;0.94;0.24
+ECE;Subcompact Car;FCEV;US$2017/pkm;1.83;1.92;1.94;1.9;2.15;0.73
+ECE;Subcompact Car;Gases;US$2017/pkm;1.5;1.53;1.53;1.69;2.13;0.48
+ECE;Subcompact Car;Hybrid electric;US$2017/pkm;0.94;0.98;1;0.79;0.67;0.13
+ECE;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECE;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.46
+ECE;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;7.16
+ECE;Truck (0-3_5t);Gases;US$2017/tkm;15.03;8.25;7.21;10.06;100;8.43
+ECE;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECE;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.41
+ECE;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.12
+ECE;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;100
+ECE;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECE;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.19
+ECE;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.51
+ECE;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+ECE;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECE;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.11
+ECE;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.3
+ECE;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+ECE;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECE;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.52
+ECE;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;1.51
+ECE;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+ECE;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECS;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.3
+ECS;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;1.36
+ECS;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;100;100;0.47;0.35;0.48
+ECS;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECS;Compact Car;BEV;US$2017/pkm;1.43;1.41;1.43;1.02;0.69;0.15
+ECS;Compact Car;FCEV;US$2017/pkm;1.42;1.4;1.43;1.41;1.59;0.51
+ECS;Compact Car;Gases;US$2017/pkm;0.42;0.41;0.44;0.48;0.62;0.19
+ECS;Compact Car;Hybrid electric;US$2017/pkm;0.73;0.72;0.73;0.58;0.5;0.06
+ECS;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECS;Large Car and SUV;BEV;US$2017/pkm;1.14;1.12;1.15;0.82;0.56;0.11
+ECS;Large Car and SUV;FCEV;US$2017/pkm;1.14;1.12;1.14;1.13;1.27;0.45
+ECS;Large Car and SUV;Gases;US$2017/pkm;0.42;0.41;0.43;0.48;0.62;0.22
+ECS;Large Car and SUV;Hybrid electric;US$2017/pkm;0.58;0.58;0.59;0.47;0.4;0.03
+ECS;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECS;Midsize Car;BEV;US$2017/pkm;1.49;1.46;1.49;1.06;0.72;0.17
+ECS;Midsize Car;FCEV;US$2017/pkm;1.48;1.45;1.49;1.46;1.65;0.56
+ECS;Midsize Car;Gases;US$2017/pkm;0.41;0.4;0.42;0.47;0.6;0.2
+ECS;Midsize Car;Hybrid electric;US$2017/pkm;0.76;0.75;0.76;0.61;0.52;0.07
+ECS;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECS;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.03
+ECS;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECS;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.09
+ECS;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ECS;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.14
+ECS;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ECS;Subcompact Car;BEV;US$2017/pkm;1.85;1.83;1.87;1.34;0.91;0.24
+ECS;Subcompact Car;FCEV;US$2017/pkm;1.84;1.82;1.86;1.84;2.08;0.74
+ECS;Subcompact Car;Gases;US$2017/pkm;0.43;0.42;0.44;0.49;0.63;0.2
+ECS;Subcompact Car;Hybrid electric;US$2017/pkm;0.95;0.94;0.96;0.76;0.65;0.13
+ECS;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ECS;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.26
+ECS;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;8.23
+ECS;Truck (0-3_5t);Gases;US$2017/tkm;11.26;15.73;16.89;20.27;39.07;19.76
+ECS;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECS;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.46
+ECS;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.52
+ECS;Truck (18t);Gases;US$2017/tkm;100;100;100;5.87;4.95;5.67
+ECS;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECS;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.22
+ECS;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.73
+ECS;Truck (26t);Gases;US$2017/tkm;100;100;100;2.76;2.34;2.64
+ECS;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECS;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.14
+ECS;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.46
+ECS;Truck (40t);Gases;US$2017/tkm;100;100;100;1.73;1.47;1.63
+ECS;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ECS;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.65
+ECS;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;2.38
+ECS;Truck (7_5t);Gases;US$2017/tkm;100;100;100;12.68;10.71;12.29
+ECS;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ENC;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.19
+ENC;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.93
+ENC;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;0.57;0.49;0.49;0.48;0.49
+ENC;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+ENC;Compact Car;BEV;US$2017/pkm;1.26;1.27;1.28;0.9;0.61;0.11
+ENC;Compact Car;FCEV;US$2017/pkm;1.26;1.26;1.27;1.24;1.39;0.48
+ENC;Compact Car;Gases;US$2017/pkm;1.79;1.8;1.83;2.05;2.57;1.08
+ENC;Compact Car;Hybrid electric;US$2017/pkm;0.65;0.65;0.65;0.51;0.43;0.05
+ENC;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ENC;Large Car and SUV;BEV;US$2017/pkm;1.02;1.03;1.04;0.73;0.5;0.07
+ENC;Large Car and SUV;FCEV;US$2017/pkm;1.02;1.02;1.03;1.01;1.13;0.44
+ENC;Large Car and SUV;Gases;US$2017/pkm;1.79;1.8;1.83;2.06;2.59;1.25
+ENC;Large Car and SUV;Hybrid electric;US$2017/pkm;0.52;0.53;0.53;0.42;0.35;0.01
+ENC;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+ENC;Midsize Car;BEV;US$2017/pkm;1.25;1.26;1.27;0.9;0.6;0.11
+ENC;Midsize Car;FCEV;US$2017/pkm;1.25;1.26;1.26;1.23;1.38;0.49
+ENC;Midsize Car;Gases;US$2017/pkm;1.96;1.97;2;2.24;2.82;1.21
+ENC;Midsize Car;Hybrid electric;US$2017/pkm;0.64;0.65;0.65;0.51;0.43;0.05
+ENC;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ENC;Mini Car;BEV;US$2017/pkm;100;100;100;0.98;0.57;0.08
+ENC;Mini Car;FCEV;US$2017/pkm;100;100;100;1.34;1.31;0.39
+ENC;Mini Car;Gases;US$2017/pkm;100;100;100;1.52;1.66;0.6
+ENC;Mini Car;Hybrid electric;US$2017/pkm;100;100;100;0.56;0.41;0.03
+ENC;Mini Car;Liquids;US$2017/pkm;100;100;100;0;0;0
+ENC;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.1
+ENC;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+ENC;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.25
+ENC;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ENC;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.39
+ENC;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ENC;Subcompact Car;BEV;US$2017/pkm;1.28;1.29;1.29;0.91;0.62;0.1
+ENC;Subcompact Car;FCEV;US$2017/pkm;1.27;1.28;1.29;1.26;1.41;0.44
+ENC;Subcompact Car;Gases;US$2017/pkm;1.79;1.8;1.83;2.05;2.58;0.98
+ENC;Subcompact Car;Hybrid electric;US$2017/pkm;0.65;0.66;0.66;0.52;0.44;0.04
+ENC;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ENC;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.71
+ENC;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;7.57
+ENC;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+ENC;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ENC;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.66
+ENC;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.71
+ENC;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;100
+ENC;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ENC;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.28
+ENC;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.73
+ENC;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+ENC;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ENC;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.18
+ENC;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.49
+ENC;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+ENC;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ENC;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.82
+ENC;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;2.32
+ENC;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+ENC;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ENC;Van;BEV;US$2017/pkm;100;100;100;1.09;0.74;0.19
+ENC;Van;FCEV;US$2017/pkm;100;100;100;1.5;1.69;0.75
+ENC;Van;Gases;US$2017/pkm;100;100;100;1.7;2.14;1.1
+ENC;Van;Hybrid electric;US$2017/pkm;100;100;100;0.62;0.53;0.11
+ENC;Van;Liquids;US$2017/pkm;100;100;100;0;0;0
+ESC;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.16
+ESC;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.53
+ESC;Bus_tmp_vehicletype;Gases;US$2017/pkm;0.43;0.42;0.27;0.2;0.16;0.2
+ESC;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESC;Compact Car;BEV;US$2017/pkm;1.38;1.38;1.38;0.97;0.66;0.13
+ESC;Compact Car;FCEV;US$2017/pkm;1.37;1.37;1.37;1.33;1.5;0.51
+ESC;Compact Car;Gases;US$2017/pkm;0.88;0.79;0.78;0.94;1.18;0.47
+ESC;Compact Car;Hybrid electric;US$2017/pkm;0.7;0.71;0.71;0.55;0.47;0.05
+ESC;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESC;Large Car and SUV;BEV;US$2017/pkm;1.19;1.19;1.19;0.83;0.57;0.12
+ESC;Large Car and SUV;FCEV;US$2017/pkm;1.18;1.18;1.18;1.15;1.29;0.53
+ESC;Large Car and SUV;Gases;US$2017/pkm;0.82;0.73;0.73;0.88;1.11;0.54
+ESC;Large Car and SUV;Hybrid electric;US$2017/pkm;0.61;0.61;0.61;0.48;0.4;0.03
+ESC;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESC;Midsize Car;BEV;US$2017/pkm;1.37;1.37;1.37;0.96;0.65;0.13
+ESC;Midsize Car;FCEV;US$2017/pkm;1.36;1.36;1.36;1.32;1.49;0.51
+ESC;Midsize Car;Gases;US$2017/pkm;0.85;0.76;0.75;0.91;1.14;0.46
+ESC;Midsize Car;Hybrid electric;US$2017/pkm;0.7;0.7;0.7;0.55;0.46;0.05
+ESC;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESC;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.1
+ESC;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESC;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.24
+ESC;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ESC;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.36
+ESC;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ESC;Subcompact Car;BEV;US$2017/pkm;1.97;1.97;1.97;1.38;0.94;0.27
+ESC;Subcompact Car;FCEV;US$2017/pkm;1.96;1.96;1.96;1.9;2.14;0.87
+ESC;Subcompact Car;Gases;US$2017/pkm;0.89;0.83;0.82;0.97;1.22;0.54
+ESC;Subcompact Car;Hybrid electric;US$2017/pkm;1.01;1.01;1.01;0.79;0.67;0.16
+ESC;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESC;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.03
+ESC;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;7.41
+ESC;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESC;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESC;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.62
+ESC;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.93
+ESC;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESC;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESC;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.29
+ESC;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.9
+ESC;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESC;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESC;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.17
+ESC;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.54
+ESC;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESC;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESC;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.78
+ESC;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;2.88
+ESC;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESC;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESW;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;0.33;0.25;0.12
+ESW;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;0.63;0.49;0.51
+ESW;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;2.33;2.21;0.26;0.19;0.26
+ESW;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESW;Compact Car;BEV;US$2017/pkm;1.3;1.3;1.3;0.92;0.62;0.12
+ESW;Compact Car;FCEV;US$2017/pkm;1.29;1.29;1.29;1.27;1.42;0.49
+ESW;Compact Car;Gases;US$2017/pkm;1.38;1.38;1.38;1.52;1.92;0.78
+ESW;Compact Car;Hybrid electric;US$2017/pkm;0.66;0.66;0.67;0.53;0.44;0.05
+ESW;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESW;Large Car and SUV;BEV;US$2017/pkm;1;1;1;0.7;0.48;0.07
+ESW;Large Car and SUV;FCEV;US$2017/pkm;0.99;0.99;0.99;0.97;1.09;0.4
+ESW;Large Car and SUV;Gases;US$2017/pkm;1.06;1.05;1.05;1.16;1.46;0.66
+ESW;Large Car and SUV;Hybrid electric;US$2017/pkm;0.51;0.51;0.51;0.4;0.34;0
+ESW;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESW;Midsize Car;BEV;US$2017/pkm;1.31;1.32;1.32;0.93;0.63;0.13
+ESW;Midsize Car;FCEV;US$2017/pkm;1.31;1.31;1.31;1.29;1.44;0.51
+ESW;Midsize Car;Gases;US$2017/pkm;1.4;1.4;1.4;1.54;1.95;0.81
+ESW;Midsize Car;Hybrid electric;US$2017/pkm;0.67;0.67;0.67;0.53;0.45;0.05
+ESW;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESW;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.07
+ESW;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESW;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.18
+ESW;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ESW;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.28
+ESW;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+ESW;Subcompact Car;BEV;US$2017/pkm;1.52;1.52;1.52;1.08;0.73;0.16
+ESW;Subcompact Car;FCEV;US$2017/pkm;1.52;1.51;1.51;1.48;1.66;0.58
+ESW;Subcompact Car;Gases;US$2017/pkm;1.53;1.53;1.53;1.69;2.13;0.85
+ESW;Subcompact Car;Hybrid electric;US$2017/pkm;0.78;0.78;0.78;0.61;0.52;0.08
+ESW;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+ESW;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;1.5
+ESW;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;7.28
+ESW;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESW;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESW;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.49
+ESW;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.84
+ESW;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESW;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESW;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.21
+ESW;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.8
+ESW;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESW;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESW;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.14
+ESW;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.54
+ESW;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESW;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+ESW;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.59
+ESW;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;2.87
+ESW;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+ESW;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+EWN;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.12
+EWN;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.65
+EWN;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;0.38;0.26;0.22;0.19;0.22
+EWN;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+EWN;Compact Car;BEV;US$2017/pkm;1.12;1.13;1.13;0.8;0.54;0.08
+EWN;Compact Car;FCEV;US$2017/pkm;1.12;1.12;1.12;1.1;1.23;0.4
+EWN;Compact Car;Gases;US$2017/pkm;0.96;0.96;0.96;1.06;1.34;0.52
+EWN;Compact Car;Hybrid electric;US$2017/pkm;0.57;0.58;0.58;0.46;0.38;0.01
+EWN;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+EWN;Large Car and SUV;BEV;US$2017/pkm;1.06;1.06;1.06;0.75;0.51;0.08
+EWN;Large Car and SUV;FCEV;US$2017/pkm;1.05;1.06;1.06;1.03;1.16;0.47
+EWN;Large Car and SUV;Gases;US$2017/pkm;0.93;0.94;0.94;1.03;1.3;0.64
+EWN;Large Car and SUV;Hybrid electric;US$2017/pkm;0.54;0.54;0.54;0.43;0.36;0.01
+EWN;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+EWN;Midsize Car;BEV;US$2017/pkm;1.13;1.14;1.14;0.8;0.54;0.08
+EWN;Midsize Car;FCEV;US$2017/pkm;1.13;1.13;1.13;1.1;1.24;0.42
+EWN;Midsize Car;Gases;US$2017/pkm;0.95;0.95;0.96;1.05;1.32;0.54
+EWN;Midsize Car;Hybrid electric;US$2017/pkm;0.58;0.58;0.58;0.46;0.39;0.02
+EWN;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+EWN;Moped;BEV;US$2017/pkm;100;100;100;1.03;0.71;0.1
+EWN;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+EWN;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;2.25;1.72;0.25
+EWN;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+EWN;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;3.37;2.63;0.39
+EWN;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+EWN;Subcompact Car;BEV;US$2017/pkm;1.32;1.32;1.32;0.93;0.63;0.11
+EWN;Subcompact Car;FCEV;US$2017/pkm;1.31;1.32;1.32;1.28;1.44;0.48
+EWN;Subcompact Car;Gases;US$2017/pkm;0.99;1;1;1.1;1.39;0.54
+EWN;Subcompact Car;Hybrid electric;US$2017/pkm;0.68;0.68;0.68;0.53;0.45;0.04
+EWN;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+EWN;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.57
+EWN;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;14.14
+EWN;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;23.59;19.07;22.99
+EWN;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+EWN;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.7
+EWN;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;3.21
+EWN;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;100
+EWN;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+EWN;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.29
+EWN;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;1.34
+EWN;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+EWN;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+EWN;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.23
+EWN;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;1.04
+EWN;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+EWN;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+EWN;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.91
+EWN;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;5.01
+EWN;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+EWN;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+FRA;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;0.41;0.31;0.13
+FRA;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;0.48;0.36;0.39
+FRA;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;100;100;0.26;0.19;0.26
+FRA;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+FRA;Compact Car;BEV;US$2017/pkm;1;1;1;0.71;0.48;0.05
+FRA;Compact Car;FCEV;US$2017/pkm;1;1;1;0.98;1.1;0.3
+FRA;Compact Car;Gases;US$2017/pkm;1.7;1.7;1.7;1.88;2.37;0.85
+FRA;Compact Car;Hybrid electric;US$2017/pkm;0.51;0.51;0.51;0.41;0.34;0
+FRA;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+FRA;Large Car and SUV;BEV;US$2017/pkm;0.91;0.91;0.91;0.64;0.43;0.05
+FRA;Large Car and SUV;FCEV;US$2017/pkm;0.9;0.9;0.9;0.88;0.99;0.37
+FRA;Large Car and SUV;Gases;US$2017/pkm;1.8;1.8;1.8;1.99;2.5;1.18
+FRA;Large Car and SUV;Hybrid electric;US$2017/pkm;0.46;0.46;0.46;0.37;0.31;0
+FRA;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0.02
+FRA;Midsize Car;BEV;US$2017/pkm;0.98;0.98;0.98;0.7;0.47;0.05
+FRA;Midsize Car;FCEV;US$2017/pkm;0.98;0.98;0.98;0.96;1.08;0.3
+FRA;Midsize Car;Gases;US$2017/pkm;1.65;1.65;1.65;1.82;2.29;0.84
+FRA;Midsize Car;Hybrid electric;US$2017/pkm;0.5;0.5;0.5;0.4;0.34;0
+FRA;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+FRA;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.1
+FRA;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+FRA;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.23
+FRA;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+FRA;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.36
+FRA;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+FRA;Subcompact Car;BEV;US$2017/pkm;1.21;1.21;1.21;0.86;0.58;0.09
+FRA;Subcompact Car;FCEV;US$2017/pkm;1.2;1.2;1.2;1.18;1.32;0.39
+FRA;Subcompact Car;Gases;US$2017/pkm;1.67;1.67;1.67;1.84;2.32;0.83
+FRA;Subcompact Car;Hybrid electric;US$2017/pkm;0.62;0.62;0.62;0.49;0.41;0.03
+FRA;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+FRA;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.55
+FRA;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;7.17
+FRA;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+FRA;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+FRA;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.89
+FRA;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;2.31
+FRA;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;100
+FRA;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+FRA;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.41
+FRA;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;1.08
+FRA;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+FRA;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+FRA;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.24
+FRA;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.63
+FRA;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+FRA;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+FRA;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.95
+FRA;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;2.69
+FRA;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+FRA;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+IND;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.1
+IND;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;100
+IND;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;0.05;0.03;0.04;0.05;0.05
+IND;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+IND;Compact Car;BEV;US$2017/pkm;1.14;1.16;1.17;0.84;0.51;0.15
+IND;Compact Car;FCEV;US$2017/pkm;1.13;1.16;1.16;1.1;1.04;0.35
+IND;Compact Car;Gases;US$2017/pkm;1.13;1.16;1.16;1.13;1.1;0.42
+IND;Compact Car;Hybrid electric;US$2017/pkm;0.58;0.59;0.6;0.62;0.65;0.21
+IND;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+IND;Large Car and SUV;BEV;US$2017/pkm;0.89;0.89;0.89;0.63;0.37;0.09
+IND;Large Car and SUV;FCEV;US$2017/pkm;0.89;0.89;0.89;0.82;0.76;0.24
+IND;Large Car and SUV;Gases;US$2017/pkm;0.89;0.89;0.89;0.85;0.8;0.29
+IND;Large Car and SUV;Hybrid electric;US$2017/pkm;0.46;0.46;0.46;0.47;0.48;0.13
+IND;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+IND;Mini Car;BEV;US$2017/pkm;1.14;1.16;1.17;0.84;0.51;0.09
+IND;Mini Car;FCEV;US$2017/pkm;1.13;1.16;1.17;1.1;1.04;0.2
+IND;Mini Car;Gases;US$2017/pkm;1.13;1.16;1.17;1.13;1.1;0.26
+IND;Mini Car;Hybrid electric;US$2017/pkm;0.58;0.6;0.6;0.62;0.65;0.12
+IND;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+IND;Moped;BEV;US$2017/pkm;100;100;100;0.03;0.01;0.01
+IND;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+IND;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;0.03;0.02;0.01
+IND;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+IND;Subcompact Car;BEV;US$2017/pkm;0.95;0.97;0.98;0.75;0.44;0.08
+IND;Subcompact Car;FCEV;US$2017/pkm;0.95;0.95;0.96;0.89;0.77;0.18
+IND;Subcompact Car;Gases;US$2017/pkm;0.95;1.07;1.12;1.1;1.03;0.28
+IND;Subcompact Car;Hybrid electric;US$2017/pkm;0.49;0.49;0.49;0.52;0.54;0.11
+IND;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+IND;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;1.57
+IND;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;100
+IND;Truck (0-3_5t);Gases;US$2017/tkm;100;1.3;1.02;0.92;0.87;1.03
+IND;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+IND;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.23
+IND;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;100
+IND;Truck (18t);Gases;US$2017/tkm;100;100;100;0.14;0.12;0.14
+IND;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+IND;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.03
+IND;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;100
+IND;Truck (26t);Gases;US$2017/tkm;100;100;100;0.08;0.07;0.08
+IND;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+IND;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.02
+IND;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;100
+IND;Truck (40t);Gases;US$2017/tkm;100;100;100;0.03;0.03;0.03
+IND;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+IND;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.23
+IND;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;100
+IND;Truck (7_5t);Gases;US$2017/tkm;100;100;100;0.2;0.17;0.2
+IND;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+JPN;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.23
+JPN;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.35
+JPN;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;100;100;100;100;0.79
+JPN;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+JPN;Compact Car;BEV;US$2017/pkm;1.76;1.76;1.76;1.15;0.54;0.25
+JPN;Compact Car;FCEV;US$2017/pkm;1.75;1.75;1.75;1.62;1.49;0.92
+JPN;Compact Car;Gases;US$2017/pkm;1.75;1.75;1.75;1.67;1.58;1.02
+JPN;Compact Car;Hybrid electric;US$2017/pkm;0.9;0.9;0.9;0.92;0.94;0.56
+JPN;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+JPN;Large Car and SUV;BEV;US$2017/pkm;2.21;2.21;2.21;1.45;0.68;0.39
+JPN;Large Car and SUV;FCEV;US$2017/pkm;2.2;2.2;2.2;2.04;1.87;1.39
+JPN;Large Car and SUV;Gases;US$2017/pkm;2.2;2.2;2.2;2.09;1.98;1.52
+JPN;Large Car and SUV;Hybrid electric;US$2017/pkm;1.13;1.13;1.13;1.16;1.18;0.85
+JPN;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+JPN;Mini Car;BEV;US$2017/pkm;2.04;2.04;2.04;1.34;0.63;0.26
+JPN;Mini Car;FCEV;US$2017/pkm;2.03;2.03;2.03;1.88;1.73;0.92
+JPN;Mini Car;Gases;US$2017/pkm;2.03;2.03;2.03;1.93;1.83;1.02
+JPN;Mini Car;Hybrid electric;US$2017/pkm;1.04;1.04;1.04;1.07;1.09;0.56
+JPN;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+JPN;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.1
+JPN;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+JPN;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.24
+JPN;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+JPN;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.34
+JPN;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+JPN;Subcompact Car;BEV;US$2017/pkm;2.1;2.1;2.1;1.37;0.65;0.31
+JPN;Subcompact Car;FCEV;US$2017/pkm;2.09;2.09;2.09;1.93;1.78;1.11
+JPN;Subcompact Car;Gases;US$2017/pkm;2.09;2.09;2.09;1.99;1.88;1.21
+JPN;Subcompact Car;Hybrid electric;US$2017/pkm;1.07;1.07;1.07;1.1;1.12;0.68
+JPN;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+JPN;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.59
+JPN;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;3.69
+JPN;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;7.87
+JPN;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+JPN;Truck (18t);BEV;US$2017/tkm;100;100;100;0.03;100;100
+JPN;Truck (18t);FCEV;US$2017/tkm;100;100;100;0.04;100;100
+JPN;Truck (18t);Gases;US$2017/tkm;100;100;100;0.04;100;100
+JPN;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;100;100
+JPN;Truck (26t);BEV;US$2017/tkm;100;100;100;0.02;100;100
+JPN;Truck (26t);FCEV;US$2017/tkm;100;100;100;0.02;100;100
+JPN;Truck (26t);Gases;US$2017/tkm;100;100;100;0.02;100;100
+JPN;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;100;100
+JPN;Truck (40t);BEV;US$2017/tkm;100;100;100;0.01;100;100
+JPN;Truck (40t);FCEV;US$2017/tkm;100;100;100;0.01;100;100
+JPN;Truck (40t);Gases;US$2017/tkm;100;100;100;0.01;100;100
+JPN;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;100;100
+JPN;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.35
+JPN;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;0.5
+JPN;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;1.04
+JPN;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+LAM;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.21
+LAM;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;1.21
+LAM;Bus_tmp_vehicletype;Gases;US$2017/pkm;0.72;0.26;0.28;0.28;0.28;0.24
+LAM;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Compact Car;BEV;US$2017/pkm;1.12;1.12;1.12;0.82;0.51;0.19
+LAM;Compact Car;FCEV;US$2017/pkm;1.11;1.12;1.11;1.03;0.95;0.43
+LAM;Compact Car;Gases;US$2017/pkm;1.11;1.12;1.11;1.06;1.01;0.5
+LAM;Compact Car;Hybrid electric;US$2017/pkm;0.57;0.57;0.57;0.59;0.6;0.25
+LAM;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Large Car;BEV;US$2017/pkm;0.99;0.98;0.98;0.72;0.45;0.17
+LAM;Large Car;FCEV;US$2017/pkm;0.98;0.98;0.98;0.91;0.83;0.41
+LAM;Large Car;Gases;US$2017/pkm;0.98;0.98;0.98;0.93;0.88;0.48
+LAM;Large Car;Hybrid electric;US$2017/pkm;0.51;0.5;0.5;0.51;0.53;0.23
+LAM;Large Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Large Car and SUV;BEV;US$2017/pkm;0.78;0.79;0.78;0.58;0.36;0.11
+LAM;Large Car and SUV;FCEV;US$2017/pkm;0.78;0.79;0.78;0.73;0.67;0.28
+LAM;Large Car and SUV;Gases;US$2017/pkm;0.78;0.79;0.78;0.75;0.71;0.33
+LAM;Large Car and SUV;Hybrid electric;US$2017/pkm;0.4;0.4;0.4;0.42;0.42;0.15
+LAM;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Midsize Car;BEV;US$2017/pkm;0.99;0.99;0.99;0.72;0.45;0.16
+LAM;Midsize Car;FCEV;US$2017/pkm;0.99;0.98;0.98;0.91;0.84;0.38
+LAM;Midsize Car;Gases;US$2017/pkm;0.97;0.97;0.97;0.92;0.88;0.44
+LAM;Midsize Car;Hybrid electric;US$2017/pkm;0.51;0.5;0.51;0.52;0.53;0.21
+LAM;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Mini Car;BEV;US$2017/pkm;1.12;1.12;1.12;0.82;0.51;0.12
+LAM;Mini Car;FCEV;US$2017/pkm;1.12;1.12;1.12;1.04;0.95;0.26
+LAM;Mini Car;Gases;US$2017/pkm;1.12;1.12;1.12;1.06;1.01;0.32
+LAM;Mini Car;Hybrid electric;US$2017/pkm;0.57;0.58;0.57;0.59;0.6;0.15
+LAM;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.06
+LAM;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.18
+LAM;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.23
+LAM;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Subcompact Car;BEV;US$2017/pkm;1.12;1.12;1.12;0.82;0.51;0.16
+LAM;Subcompact Car;FCEV;US$2017/pkm;1.12;1.12;1.12;1.04;0.95;0.35
+LAM;Subcompact Car;Gases;US$2017/pkm;1.12;1.12;1.12;1.06;1.01;0.41
+LAM;Subcompact Car;Hybrid electric;US$2017/pkm;0.58;0.58;0.57;0.59;0.6;0.2
+LAM;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+LAM;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;1.41
+LAM;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;6.7
+LAM;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;4.25
+LAM;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+LAM;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.24
+LAM;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;0.97
+LAM;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;0.44
+LAM;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+LAM;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.14
+LAM;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.55
+LAM;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;0.25
+LAM;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+LAM;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.05
+LAM;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.17
+LAM;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;0.07
+LAM;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+LAM;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.14
+LAM;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;0.64
+LAM;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;0.4
+LAM;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+LAM;Van;BEV;US$2017/pkm;1.54;1.54;1.54;1.12;0.73;0.4
+LAM;Van;FCEV;US$2017/pkm;1.54;1.54;1.54;1.42;1.36;0.84
+LAM;Van;Gases;US$2017/pkm;1.54;1.54;1.54;1.46;1.44;0.93
+LAM;Van;Hybrid electric;US$2017/pkm;0.79;0.79;0.79;0.81;0.86;0.5
+LAM;Van;Liquids;US$2017/pkm;0;0;0;0;0;0
+MEA;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.19
+MEA;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.7
+MEA;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;0.32;0.29;0.26;0.23;0.17
+MEA;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+MEA;Compact Car;BEV;US$2017/pkm;0.93;0.95;0.95;0.69;0.43;0.13
+MEA;Compact Car;FCEV;US$2017/pkm;0.92;0.94;0.95;0.89;0.85;0.31
+MEA;Compact Car;Gases;US$2017/pkm;0.92;0.94;0.95;0.91;0.89;0.37
+MEA;Compact Car;Hybrid electric;US$2017/pkm;0.48;0.48;0.49;0.51;0.53;0.18
+MEA;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+MEA;Large Car and SUV;BEV;US$2017/pkm;0.82;0.83;0.83;0.6;0.37;0.11
+MEA;Large Car and SUV;FCEV;US$2017/pkm;0.81;0.82;0.83;0.77;0.72;0.29
+MEA;Large Car and SUV;Gases;US$2017/pkm;0.81;0.82;0.83;0.79;0.76;0.34
+MEA;Large Car and SUV;Hybrid electric;US$2017/pkm;0.42;0.42;0.42;0.44;0.45;0.16
+MEA;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+MEA;Mini Car;BEV;US$2017/pkm;1.17;1.19;1.2;0.88;0.55;0.13
+MEA;Mini Car;FCEV;US$2017/pkm;1.16;1.19;1.2;1.13;1.06;0.29
+MEA;Mini Car;Gases;US$2017/pkm;1.16;1.19;1.2;1.16;1.13;0.35
+MEA;Mini Car;Hybrid electric;US$2017/pkm;0.6;0.61;0.61;0.64;0.67;0.18
+MEA;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+MEA;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.02
+MEA;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+MEA;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.01
+MEA;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+MEA;Subcompact Car;BEV;US$2017/pkm;0.87;0.89;0.89;0.67;0.41;0.09
+MEA;Subcompact Car;FCEV;US$2017/pkm;0.86;0.88;0.88;0.83;0.76;0.21
+MEA;Subcompact Car;Gases;US$2017/pkm;0.86;0.89;0.9;0.87;0.84;0.27
+MEA;Subcompact Car;Hybrid electric;US$2017/pkm;0.44;0.45;0.46;0.48;0.5;0.13
+MEA;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+MEA;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;1.61
+MEA;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;8.59
+MEA;Truck (0-3_5t);Gases;US$2017/tkm;100;11.2;10.23;7.68;6.51;1.49
+MEA;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+MEA;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.21
+MEA;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.03
+MEA;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;0.17
+MEA;Truck (18t);Liquids;US$2017/tkm;100;100;100;0;0;0
+MEA;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;100
+MEA;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;100
+MEA;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+MEA;Truck (26t);Liquids;US$2017/tkm;100;100;100;100;100;100
+MEA;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;100
+MEA;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;100
+MEA;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+MEA;Truck (40t);Liquids;US$2017/tkm;100;100;100;100;100;100
+MEA;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.21
+MEA;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;1.11
+MEA;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;0.25
+MEA;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NEN;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;0.24;0.17;0.09
+NEN;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.69
+NEN;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;100;0.28;0.3;0.31;0.27
+NEN;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+NEN;Compact Car;BEV;US$2017/pkm;1.21;1.21;1.21;0.62;0.02;0
+NEN;Compact Car;FCEV;US$2017/pkm;1.2;1.2;1.21;1.12;1.03;0.91
+NEN;Compact Car;Gases;US$2017/pkm;1.15;1.16;1.16;1.1;1.04;0.92
+NEN;Compact Car;Hybrid electric;US$2017/pkm;0.62;0.62;0.62;0.63;0.65;0.57
+NEN;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0.12
+NEN;Large Car and SUV;BEV;US$2017/pkm;1.17;1.18;1.18;0.6;0.02;0
+NEN;Large Car and SUV;FCEV;US$2017/pkm;1.16;1.17;1.17;1.09;1;0.92
+NEN;Large Car and SUV;Gases;US$2017/pkm;1.16;1.17;1.17;1.11;1.05;0.97
+NEN;Large Car and SUV;Hybrid electric;US$2017/pkm;0.6;0.6;0.6;0.62;0.63;0.58
+NEN;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0.13
+NEN;Midsize Car;BEV;US$2017/pkm;1.22;1.22;1.22;0.62;0.02;0
+NEN;Midsize Car;FCEV;US$2017/pkm;1.21;1.21;1.21;1.12;1.04;0.92
+NEN;Midsize Car;Gases;US$2017/pkm;1.15;1.16;1.16;1.1;1.05;0.93
+NEN;Midsize Car;Hybrid electric;US$2017/pkm;0.62;0.62;0.62;0.64;0.65;0.58
+NEN;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0.12
+NEN;Mini Car;BEV;US$2017/pkm;100;100;100;0.7;0.03;0
+NEN;Mini Car;FCEV;US$2017/pkm;100;100;100;1.27;1.17;1.01
+NEN;Mini Car;Gases;US$2017/pkm;100;100;100;1.3;1.24;1.08
+NEN;Mini Car;Hybrid electric;US$2017/pkm;100;100;100;0.72;0.74;0.64
+NEN;Mini Car;Liquids;US$2017/pkm;100;100;100;0;0;0.12
+NEN;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.11
+NEN;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+NEN;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.28
+NEN;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+NEN;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.43
+NEN;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+NEN;Subcompact Car;BEV;US$2017/pkm;1.28;1.29;1.29;0.66;0.03;0
+NEN;Subcompact Car;FCEV;US$2017/pkm;1.28;1.28;1.28;1.19;1.09;0.95
+NEN;Subcompact Car;Gases;US$2017/pkm;1.17;1.18;1.18;1.12;1.06;0.92
+NEN;Subcompact Car;Hybrid electric;US$2017/pkm;0.66;0.66;0.66;0.67;0.69;0.6
+NEN;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0.12
+NEN;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.33
+NEN;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;15.26
+NEN;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;15.12;11.89;7.66
+NEN;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NEN;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.55
+NEN;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;2.87
+NEN;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;1.22
+NEN;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NEN;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.24
+NEN;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;1.22
+NEN;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;0.54
+NEN;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NEN;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.16
+NEN;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.8
+NEN;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;0.37
+NEN;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NEN;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.87
+NEN;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;5.71
+NEN;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;3.25
+NEN;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NEN;Van;BEV;US$2017/pkm;100;100;100;0.79;0.03;0
+NEN;Van;FCEV;US$2017/pkm;100;100;100;1.42;1.31;1.18
+NEN;Van;Gases;US$2017/pkm;100;100;100;1.46;1.38;1.25
+NEN;Van;Hybrid electric;US$2017/pkm;100;100;100;0.81;0.83;0.74
+NEN;Van;Liquids;US$2017/pkm;100;100;100;0;0;0.12
+NES;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.12
+NES;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.45
+NES;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;100;100;0.37;0.28;0.15
+NES;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+NES;Compact Car;BEV;US$2017/pkm;1.02;1;0.99;0.73;0.48;0.17
+NES;Compact Car;FCEV;US$2017/pkm;1.01;0.99;0.99;0.91;0.85;0.34
+NES;Compact Car;Gases;US$2017/pkm;0.93;0.91;0.91;0.85;0.83;0.36
+NES;Compact Car;Hybrid electric;US$2017/pkm;0.52;0.51;0.51;0.51;0.54;0.19
+NES;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+NES;Large Car and SUV;BEV;US$2017/pkm;0.99;0.97;0.97;0.71;0.47;0.2
+NES;Large Car and SUV;FCEV;US$2017/pkm;0.99;0.97;0.96;0.88;0.83;0.42
+NES;Large Car and SUV;Gases;US$2017/pkm;0.9;0.88;0.88;0.83;0.81;0.44
+NES;Large Car and SUV;Hybrid electric;US$2017/pkm;0.51;0.5;0.5;0.5;0.52;0.24
+NES;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+NES;Midsize Car;BEV;US$2017/pkm;0.86;0.84;0.83;0.61;0.43;0.14
+NES;Midsize Car;FCEV;US$2017/pkm;0.85;0.83;0.83;0.77;0.76;0.29
+NES;Midsize Car;Gases;US$2017/pkm;0.61;0.6;0.59;0.56;0.59;0.24
+NES;Midsize Car;Hybrid electric;US$2017/pkm;0.44;0.43;0.43;0.43;0.48;0.16
+NES;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+NES;Mini Car;BEV;US$2017/pkm;100;100;100;1.02;0.66;0.29
+NES;Mini Car;FCEV;US$2017/pkm;100;100;100;1.27;1.17;0.57
+NES;Mini Car;Gases;US$2017/pkm;100;100;100;1.3;1.24;0.64
+NES;Mini Car;Hybrid electric;US$2017/pkm;100;100;100;0.72;0.74;0.34
+NES;Mini Car;Liquids;US$2017/pkm;100;100;100;0;0;0
+NES;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.06
+NES;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+NES;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.16
+NES;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+NES;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.22
+NES;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+NES;Subcompact Car;BEV;US$2017/pkm;1.04;1.02;1.01;0.74;0.49;0.16
+NES;Subcompact Car;FCEV;US$2017/pkm;1.03;1.01;1.01;0.92;0.87;0.32
+NES;Subcompact Car;Gases;US$2017/pkm;0.94;0.92;0.92;0.86;0.84;0.33
+NES;Subcompact Car;Hybrid electric;US$2017/pkm;0.53;0.52;0.52;0.52;0.55;0.18
+NES;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+NES;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.13
+NES;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;11.29
+NES;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;5.94
+NES;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NES;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.35
+NES;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.58
+NES;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;0.57
+NES;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NES;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.14
+NES;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.64
+NES;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;0.23
+NES;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NES;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.12
+NES;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.54
+NES;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;0.19
+NES;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NES;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.52
+NES;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;2.78
+NES;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;1.38
+NES;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+NES;Van;BEV;US$2017/pkm;1.47;1.46;1.46;1.08;0.72;0.35
+NES;Van;FCEV;US$2017/pkm;1.46;1.46;1.46;1.35;1.29;0.65
+NES;Van;Gases;US$2017/pkm;1.46;1.45;1.45;1.37;1.35;0.74
+NES;Van;Hybrid electric;US$2017/pkm;0.75;0.75;0.74;0.76;0.81;0.39
+NES;Van;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.1
+OAS;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.62
+OAS;Bus_tmp_vehicletype;Gases;US$2017/pkm;1.85;0.1;0.04;0.04;0.05;0.05
+OAS;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Compact Car;BEV;US$2017/pkm;1.08;1.09;1.1;0.79;0.47;0.16
+OAS;Compact Car;FCEV;US$2017/pkm;1.07;1.09;1.09;1.02;0.96;0.39
+OAS;Compact Car;Gases;US$2017/pkm;1.07;1.09;1.09;1.05;1.01;0.43
+OAS;Compact Car;Hybrid electric;US$2017/pkm;0.55;0.56;0.56;0.58;0.6;0.23
+OAS;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Large Car;BEV;US$2017/pkm;1.32;1.32;1.32;0.94;0.55;0.27
+OAS;Large Car;FCEV;US$2017/pkm;1.32;1.32;1.32;1.22;1.12;0.66
+OAS;Large Car;Gases;US$2017/pkm;1.32;1.32;1.32;1.25;1.19;0.68
+OAS;Large Car;Hybrid electric;US$2017/pkm;0.68;0.68;0.68;0.69;0.71;0.39
+OAS;Large Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Large Car and SUV;BEV;US$2017/pkm;0.9;0.91;0.91;0.67;0.38;0.12
+OAS;Large Car and SUV;FCEV;US$2017/pkm;0.9;0.9;0.89;0.82;0.74;0.29
+OAS;Large Car and SUV;Gases;US$2017/pkm;0.96;0.91;0.89;0.79;0.74;0.3
+OAS;Large Car and SUV;Hybrid electric;US$2017/pkm;0.46;0.46;0.46;0.45;0.45;0.16
+OAS;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Midsize Car;BEV;US$2017/pkm;1.13;1.13;1.13;0.8;0.51;0.22
+OAS;Midsize Car;FCEV;US$2017/pkm;1.12;1.12;1.12;1.04;1.04;0.5
+OAS;Midsize Car;Gases;US$2017/pkm;0.8;0.8;0.8;0.76;0.8;0.4
+OAS;Midsize Car;Hybrid electric;US$2017/pkm;0.58;0.58;0.58;0.59;0.66;0.29
+OAS;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Mini Car;BEV;US$2017/pkm;1.05;1.06;1.06;0.76;0.45;0.1
+OAS;Mini Car;FCEV;US$2017/pkm;1.04;1.05;1.06;0.99;0.93;0.24
+OAS;Mini Car;Gases;US$2017/pkm;1.04;1.05;1.06;1.02;0.98;0.27
+OAS;Mini Car;Hybrid electric;US$2017/pkm;0.54;0.54;0.54;0.56;0.58;0.14
+OAS;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.02
+OAS;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.05
+OAS;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.03
+OAS;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Subcompact Car;BEV;US$2017/pkm;0.9;0.93;0.93;0.73;0.42;0.12
+OAS;Subcompact Car;FCEV;US$2017/pkm;0.9;0.91;0.9;0.84;0.76;0.25
+OAS;Subcompact Car;Gases;US$2017/pkm;0.94;0.98;0.99;0.95;0.9;0.3
+OAS;Subcompact Car;Hybrid electric;US$2017/pkm;0.46;0.47;0.47;0.52;0.52;0.15
+OAS;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+OAS;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;1.87
+OAS;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;4.62
+OAS;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;13.13;10.62;4.76
+OAS;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+OAS;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.23
+OAS;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;0.53
+OAS;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;0.5
+OAS;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+OAS;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.13
+OAS;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.29
+OAS;Truck (26t);Gases;US$2017/tkm;100;100;100;0.11;0.07;0.08
+OAS;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+OAS;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.06
+OAS;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.13
+OAS;Truck (40t);Gases;US$2017/tkm;100;100;100;0.05;0.03;0.04
+OAS;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+OAS;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.28
+OAS;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;0.69
+OAS;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;0.78
+OAS;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+OAS;Van;BEV;US$2017/pkm;100;100;100;1.09;0.67;0.36
+OAS;Van;FCEV;US$2017/pkm;100;100;100;1.42;1.36;0.83
+OAS;Van;Gases;US$2017/pkm;100;100;100;1.46;1.44;0.93
+OAS;Van;Hybrid electric;US$2017/pkm;100;100;100;0.81;0.86;0.49
+OAS;Van;Liquids;US$2017/pkm;100;100;100;0;0;0
+REF;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.38
+REF;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;1.65
+REF;Bus_tmp_vehicletype;Gases;US$2017/pkm;0.3;0.51;0.5;0.46;0.4;0.33
+REF;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Compact Car;BEV;US$2017/pkm;1.39;1.39;1.39;0.97;0.55;0.2
+REF;Compact Car;FCEV;US$2017/pkm;1.39;1.39;1.39;1.28;1.18;0.5
+REF;Compact Car;Gases;US$2017/pkm;1.39;1.39;1.39;1.32;1.25;0.58
+REF;Compact Car;Hybrid electric;US$2017/pkm;0.71;0.71;0.71;0.73;0.75;0.3
+REF;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Large Car and SUV;BEV;US$2017/pkm;1.39;1.39;1.39;0.97;0.55;0.24
+REF;Large Car and SUV;FCEV;US$2017/pkm;1.39;1.39;1.39;1.28;1.18;0.61
+REF;Large Car and SUV;Gases;US$2017/pkm;1.39;1.39;1.39;1.32;1.25;0.7
+REF;Large Car and SUV;Hybrid electric;US$2017/pkm;0.71;0.71;0.71;0.73;0.75;0.37
+REF;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Midsize Car;BEV;US$2017/pkm;1.39;1.39;1.39;0.97;0.55;0.22
+REF;Midsize Car;FCEV;US$2017/pkm;1.39;1.39;1.39;1.29;1.18;0.56
+REF;Midsize Car;Gases;US$2017/pkm;1.39;1.39;1.39;1.32;1.25;0.64
+REF;Midsize Car;Hybrid electric;US$2017/pkm;0.71;0.71;0.71;0.73;0.75;0.34
+REF;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Mini Car;BEV;US$2017/pkm;1.01;1.03;1.04;0.74;0.43;0.11
+REF;Mini Car;FCEV;US$2017/pkm;1;1.02;1.03;0.97;0.92;0.28
+REF;Mini Car;Gases;US$2017/pkm;1;1.02;1.03;1;0.97;0.33
+REF;Mini Car;Hybrid electric;US$2017/pkm;0.52;0.53;0.53;0.55;0.58;0.16
+REF;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.05
+REF;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Motorcycle (50-250cc);BEV;US$2017/pkm;0.8;0.82;0.88;1.16;100;0.27
+REF;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.35
+REF;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Subcompact Car;BEV;US$2017/pkm;1.39;1.39;1.39;0.97;0.55;0.18
+REF;Subcompact Car;FCEV;US$2017/pkm;1.39;1.39;1.39;1.28;1.18;0.45
+REF;Subcompact Car;Gases;US$2017/pkm;1.39;1.39;1.39;1.32;1.25;0.53
+REF;Subcompact Car;Hybrid electric;US$2017/pkm;0.71;0.71;0.71;0.73;0.75;0.27
+REF;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+REF;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;1.62
+REF;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;4.33
+REF;Truck (0-3_5t);Gases;US$2017/tkm;2.15;3.81;3.8;3.49;3.22;2.77
+REF;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+REF;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.26
+REF;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;0.63
+REF;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;0.47
+REF;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+REF;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.12
+REF;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.29
+REF;Truck (26t);Gases;US$2017/tkm;0.1;0.18;0.18;0.14;0.11;0.1
+REF;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+REF;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.09
+REF;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.24
+REF;Truck (40t);Gases;US$2017/tkm;0.09;0.15;0.14;0.13;0.12;0.1
+REF;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+REF;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.34
+REF;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;0.92
+REF;Truck (7_5t);Gases;US$2017/tkm;0.51;0.85;0.85;1.25;100;1.03
+REF;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+SSA;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.11
+SSA;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.46
+SSA;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;100;100;0.71;0.57;0.15
+SSA;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+SSA;Compact Car;BEV;US$2017/pkm;1.14;1.16;1.17;0.84;0.51;0.16
+SSA;Compact Car;FCEV;US$2017/pkm;1.13;1.16;1.17;1.1;1.04;0.36
+SSA;Compact Car;Gases;US$2017/pkm;1.13;1.16;1.17;1.13;1.1;0.43
+SSA;Compact Car;Hybrid electric;US$2017/pkm;0.58;0.6;0.6;0.62;0.65;0.22
+SSA;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+SSA;Large Car and SUV;BEV;US$2017/pkm;0.81;0.81;0.81;0.58;0.34;0.08
+SSA;Large Car and SUV;FCEV;US$2017/pkm;0.81;0.81;0.81;0.75;0.69;0.21
+SSA;Large Car and SUV;Gases;US$2017/pkm;0.81;0.81;0.81;0.77;0.73;0.26
+SSA;Large Car and SUV;Hybrid electric;US$2017/pkm;0.42;0.42;0.42;0.43;0.44;0.12
+SSA;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+SSA;Mini Car;BEV;US$2017/pkm;1.14;1.16;1.17;0.84;0.51;0.1
+SSA;Mini Car;FCEV;US$2017/pkm;1.13;1.16;1.17;1.1;1.04;0.21
+SSA;Mini Car;Gases;US$2017/pkm;1.13;1.16;1.17;1.13;1.1;0.27
+SSA;Mini Car;Hybrid electric;US$2017/pkm;0.58;0.6;0.6;0.62;0.65;0.13
+SSA;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+SSA;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.01
+SSA;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+SSA;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.01
+SSA;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+SSA;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.02
+SSA;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+SSA;Subcompact Car;BEV;US$2017/pkm;0.95;0.97;0.98;0.76;0.44;0.09
+SSA;Subcompact Car;FCEV;US$2017/pkm;0.95;0.95;0.96;0.89;0.78;0.19
+SSA;Subcompact Car;Gases;US$2017/pkm;0.95;0.96;0.97;0.97;0.92;0.26
+SSA;Subcompact Car;Hybrid electric;US$2017/pkm;0.49;0.49;0.49;0.52;0.54;0.13
+SSA;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+SSA;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.71
+SSA;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;7.39
+SSA;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;2.18
+SSA;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+SSA;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.34
+SSA;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;0.9
+SSA;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;0.29
+SSA;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+SSA;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.17
+SSA;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.46
+SSA;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;0.14
+SSA;Truck (26t);Liquids;US$2017/tkm;100;100;100;0;0;0
+SSA;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.07
+SSA;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.2
+SSA;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;0.05
+SSA;Truck (40t);Liquids;US$2017/tkm;100;100;100;0;0;0
+SSA;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.35
+SSA;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;0.96
+SSA;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;0.44
+SSA;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+SSA;Van;BEV;US$2017/pkm;100;100;100;1.09;0.67;0.27
+SSA;Van;FCEV;US$2017/pkm;100;100;100;1.42;1.36;0.63
+SSA;Van;Gases;US$2017/pkm;100;100;100;1.46;1.44;0.73
+SSA;Van;Hybrid electric;US$2017/pkm;100;100;100;0.81;0.86;0.38
+SSA;Van;Liquids;US$2017/pkm;100;100;100;0;0;0
+UKI;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;0.28;0.2;0.13
+UKI;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;3.75;2.91;0.43
+UKI;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;100;100;0.99;0.76;0.97
+UKI;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Compact Car;BEV;US$2017/pkm;1.23;1.23;1.23;0.95;0.78;0.21
+UKI;Compact Car;FCEV;US$2017/pkm;1.22;1.22;1.23;1.19;1.33;0.45
+UKI;Compact Car;Gases;US$2017/pkm;0.54;0.54;0.54;0.6;0.74;0.22
+UKI;Compact Car;Hybrid electric;US$2017/pkm;0.63;0.63;0.63;0.5;0.42;0.03
+UKI;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Large Car and SUV;BEV;US$2017/pkm;1.08;1.08;1.08;0.84;0.68;0.21
+UKI;Large Car and SUV;FCEV;US$2017/pkm;1.07;1.07;1.07;1.05;1.17;0.47
+UKI;Large Car and SUV;Gases;US$2017/pkm;0.46;0.44;0.44;0.48;0.57;0.24
+UKI;Large Car and SUV;Hybrid electric;US$2017/pkm;0.55;0.55;0.55;0.43;0.36;0.02
+UKI;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Midsize Car;BEV;US$2017/pkm;1.15;1.16;1.16;0.9;0.73;0.19
+UKI;Midsize Car;FCEV;US$2017/pkm;1.15;1.15;1.15;1.12;1.25;0.41
+UKI;Midsize Car;Gases;US$2017/pkm;0.55;0.55;0.55;0.61;0.78;0.22
+UKI;Midsize Car;Hybrid electric;US$2017/pkm;0.59;0.59;0.59;0.47;0.39;0.03
+UKI;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Mini Car;BEV;US$2017/pkm;1.38;1.38;1.38;1.07;0.76;0.2
+UKI;Mini Car;FCEV;US$2017/pkm;1.37;1.37;1.37;1.34;1.31;0.42
+UKI;Mini Car;Gases;US$2017/pkm;1.37;1.37;1.37;1.52;1.67;0.5
+UKI;Mini Car;Hybrid electric;US$2017/pkm;0.71;0.71;0.71;0.56;0.41;0.04
+UKI;Mini Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Moped;BEV;US$2017/pkm;100;100;100;100;100;0.09
+UKI;Moped;Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Motorcycle (50-250cc);BEV;US$2017/pkm;100;100;100;100;100;0.21
+UKI;Motorcycle (50-250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.32
+UKI;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Subcompact Car;BEV;US$2017/pkm;1.43;1.42;1.43;1.1;0.89;0.25
+UKI;Subcompact Car;FCEV;US$2017/pkm;1.42;1.41;1.42;1.38;1.53;0.52
+UKI;Subcompact Car;Gases;US$2017/pkm;0.65;0.65;0.65;0.72;0.89;0.26
+UKI;Subcompact Car;Hybrid electric;US$2017/pkm;0.73;0.73;0.73;0.57;0.48;0.06
+UKI;Subcompact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+UKI;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;2.43
+UKI;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;6.24
+UKI;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+UKI;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+UKI;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;0.64
+UKI;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;1.52
+UKI;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;100
+UKI;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+UKI;Truck (26t);BEV;US$2017/tkm;100;100;100;100;100;0.27
+UKI;Truck (26t);FCEV;US$2017/tkm;100;100;100;100;100;0.64
+UKI;Truck (26t);Gases;US$2017/tkm;100;100;100;100;100;100
+UKI;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+UKI;Truck (40t);BEV;US$2017/tkm;100;100;100;100;100;0.17
+UKI;Truck (40t);FCEV;US$2017/tkm;100;100;100;100;100;0.4
+UKI;Truck (40t);Gases;US$2017/tkm;100;100;100;100;100;100
+UKI;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+UKI;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;0.83
+UKI;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;2.14
+UKI;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;100
+UKI;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+UKI;Van;BEV;US$2017/pkm;1.54;1.54;1.54;1.2;0.98;0.39
+UKI;Van;FCEV;US$2017/pkm;1.53;1.53;1.53;1.5;1.69;0.8
+UKI;Van;Gases;US$2017/pkm;1.53;1.53;1.53;1.7;2.15;0.91
+UKI;Van;Hybrid electric;US$2017/pkm;0.79;0.79;0.79;0.62;0.53;0.12
+UKI;Van;Liquids;US$2017/pkm;0;0;0;0;0;0
+USA;Bus_tmp_vehicletype;BEV;US$2017/pkm;100;100;100;100;100;0.19
+USA;Bus_tmp_vehicletype;FCEV;US$2017/pkm;100;100;100;100;100;0.45
+USA;Bus_tmp_vehicletype;Gases;US$2017/pkm;100;0.18;0.15;0.15;0.14;0.14
+USA;Bus_tmp_vehicletype;Liquids;US$2017/pkm;0;0;0;0;0;0
+USA;Compact Car;BEV;US$2017/pkm;0.98;0.98;0.98;0.72;0.46;0.18
+USA;Compact Car;FCEV;US$2017/pkm;0.97;0.97;0.97;0.9;0.83;0.39
+USA;Compact Car;Gases;US$2017/pkm;0.97;0.97;0.97;0.92;0.88;0.45
+USA;Compact Car;Hybrid electric;US$2017/pkm;0.5;0.5;0.5;0.51;0.52;0.22
+USA;Compact Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+USA;Large Car;BEV;US$2017/pkm;0.98;0.98;0.98;0.72;0.46;0.2
+USA;Large Car;FCEV;US$2017/pkm;0.97;0.97;0.97;0.9;0.83;0.45
+USA;Large Car;Gases;US$2017/pkm;0.97;0.97;0.97;0.92;0.88;0.52
+USA;Large Car;Hybrid electric;US$2017/pkm;0.5;0.5;0.5;0.51;0.52;0.26
+USA;Large Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+USA;Large Car and SUV;BEV;US$2017/pkm;1.03;1.03;1.03;0.76;0.49;0.22
+USA;Large Car and SUV;FCEV;US$2017/pkm;1.03;1.03;1.03;0.95;0.88;0.48
+USA;Large Car and SUV;Gases;US$2017/pkm;1.03;1.03;1.03;0.98;0.93;0.55
+USA;Large Car and SUV;Hybrid electric;US$2017/pkm;0.53;0.53;0.53;0.54;0.55;0.28
+USA;Large Car and SUV;Liquids;US$2017/pkm;0;0;0;0;0;0
+USA;Midsize Car;BEV;US$2017/pkm;0.98;0.98;0.98;0.72;0.46;0.19
+USA;Midsize Car;FCEV;US$2017/pkm;0.97;0.97;0.97;0.9;0.83;0.43
+USA;Midsize Car;Gases;US$2017/pkm;0.97;0.97;0.97;0.92;0.88;0.49
+USA;Midsize Car;Hybrid electric;US$2017/pkm;0.5;0.5;0.5;0.51;0.52;0.25
+USA;Midsize Car;Liquids;US$2017/pkm;0;0;0;0;0;0
+USA;Motorcycle (>250cc);BEV;US$2017/pkm;100;100;100;100;100;0.49
+USA;Motorcycle (>250cc);Liquids;US$2017/pkm;0;0;0;0;0;0
+USA;Truck (0-3_5t);BEV;US$2017/tkm;100;100;100;100;100;8.7
+USA;Truck (0-3_5t);FCEV;US$2017/tkm;100;100;100;100;100;27.01
+USA;Truck (0-3_5t);Gases;US$2017/tkm;100;100;100;100;100;15.1
+USA;Truck (0-3_5t);Liquids;US$2017/tkm;0;0;0;0;0;0
+USA;Truck (18t);BEV;US$2017/tkm;100;100;100;100;100;1.4
+USA;Truck (18t);FCEV;US$2017/tkm;100;100;100;100;100;4.17
+USA;Truck (18t);Gases;US$2017/tkm;100;100;100;100;100;1.71
+USA;Truck (18t);Liquids;US$2017/tkm;0;0;0;0;0;0
+USA;Truck (26t);BEV;US$2017/tkm;100;100;100;0.32;0.24;0.11
+USA;Truck (26t);FCEV;US$2017/tkm;100;100;100;0.28;0.21;0.13
+USA;Truck (26t);Gases;US$2017/tkm;100;100;100;0.53;0.42;0.13
+USA;Truck (26t);Liquids;US$2017/tkm;0;0;0;0;0;0
+USA;Truck (40t);BEV;US$2017/tkm;100;100;100;0.13;0.09;0.05
+USA;Truck (40t);FCEV;US$2017/tkm;100;100;100;0.11;0.08;0.05
+USA;Truck (40t);Gases;US$2017/tkm;100;100;100;0.21;0.16;0.05
+USA;Truck (40t);Liquids;US$2017/tkm;0;0;0;0;0;0
+USA;Truck (7_5t);BEV;US$2017/tkm;100;100;100;100;100;1.12
+USA;Truck (7_5t);FCEV;US$2017/tkm;100;100;100;100;100;3.47
+USA;Truck (7_5t);Gases;US$2017/tkm;100;100;100;100;100;1.91
+USA;Truck (7_5t);Liquids;US$2017/tkm;0;0;0;0;0;0

@@ -45,7 +45,10 @@ toolCalculateFS3share <- function(endoCostData, timesteps, timeValue, preference
   VS3share <- VS3share[, .(totPrice = sum(value)), by = .(region, period, sector, subsectorL1, subsectorL2, subsectorL3, vehicleType)]
   lambdasVS3 <- lambdas[level == "VS3"]
   lambdasVS3[, c("vehicleType", "level") := NULL]
-  VS3share <- merge(VS3share, lambdasVS3, by = intersect(names(VS3share), names(lambdasVS3)))
+  VS3share <- merge(VS3share, lambdasVS3, by = intersect(names(VS3share), names(lambdasVS3)), all.x = TRUE)
+  # modes marked with a "tmp" (e.g. Bus) have only a single branch in this level of the decision tree and
+  # therefore get no lambda as input. The share equals one with every lambda that is chosen.
+  VS3share[grepl(".*tmp.*", vehicleType), lambda := -15]
   preftrends <- preferences[level == "VS3"][, c("level", "variable", "technology", "unit") := NULL]
   preftrends <- approx_dt(preftrends, unique(helpers$dtTimeRes$period), "period", "value")
   setnames(preftrends, "value", "pref")

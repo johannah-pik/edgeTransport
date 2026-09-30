@@ -7,14 +7,10 @@
 toolUpdateEndogenousCosts(
   dataEndoCosts,
   depreciationFactors,
-  scenParIncoCost,
-  allEqYear,
   timeValue,
   preferences,
   lambdas,
   helpers,
-  isICEban,
-  ICEbanYears,
   vehiclesPerTech = NULL
 )
 }
@@ -25,10 +21,6 @@ Endogenous cost components and FS3 shares are provided until 2020. Rest is fille
 
 \item{depreciationFactors}{data.table containing vehicle depreciation factor for each year of service Life}
 
-\item{scenParIncoCost}{data.table containing scenario specific parameters for inconvenience costs policy mask}
-
-\item{allEqYear}{year from which scenario-specific differentiation begins}
-
 \item{timeValue}{data.table containing mode specific time value costs based on speed and gdp}
 
 \item{preferences}{preference factor trends}
@@ -36,10 +28,6 @@ Endogenous cost components and FS3 shares are provided until 2020. Rest is fille
 \item{lambdas}{data.table containing exponents for discrete choice calculation}
 
 \item{helpers}{list containing helpers like mappings, decisionTree etc.}
-
-\item{isICEban}{optional enabling of ICE ban}
-
-\item{ICEbanYears}{sequence of years in which ICEban is applied}
 
 \item{vehiclesPerTech}{data.table containing total number of vehicles for all years and regions}
 }

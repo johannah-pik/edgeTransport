@@ -11,7 +11,7 @@ toolDiscreteChoice(input, lambdasDiscreteChoice, updatedEndoCosts, helpers)
 
 \item{lambdasDiscreteChoice}{lambdas from the general model parameters}
 
-\item{updatedEndoCosts}{updated endogenous costs}
+\item{updatedEndoCosts}{updated endogenous inconvenience costs for vehicle types with fleet tracking}
 
 \item{helpers}{list of helpers}
 }
