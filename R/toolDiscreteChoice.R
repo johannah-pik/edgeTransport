@@ -16,7 +16,7 @@ toolDiscreteChoice <- function(input, lambdasDiscreteChoice, updatedEndoCosts, h
   # bind variables locally to prevent NSE notes in R CMD CHECK
   type <- level <- vehicleType <- subsectorL1 <- pref <- lambda <- . <- value <- zeroTypes <- share <- NULL
   totPrice <- testShares <- variable <- univocalName <- period <- technology <- subsectorL3 <- subsectorL2 <- unit <- NULL
-  browser()
+
   # calculate all FV shares --------------------------------------------------------------------
   CAPEXandOPEX <- copy(input$combinedCAPEXandOPEX)
   CAPEXandOPEX <- merge(CAPEXandOPEX, helpers$decisionTree, by = c("region", "univocalName", "technology"), all.x = TRUE)
