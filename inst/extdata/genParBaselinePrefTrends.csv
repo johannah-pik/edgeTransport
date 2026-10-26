@@ -7155,108 +7155,76 @@ SSP5;UKI;;Midsize Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_p
 SSP5;USA;;Midsize Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;3.74E-01;3.74E-01;3.74E-01;3.74E-01;3.74E-01;3.74E-01
 SDP;CAZ;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;9.88E-09;1.98E-08;2.47E-08;2.96E-08;2.96E-08;2.96E-08
 SDP;CHA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.78E-02;2.22E-02;2.22E-02;2.22E-02;2.22E-02;2.22E-02
-SDP;ENC;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.62E-07;5.24E-07;5.93E-07;6.62E-07;6.62E-07;6.62E-07
 SDP;IND;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03
 SDP;JPN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.84E-02;9.68E-02;1.21E-01;1.45E-01;1.45E-01;1.45E-01
 SDP;LAM;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02
 SDP;MEA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.40E-02;7.91E-02;8.14E-02;8.36E-02;8.36E-02;8.36E-02
-SDP;NEN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.43E-08;1.29E-07;1.34E-07;1.39E-07;1.39E-07;1.39E-07
-SDP;NES;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.89E-03;3.27E-03;3.27E-03;3.28E-03;3.28E-03;3.28E-03
 SDP;OAS;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.78E-05;5.78E-05;9.39E-05;1.30E-04;1.73E-04;1.73E-04
 SDP;REF;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.42E-04;2.67E-04;2.94E-04;3.20E-04;3.20E-04;3.20E-04
 SDP;SSA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02
-SDP;UKI;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;5.28E-07;9.28E-07;9.28E-07;9.28E-07;9.28E-07;9.28E-07
 SDP_EI;CAZ;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;9.88E-09;9.88E-09;9.88E-09;9.88E-09;9.88E-09;9.88E-09
 SDP_EI;CHA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.78E-02;1.60E-02;1.53E-02;1.46E-02;1.23E-02;1.23E-02
-SDP_EI;ENC;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.62E-07;2.62E-07;2.62E-07;2.62E-07;2.36E-07;2.36E-07
 SDP_EI;IND;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03
 SDP_EI;JPN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.84E-02;4.84E-02;4.84E-02;4.84E-02;4.84E-02;4.84E-02
 SDP_EI;LAM;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02
 SDP_EI;MEA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.40E-02;3.96E-02;3.79E-02;3.63E-02;3.30E-02;3.30E-02
-SDP_EI;NEN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.43E-08;6.43E-08;6.43E-08;6.43E-08;6.43E-08;6.43E-08
-SDP_EI;NES;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.89E-03;1.89E-03;1.95E-03;2.01E-03;2.01E-03;2.01E-03
 SDP_EI;OAS;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.78E-05;2.89E-05;3.61E-05;4.34E-05;5.78E-05;5.78E-05
 SDP_EI;REF;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.42E-04;1.34E-04;1.34E-04;1.34E-04;1.22E-04;1.22E-04
 SDP_EI;SSA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02
-SDP_EI;UKI;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;5.28E-07;5.28E-07;5.01E-07;4.75E-07;4.75E-07;4.75E-07
 SDP_MC;CAZ;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;9.88E-09;2.96E-08;2.96E-08;2.96E-08;2.96E-08;2.96E-08
 SDP_MC;CHA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.78E-02;2.22E-02;2.22E-02;2.22E-02;2.22E-02;2.22E-02
-SDP_MC;ENC;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.62E-07;6.62E-07;6.62E-07;6.62E-07;6.62E-07;6.62E-07
 SDP_MC;IND;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03
 SDP_MC;JPN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.84E-02;1.45E-01;1.45E-01;1.45E-01;1.45E-01;1.45E-01
 SDP_MC;LAM;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02
 SDP_MC;MEA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.40E-02;8.36E-02;8.36E-02;8.36E-02;8.36E-02;8.36E-02
-SDP_MC;NEN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.43E-08;1.39E-07;1.39E-07;1.39E-07;1.39E-07;1.39E-07
-SDP_MC;NES;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.89E-03;3.27E-03;3.27E-03;3.28E-03;3.28E-03;3.28E-03
 SDP_MC;OAS;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.78E-05;8.67E-05;1.08E-04;1.30E-04;1.73E-04;1.73E-04
 SDP_MC;REF;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.42E-04;3.20E-04;3.20E-04;3.20E-04;3.20E-04;3.20E-04
 SDP_MC;SSA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02
-SDP_MC;UKI;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;5.28E-07;9.28E-07;9.28E-07;9.28E-07;9.28E-07;9.28E-07
 SDP_RC;CAZ;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;9.88E-09;2.96E-08;2.96E-08;2.96E-08;2.96E-08;2.96E-08
 SDP_RC;CHA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.78E-02;2.22E-02;2.22E-02;2.22E-02;2.22E-02;2.22E-02
-SDP_RC;ENC;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.62E-07;6.62E-07;6.62E-07;6.62E-07;6.62E-07;6.62E-07
 SDP_RC;IND;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03
 SDP_RC;JPN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.84E-02;1.45E-01;1.45E-01;1.45E-01;1.45E-01;1.45E-01
 SDP_RC;LAM;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02
 SDP_RC;MEA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.40E-02;8.36E-02;8.36E-02;8.36E-02;8.36E-02;8.36E-02
-SDP_RC;NEN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.43E-08;1.39E-07;1.39E-07;1.39E-07;1.39E-07;1.39E-07
-SDP_RC;NES;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.89E-03;3.27E-03;3.27E-03;3.28E-03;3.28E-03;3.28E-03
 SDP_RC;OAS;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.78E-05;8.67E-05;1.08E-04;1.30E-04;1.73E-04;1.73E-04
 SDP_RC;REF;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.42E-04;3.20E-04;3.20E-04;3.20E-04;3.20E-04;3.20E-04
 SDP_RC;SSA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02
-SDP_RC;UKI;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;5.28E-07;9.28E-07;9.28E-07;9.28E-07;9.28E-07;9.28E-07
 SSP1;CAZ;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;9.88E-09;9.88E-09;1.48E-08;1.98E-08;2.96E-08;2.96E-08
 SSP1;CHA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.78E-02;1.60E-02;1.91E-02;2.22E-02;2.22E-02;2.22E-02
-SSP1;ENC;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.62E-07;2.62E-07;3.93E-07;5.24E-07;6.62E-07;6.62E-07
 SSP1;IND;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03
 SSP1;JPN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.84E-02;4.84E-02;7.26E-02;9.68E-02;1.45E-01;1.45E-01
 SSP1;LAM;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02
 SSP1;MEA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.40E-02;3.96E-02;5.60E-02;7.25E-02;8.36E-02;8.36E-02
-SSP1;NEN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.43E-08;6.43E-08;9.66E-08;1.29E-07;1.39E-07;1.39E-07
-SSP1;NES;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.89E-03;1.89E-03;2.58E-03;3.28E-03;3.28E-03;3.28E-03
 SSP1;OAS;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.78E-05;2.89E-05;5.78E-05;8.67E-05;1.73E-04;1.73E-04
 SSP1;REF;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.42E-04;1.34E-04;2.00E-04;2.67E-04;3.20E-04;3.20E-04
 SSP1;SSA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02
-SSP1;UKI;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;5.28E-07;5.28E-07;7.28E-07;9.28E-07;9.28E-07;9.28E-07
 SSP2;CAZ;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;9.88E-09;9.88E-09;9.88E-09;9.88E-09;9.88E-09;9.88E-09
 SSP2;CHA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.78E-02;1.60E-02;1.53E-02;1.46E-02;1.23E-02;1.23E-02
-SSP2;ENC;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.62E-07;2.62E-07;2.62E-07;2.62E-07;2.36E-07;2.36E-07
 SSP2;IND;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03
 SSP2;JPN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.84E-02;4.84E-02;4.84E-02;4.84E-02;4.84E-02;4.84E-02
 SSP2;LAM;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02
 SSP2;MEA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.40E-02;3.96E-02;3.79E-02;3.63E-02;3.30E-02;3.30E-02
-SSP2;NEN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.43E-08;6.43E-08;6.43E-08;6.43E-08;6.43E-08;6.43E-08
-SSP2;NES;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.89E-03;1.89E-03;1.95E-03;2.01E-03;2.01E-03;2.01E-03
 SSP2;OAS;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.78E-05;2.89E-05;3.61E-05;4.34E-05;5.78E-05;5.78E-05
 SSP2;REF;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.42E-04;1.34E-04;1.34E-04;1.34E-04;1.22E-04;1.22E-04
 SSP2;SSA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02
-SSP2;UKI;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;5.28E-07;5.28E-07;5.01E-07;4.75E-07;4.75E-07;4.75E-07
 SSP3;CAZ;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;9.88E-09;9.88E-09;9.88E-09;9.88E-09;9.88E-09;9.88E-09
 SSP3;CHA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.78E-02;1.60E-02;1.53E-02;1.46E-02;1.23E-02;1.23E-02
-SSP3;ENC;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.62E-07;2.62E-07;2.62E-07;2.62E-07;2.36E-07;2.36E-07
 SSP3;IND;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03
 SSP3;JPN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.84E-02;4.84E-02;4.84E-02;4.84E-02;4.84E-02;4.84E-02
 SSP3;LAM;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02
 SSP3;MEA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.40E-02;3.96E-02;3.79E-02;3.63E-02;3.30E-02;3.30E-02
-SSP3;NEN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.43E-08;6.43E-08;6.43E-08;6.43E-08;6.43E-08;6.43E-08
-SSP3;NES;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.89E-03;1.89E-03;1.95E-03;2.01E-03;2.01E-03;2.01E-03
 SSP3;OAS;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.78E-05;2.89E-05;3.61E-05;4.34E-05;5.78E-05;5.78E-05
 SSP3;REF;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.42E-04;1.34E-04;1.34E-04;1.34E-04;1.22E-04;1.22E-04
 SSP3;SSA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02
-SSP3;UKI;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;5.28E-07;5.28E-07;5.01E-07;4.75E-07;4.75E-07;4.75E-07
 SSP5;CAZ;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;9.88E-09;5.49E-09;5.49E-09;5.49E-09;5.81E-09;5.81E-09
 SSP5;CHA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.78E-02;8.92E-03;8.51E-03;8.11E-03;7.26E-03;7.26E-03
-SSP5;ENC;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.62E-07;1.46E-07;1.46E-07;1.46E-07;1.39E-07;1.39E-07
 SSP5;IND;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03;6.37E-03
 SSP5;JPN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.84E-02;2.69E-02;2.69E-02;2.69E-02;2.85E-02;2.85E-02
 SSP5;LAM;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02;1.23E-02
 SSP5;MEA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.40E-02;2.20E-02;2.11E-02;2.01E-02;1.94E-02;1.94E-02
-SSP5;NEN;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;6.43E-08;3.57E-08;3.57E-08;3.57E-08;3.78E-08;3.78E-08
-SSP5;NES;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.89E-03;1.05E-03;1.08E-03;1.12E-03;1.18E-03;1.18E-03
 SSP5;OAS;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.78E-05;1.61E-05;2.01E-05;2.41E-05;3.40E-05;3.40E-05
 SSP5;REF;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.42E-04;7.42E-05;7.42E-05;7.42E-05;7.19E-05;7.19E-05
 SSP5;SSA;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02;2.71E-02
-SSP5;UKI;;Mini Car;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;5.28E-07;2.93E-07;2.79E-07;2.64E-07;2.80E-07;2.80E-07
 SDP;CAZ;;Moped;trn_pass_road_LDV_2W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.87E-04;2.87E-04;2.87E-04;2.87E-04;2.87E-04;2.87E-04
 SDP;CHA;;Moped;trn_pass_road_LDV_2W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;4.04E-02;4.04E-02;4.04E-02;4.04E-02;4.04E-02;4.04E-02
 SDP;DEU;;Moped;trn_pass_road_LDV_2W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.18E-01;2.18E-01;2.18E-01;2.18E-01;2.18E-01;2.18E-01
@@ -8738,69 +8706,37 @@ SSP5;SSA;;Truck (7_5t);trn_freight_road_tmp_subsectorL3;trn_freight_road_tmp_sub
 SSP5;UKI;;Truck (7_5t);trn_freight_road_tmp_subsectorL3;trn_freight_road_tmp_subsectorL2;trn_freight_road;trn_freight;VS3;7.76E-01;7.76E-01;7.76E-01;7.76E-01;7.76E-01;7.76E-01
 SSP5;USA;;Truck (7_5t);trn_freight_road_tmp_subsectorL3;trn_freight_road_tmp_subsectorL2;trn_freight_road;trn_freight;VS3;6.26E-01;6.26E-01;6.26E-01;6.26E-01;6.26E-01;6.26E-01
 SDP;CAZ;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01
-SDP;ENC;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.05E-03;1.05E-03;9.67E-04;8.84E-04;9.83E-04;9.83E-04
 SDP;LAM;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.47E-03;8.84E-04;7.49E-04;6.14E-04;6.55E-04;6.55E-04
-SDP;NEN;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.35E-03;7.35E-03;6.32E-03;5.30E-03;5.30E-03;5.30E-03
-SDP;NES;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.88E-03;2.50E-03;2.03E-03;1.56E-03;1.56E-03;1.56E-03
 SDP;OAS;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05
 SDP;SSA;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.57E-05;3.79E-05;3.16E-05;2.52E-05;2.52E-05;2.52E-05
-SDP;UKI;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.68E-03;2.36E-03;2.05E-03;1.75E-03;1.75E-03;1.75E-03
 SDP_EI;CAZ;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01
-SDP_EI;ENC;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.05E-03;1.05E-03;1.05E-03;1.05E-03;1.05E-03;1.05E-03
 SDP_EI;LAM;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.47E-03;1.77E-03;1.80E-03;1.84E-03;1.96E-03;1.96E-03
-SDP_EI;NEN;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.35E-03;7.35E-03;7.35E-03;7.35E-03;7.35E-03;7.35E-03
-SDP_EI;NES;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.88E-03;2.88E-03;2.88E-03;2.88E-03;2.88E-03;2.88E-03
 SDP_EI;OAS;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05
 SDP_EI;SSA;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.57E-05;7.57E-05;7.57E-05;7.57E-05;7.57E-05;7.57E-05
-SDP_EI;UKI;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.68E-03;2.68E-03;2.68E-03;2.68E-03;2.68E-03;2.68E-03
 SDP_MC;CAZ;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01
-SDP_MC;ENC;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.05E-03;8.84E-04;8.84E-04;8.84E-04;9.83E-04;9.83E-04
 SDP_MC;LAM;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.47E-03;5.89E-04;6.02E-04;6.14E-04;6.55E-04;6.55E-04
-SDP_MC;NEN;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.35E-03;5.30E-03;5.30E-03;5.30E-03;5.30E-03;5.30E-03
-SDP_MC;NES;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.88E-03;1.67E-03;1.61E-03;1.56E-03;1.56E-03;1.56E-03
 SDP_MC;OAS;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05
 SDP_MC;SSA;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.57E-05;2.52E-05;2.52E-05;2.52E-05;2.52E-05;2.52E-05
-SDP_MC;UKI;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.68E-03;1.57E-03;1.66E-03;1.75E-03;1.75E-03;1.75E-03
 SDP_RC;CAZ;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01
-SDP_RC;ENC;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.05E-03;8.84E-04;8.84E-04;8.84E-04;9.83E-04;9.83E-04
 SDP_RC;LAM;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.47E-03;5.89E-04;6.02E-04;6.14E-04;6.55E-04;6.55E-04
-SDP_RC;NEN;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.35E-03;5.30E-03;5.30E-03;5.30E-03;5.30E-03;5.30E-03
-SDP_RC;NES;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.88E-03;1.67E-03;1.61E-03;1.56E-03;1.56E-03;1.56E-03
 SDP_RC;OAS;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05
 SDP_RC;SSA;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.57E-05;2.52E-05;2.52E-05;2.52E-05;2.52E-05;2.52E-05
-SDP_RC;UKI;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.68E-03;1.57E-03;1.66E-03;1.75E-03;1.75E-03;1.75E-03
 SSP1;CAZ;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01
-SSP1;ENC;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.05E-03;1.05E-03;1.05E-03;1.05E-03;9.83E-04;9.83E-04
 SSP1;LAM;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.47E-03;1.77E-03;1.34E-03;9.21E-04;6.55E-04;6.55E-04
-SSP1;NEN;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.35E-03;7.35E-03;7.35E-03;7.35E-03;5.30E-03;5.30E-03
-SSP1;NES;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.88E-03;2.88E-03;2.61E-03;2.34E-03;1.56E-03;1.56E-03
 SSP1;OAS;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05
 SSP1;SSA;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.57E-05;7.57E-05;5.68E-05;3.79E-05;2.52E-05;2.52E-05
-SSP1;UKI;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.68E-03;2.68E-03;2.65E-03;2.62E-03;1.75E-03;1.75E-03
 SSP2;CAZ;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01
-SSP2;ENC;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.05E-03;1.05E-03;1.05E-03;1.05E-03;1.05E-03;1.05E-03
 SSP2;LAM;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.47E-03;1.77E-03;1.80E-03;1.84E-03;1.96E-03;1.96E-03
-SSP2;NEN;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.35E-03;7.35E-03;7.35E-03;7.35E-03;7.35E-03;7.35E-03
-SSP2;NES;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.88E-03;2.88E-03;2.88E-03;2.88E-03;2.88E-03;2.88E-03
 SSP2;OAS;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05
 SSP2;SSA;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.57E-05;7.57E-05;7.57E-05;7.57E-05;7.57E-05;7.57E-05
-SSP2;UKI;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.68E-03;2.68E-03;2.68E-03;2.68E-03;2.68E-03;2.68E-03
 SSP3;CAZ;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01
-SSP3;ENC;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.05E-03;1.05E-03;1.05E-03;1.05E-03;1.05E-03;1.05E-03
 SSP3;LAM;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.47E-03;1.77E-03;1.80E-03;1.84E-03;1.96E-03;1.96E-03
-SSP3;NEN;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.35E-03;7.35E-03;7.35E-03;7.35E-03;7.35E-03;7.35E-03
-SSP3;NES;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.88E-03;2.88E-03;2.88E-03;2.88E-03;2.88E-03;2.88E-03
 SSP3;OAS;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05
 SSP3;SSA;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.57E-05;7.57E-05;7.57E-05;7.57E-05;7.57E-05;7.57E-05
-SSP3;UKI;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.68E-03;2.68E-03;2.68E-03;2.68E-03;2.68E-03;2.68E-03
 SSP5;CAZ;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01;2.08E-01
-SSP5;ENC;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.05E-03;1.05E-03;1.05E-03;1.05E-03;1.05E-03;1.05E-03
 SSP5;LAM;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.47E-03;3.18E-03;3.25E-03;3.32E-03;3.34E-03;3.34E-03
-SSP5;NEN;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.35E-03;7.35E-03;7.35E-03;7.35E-03;7.35E-03;7.35E-03
-SSP5;NES;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.88E-03;2.88E-03;2.88E-03;2.88E-03;2.88E-03;2.88E-03
 SSP5;OAS;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05;1.03E-05
 SSP5;SSA;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;7.57E-05;1.36E-04;1.36E-04;1.36E-04;1.29E-04;1.29E-04
-SSP5;UKI;;Van;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;VS3;2.68E-03;2.68E-03;2.68E-03;2.68E-03;2.68E-03;2.68E-03
 SDP;CAZ;;;trn_pass_road_LDV_2W;trn_pass_road_LDV;trn_pass_road;trn_pass;S3S2;4.00E-02;3.40E-02;3.20E-02;3.00E-02;2.00E-02;2.00E-02
 SDP;CAZ;;;trn_pass_road_LDV_4W;trn_pass_road_LDV;trn_pass_road;trn_pass;S3S2;1.00E+00;1.00E+00;1.00E+00;1.00E+00;1.00E+00;1.00E+00
 SDP;CAZ;;;;Bus;trn_pass_road;trn_pass;S2S1;8.85E-02;1.77E-01;2.55E-01;3.32E-01;4.21E-01;4.21E-01
